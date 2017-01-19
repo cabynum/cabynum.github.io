@@ -1,0 +1,11 @@
+version: '2'
+services:
+  legends:
+    image: cabynum/levvel-legends:latest
+    container_name: "levvel-legends"
+    network_mode: host
+    ports:
+     - "4000:4000"
+    volumes:
+     - .:/srv/jekyll
+    command: bundle exec jekyll serve --force_polling
