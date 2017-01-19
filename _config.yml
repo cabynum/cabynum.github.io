@@ -1,18 +1,18 @@
 # Site settings
-title: Jekyll-Uno
-description: 'Jekyll-Uno - a minimal, responsive theme for Jekyll'
-url: 'http://joshgerdes.com/jekyll-uno'
-baseurl: '/jekyll-uno/'
+title: Levvel Legends
+description: 'Engagement Journals for Levvel Consulting'
+url: 'http://localhost:4000'
+baseurl: '/levvel-legends/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
 author:
-  name: 'Josh Gerdes'
-  email: josh@joshgerdes.com
-  twitter_username: joshgerdes
-  facebook_username: joshgerdes
-  github_username:  joshgerdes
-  linkedin_username:  joshgerdes
+  name: 'Christopher Bynum'
+  email: chris.bynum@levvel.io
+  twitter_username: getlevvel
+  facebook_username: getlevvel
+  github_username:  getlevvel
+  linkedin_username:  levvel-llc
 
 defaults:
   -
