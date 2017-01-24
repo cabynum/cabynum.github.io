@@ -1,0 +1,11 @@
+---
+layout: post
+title: Zappos, Tony's Higher Purpose
+date: 2014-08-02 12:49:25
+categories: [books, technology]
+tags: [company culture, delivering happiness, entrepreneurship, purpose, startup, tony hsieh, zappos]
+---
+
+I recently finished reading Tony Hsieh's book, Delivering Happiness.  Delivering Happiness became the "brand promise" of Zappos in 2009, and as Tony points out in his book - happiness is what we are all ultimately in pursuit of in all facets of our lives.  Happiness is a little funny, though.  All happiness is not created equal.  We think that we know what we want, and believe we are focused on the things that will truly make us happy long-term, but that's generally not the case.  The book gives some insights into how focusing on your higher purpose, making that purpose into your passion, and then enjoying the highs and even the lows of your experiences to come may be the formula that we are all looking for.
+
+I can spare you all of the details of the book, but Tony is a pretty good storyteller.  Tony speaks to his life experiences from his first mail order business (printing photos on buttons) all the way through his life at Zappos.  It's pretty evident that he is driven by both enjoying his friends and integrating his personal life directly into his business world.  He even gives the credit of his successes to exactly that - working with friends.  He has an inspiring story.  Most inspiring to me is that he is not tied to short-term success, instant pleasures, or immediate experiences.  He's an obvious risk taker, taking them for the sake of his own happiness, and the happiness of others.  Although his philosophy has seemed to work out beautifully for him, taking the types of risks Tony has and leaning on faith isn't the easiest thing to do.  He sure makes it seem like the RIGHT thing to do.  What I find encouraging about Tony's story is that he didn't begin with a passion for shoes and clothes, which is his core business.  Tony has used Zappos as a vehicle that is much more about culture and vision, and driving to a higher purpose.  I think a lot about what businesses I should pursue and where my passion really is centered, and this gives me hope that it could be in anything that I may possibly dream up.  I recommend giving the book a read, it's definitely motivational - particularly for the entrepreneurial types.
