@@ -1,10 +1,10 @@
 ---
-title:  "Welcome to Levvel Legends!"
+title:  "Welcome to Levvel Journals!"
 date:   2016-01-19 15:04:23
 categories: [general]
 tags: [engagements, journal,]
 ---
-Welcome to our new playgroud, where you can share the successes you've had, challenges you've faced, and any other thoughts you may have concerning Levvel customer engagements.  This is a great sample post to follow and it can be found in the `_posts` directory.
+Welcome to our new playground, where you can share the successes you've had, challenges you've faced, and any other thoughts you may have concerning Levvel customer engagements.  This is a great sample post to follow and it can be found in the `_posts` directory.
 
 To add new posts, simply add a file in the `_posts` directory that follows the convention `YYYY-MM-DD-name-of-post.md` and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.
 

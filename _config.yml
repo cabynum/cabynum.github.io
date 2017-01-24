@@ -1,18 +1,18 @@
 # Site settings
-title: Levvel Legends
-description: 'Engagement Journals for Levvel Consulting'
+title: Christopher Bynum
+description: 'Personal Blog for Christopher A. Bynum'
 url: 'http://localhost:4000'
-baseurl: '/levvel-legends/'
+baseurl: '/'
 # google_analytics: 'UA-XXXXXX-X'
 # disqus_shortname: 'your-disqus-name'
 
 author:
   name: 'Christopher Bynum'
-  email: chris.bynum@levvel.io
-  twitter_username: getlevvel
-  facebook_username: getlevvel
-  github_username:  getlevvel
-  linkedin_username:  levvel-llc
+  email: cbynum@gmail.command
+  twitter_username: cbynum
+  facebook_username: christopher.bynum71
+  github_username:  cabynum
+  linkedin_username:  christopher-bynum-6017942
 
 defaults:
   -
