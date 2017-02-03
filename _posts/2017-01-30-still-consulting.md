@@ -32,7 +32,7 @@ Levvel focuses in **4 practice areas**:
 
   * Application Development
   * Product Innovation
-  * Payments **and**
+  * Payments and
   * DevOps
 
 <br/>
@@ -60,7 +60,7 @@ Led by a group of leaders that have been significant contributors internal to bi
   * Strategic Analysis for Issuers & 3rd-Party Wallets
   * Custom Payment Gateways
   * eCommerce Tokenization
-  * P2P Payments **and**
+  * P2P Payments and
   * [Blockchain](http://www.levvel.io/blog-post/solving-problems-with-blockchain)
 
 The insider knowledge that Levvel can provide any payments related initiative, bringing together perspective from issuers, networks, processors, gateways, merchants, 3rd-party enablers and the like is invaluable.
@@ -75,7 +75,7 @@ Levvel also has a strong DevOps practice. DevOps is central to [Digital Transfor
   * Infrastructure Automation - Design & Delivery
   * Continuous Integration & Continuous Development
   * Software Development Methodology **Transformation**
-  * Container Management Solutions **and**
+  * Container Management Solutions and
   * Platform-as-a-Service capabilities
 
 Levvel is a certified partner with technology companies that provide the very best tooling in these areas including:
@@ -84,7 +84,7 @@ Levvel is a certified partner with technology companies that provide the very be
   * [Red Hat](https://www.redhat.com/en)
   * [Pivotal](https://pivotal.io/)
   * [Hashicorp](https://www.hashicorp.com/)
-  * [Cloudbees](https://www.cloudbees.com/) **and**
+  * [Cloudbees](https://www.cloudbees.com/) and
   * [Chef](https://www.chef.io/)
 
 So in March of 2016 I decided to take the leap and join Levvel in helping businesses build better software. The team is as capable as billed, and I'm excited to do everything I can to push the company forward. It seems that as much as I fight it, IT Services continues to make its way back into my life. I figure I'll embrace it and RWTW.
