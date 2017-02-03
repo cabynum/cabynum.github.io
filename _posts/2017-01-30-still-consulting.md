@@ -7,7 +7,7 @@ tags: [levvel, consulting, devops, payments, product innovation, red hat, docker
 
 I'm late getting around to writing this, but I figure now is as good a time as any. Last year, I left Red Hat after 10 years of service. I have nothing but good things to say about Red Hat. If you'd asked me, I would have told you there are very few opportunities that I'd think warrant leaving Red Hat, but here we are.
 
-Ten years is a long time. Ten years is a very long time. I grew up through the ranks of Red Hat Consulting, and by the time I departed I found myself establishing training programs for the engineers servicing customers in the field - just as I had done earlier in my career. To be honest, it was time. Aliya was finishing up her final leg in medical residency - meaning we could handle a tiny bit more "risk" - and I just couldn't resist the itch to get closer to the startup world. It just so happened that the guy that hired me into Amentra (a consultancy later acquired by Red Hat) had recently started a consulting firm. Perfect opportunity for me to join in, right?
+Ten years is a long time. Ten years is a very long time. I grew up through the ranks of [Red Hat Consulting](https://www.redhat.com/en/services/consulting), and by the time I departed I found myself establishing training programs for the engineers servicing customers in the field - just as I had done earlier in my career. To be honest, it was time. Aliya was finishing up her final leg in medical residency - meaning we could handle a tiny bit more "risk" - and I just couldn't resist the itch to get closer to the startup world. It just so happened that the guy that hired me into Amentra (a consultancy later acquired by Red Hat) had recently started a consulting firm. Perfect opportunity for me to join in, right?
 
 **No**
 
@@ -80,11 +80,11 @@ Levvel also has a strong DevOps practice. DevOps is central to [Digital Transfor
 
 Levvel is a certified partner with technology companies that provide the very best tooling in these areas including:
 
-  * Docker
-  * Red Hat
-  * Pivotal
-  * Hashicorp
-  * Cloudbees **and**
-  * Chef
+  * [Docker](https://www.docker.com/)
+  * [Red Hat](https://www.redhat.com/en)
+  * [Pivotal](https://pivotal.io/)
+  * [Hashicorp](https://www.hashicorp.com/)
+  * [Cloudbees](https://www.cloudbees.com/) **and**
+  * [Chef](https://www.chef.io/)
 
 So in March of 2016 I decided to take the leap and join Levvel in helping businesses build better software. The team is as capable as billed, and I'm excited to do everything I can to push the company forward. It seems that as much as I fight it, IT Services continues to make its way back into my life. I figure I'll embrace it and RWTW.
