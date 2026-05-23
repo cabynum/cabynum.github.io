@@ -1,0 +1,58 @@
+baseURL = "https://cabynum.github.io/"
+languageCode = "en-us"
+title = "Christopher Bynum"
+theme = "PaperMod"
+paginate = 10
+
+[params]
+  env = "production"
+  description = "Engineering leader, AI builder, writer."
+  author = "Christopher Bynum"
+  defaultTheme = "light"
+  ShowReadingTime = true
+  ShowPostNavLinks = true
+  ShowBreadCrumbs = true
+  ShowCodeCopyButtons = true
+  ShowRssButtonInSectionTermList = true
+  ShowShareButtons = false
+  ShowToc = true
+  TocOpen = false
+
+  [params.homeInfoParams]
+    Title = "Christopher Bynum"
+    Content = "Engineering leader at Red Hat. Building AI systems that work. Writing about what I learn along the way."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/cabynum"
+
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/christopher-bynum-6017942"
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
+  [[menu.main]]
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags/"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about/"
+    weight = 30
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
+
+[markup]
+  [markup.highlight]
+    style = "dracula"
+    lineNos = false
+    codeFences = true
+    guessSyntax = true

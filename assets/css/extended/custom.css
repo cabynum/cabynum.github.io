@@ -1,0 +1,56 @@
+/* Typography: larger base font for readability */
+html {
+  font-size: 125%;
+}
+
+/* Wider content area (Roland uses 85ch) */
+.post-content,
+.post-header,
+.main {
+  max-width: 85ch;
+}
+
+/* Better line height for long reads */
+.post-content {
+  line-height: 1.6;
+}
+
+/* Softer text color (not pure black) */
+.post-content,
+.post-content p,
+.post-content li {
+  color: #2d2d2d;
+}
+
+/* Code blocks: JetBrains Mono feel */
+code, pre, pre code {
+  font-size: 0.85em;
+  line-height: 1.5;
+  border-radius: 6px;
+}
+
+/* Inline code styling */
+:not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+/* Post title sizing */
+.post-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+/* Tag pills - subtle borders like Roland's */
+.post-tags a {
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+}
+
+/* Home page profile section spacing */
+.first-entry {
+  min-height: auto;
+}
