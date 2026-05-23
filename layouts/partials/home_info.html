@@ -4,5 +4,8 @@
         <img src="/images/profile.jpg" alt="Christopher Bynum" style="width:140px;height:140px;border-radius:50%;display:block;margin:0 auto 1rem auto;">
         <p style="max-width:60ch;margin:0 auto;color:#555;">{{ .Content | markdownify }}</p>
     </div>
+    <footer class="entry-footer" style="text-align:center;">
+        {{ partial "social_icons.html" (dict "align" "center") }}
+    </footer>
 </article>
 {{- end }}
