@@ -18,9 +18,21 @@ paginate = 10
   ShowToc = true
   TocOpen = false
 
-  [params.homeInfoParams]
-    Title = "Christopher Bynum"
-    Content = "Engineering leader at Red Hat. Building AI systems that work. Writing about what I learn along the way."
+  [params.profileMode]
+    enabled = true
+    title = "Christopher Bynum"
+    subtitle = "Engineering leader at Red Hat. Building AI systems that work. Writing about what I learn along the way."
+    imageUrl = "/images/profile.jpg"
+    imageWidth = 140
+    imageHeight = 140
+    imageTitle = "Christopher Bynum"
+
+    [[params.profileMode.buttons]]
+      name = "Posts"
+      url = "/posts/"
+    [[params.profileMode.buttons]]
+      name = "About"
+      url = "/about/"
 
   [[params.socialIcons]]
     name = "github"
