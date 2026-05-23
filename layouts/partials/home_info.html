@@ -2,9 +2,7 @@
 <article class="first-entry home-info">
     <header class="entry-header">
         <img src="/images/profile.jpg" alt="{{ .Title }}" style="width:140px;height:140px;border-radius:50%;margin-bottom:1rem;">
-    </header>
-    <section class="entry-content">
         <p>{{ .Content | markdownify }}</p>
-    </section>
+    </header>
 </article>
 {{- end }}

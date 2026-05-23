@@ -20,7 +20,7 @@ paginate = 10
   TocOpen = false
 
   [params.homeInfoParams]
-    Title = "Christopher Bynum"
+    Title = ""
     Content = "Engineering leader at Red Hat. Building AI systems that work. Writing about what I learn along the way."
 
   [params.cover]
