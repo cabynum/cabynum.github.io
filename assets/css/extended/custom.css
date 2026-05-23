@@ -1,3 +1,9 @@
+/* Charlotte accent colors (Hornets teal + subtle purple) */
+:root {
+  --accent: #00788C;
+  --accent-dark: #1D1160;
+}
+
 /* Typography: larger base font for readability */
 html {
   font-size: 125%;
@@ -42,15 +48,54 @@ code, pre, pre code {
   font-weight: 700;
 }
 
-/* Tag pills - subtle borders like Roland's */
+/* Links use Hornets teal */
+.post-content a,
+.toc a:hover,
+article a {
+  color: var(--accent);
+}
+
+.post-content a:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+}
+
+/* Tag pills with teal accent */
 .post-tags a {
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   border-radius: 4px;
   padding: 2px 8px;
   font-size: 0.75rem;
+  color: var(--accent);
+}
+
+.post-tags a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* Profile mode buttons with teal */
+.button {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}
+
+.button:hover {
+  background: var(--accent) !important;
+  color: #fff !important;
 }
 
 /* Home page profile section spacing */
 .first-entry {
   min-height: auto;
+}
+
+/* Dark mode: purple hint */
+.dark {
+  --accent: #00788C;
+}
+
+/* Subtle purple accent on post titles hover */
+.post-entry .entry-header h2:hover {
+  color: var(--accent);
 }

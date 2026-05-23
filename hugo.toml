@@ -9,6 +9,7 @@ paginate = 10
   description = "Engineering leader, AI builder, writer."
   author = "Christopher Bynum"
   defaultTheme = "light"
+  favicon = "/favicon.svg"
   ShowReadingTime = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
