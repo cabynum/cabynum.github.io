@@ -1,8 +1,8 @@
 {{- with site.Params.homeInfoParams }}
-<article class="first-entry home-info" style="text-align:center;">
-    <header class="entry-header">
-        <img src="/images/profile.jpg" alt="Christopher Bynum" style="width:140px;height:140px;border-radius:50%;margin-bottom:1rem;">
-        <p>{{ .Content | markdownify }}</p>
-    </header>
+<article class="first-entry home-info">
+    <div style="text-align:center;padding:2rem 0;">
+        <img src="/images/profile.jpg" alt="Christopher Bynum" style="width:140px;height:140px;border-radius:50%;display:block;margin:0 auto 1rem auto;">
+        <p style="max-width:60ch;margin:0 auto;color:#555;">{{ .Content | markdownify }}</p>
+    </div>
 </article>
 {{- end }}
