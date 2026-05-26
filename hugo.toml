@@ -21,7 +21,7 @@ paginate = 10
 
   [params.homeInfoParams]
     Title = " "
-    Content = "Engineering at Red Hat. Building with and for AI. Writing about what I learn along the way."
+    Content = "Engineering @Red Hat. Building with AI. Writing about what I learn along the way."
 
   [params.cover]
     hidden = true
