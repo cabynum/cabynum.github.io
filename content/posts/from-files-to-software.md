@@ -1,97 +1,70 @@
 ---
-title: "My AI Command Center Outgrew Its File System"
+title: "My AI Command Center Outgrew Its Approach"
 date: 2026-05-23
 tags: ["ai", "agents", "architecture", "harness-engineering"]
-description: "What happens after you've been running an AI productivity system for a while and the shine wears off."
+description: "What happens after you've been running an AI productivity system for a while and you realize there's more to gain."
 ---
 
-Six months ago I wrote about tearing down a multi-agent system I'd built
-inside Cursor. The agents were fake. The skills and knowledge underneath
-them were real. I kept those, deleted the rest, and ended up with
-something simpler that produced the same quality output.
+Six months ago I wrote about tearing down a multi-agent system I'd built inside Cursor. The agents I'd built were "fake" - that's to say they weren't called and utilized as a part of my workflows as I'd expected. The skills and knowledge underneath the agents, were very muchreal. I kept those, deleted the rest, and ended up with something simpler that produced the same quality output.
 
-That simpler system has now been running for months. It works. It also
-has problems I can't fix with better markdown.
+I've been running this simpler system for months. It's almost entirely driven through markdown files. It works. It's works quite well actually. But the system also has needs that I can't fix by simply writing better markdown.
 
 ---
 
-## What I actually built
+## Here's what I built
 
-Argus is a personal engineering management command center. It runs inside
-Cursor as a collection of skills, knowledge files, and conventions. When
-I say "run a hygiene audit," Cursor's skill discovery activates a
-workflow file that checks my team's Jira board against 25 rules. When I
-ask "when is code freeze?", a routing table in an always-on rule points
-to the right knowledge file and the answer comes back.
+Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions. When I say for example, "run a hygiene audit," Cursor's skill discovery activates a workflow file that checks my team's Jira board against 25 rules. When I ask "when is code freeze?", a routing table in an always-on rule points to the knowledge file referencing our product release schedule and the answer comes back.
 
-Session continuity carries context between conversations. An append-only
-log records what happened in each session. A priority list persists what
-I should be working on. Project memory files track where long-running
-work left off. Every session starts by reading the last one's notes.
+Session continuity carries context between conversations. An append-only log records what happened in each session. A priority list persists what I should be working on. Project memory files track where long-running work left off. Every session starts by reading the last one's notes.
 
-Source provenance means every piece of domain knowledge traces back to a
-specific document with a date and an ID. When sources conflict, both
-positions are recorded until I resolve them. Seventy-five sources
-ingested, nine conflicts tracked and resolved.
+I've build in "source provenance" which means every piece of domain knowledge traces back to a
+specific document with a date and an ID. When sources conflict, both positions are recorded until I resolve them.
 
-The whole thing is markdown files and conventions. No code. No database.
-No service. Just structured text that the LLM reads and follows.
+The whole thing is markdown files and conventions. No code. No database. No service. Just structured text that the LLM reads and follows.
 
 ---
 
-## Where it started cracking
+## The cracks in the design
 
-The problems aren't dramatic. The system doesn't break in obvious ways.
-It degrades quietly, which is worse.
+Up until now, I haven't experienced any dramatic problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what bothers me, which might be much worse.
 
-**Reliability depends on compliance.** Everything works because the LLM
-voluntarily follows instructions. The routing table says "for release
-questions, read release-schedule.md." If the model doesn't check the
-table, it answers from training data instead. Usually it checks. Not
-always. There's no enforcement, no fallback, no alert when it doesn't.
+**Nothing enforces accuracy.** Everything in my system works because the LLM voluntarily follows the instructions I provide it. My routing table, driven through an "always apply" Cursor Rule, tells the model where to look for answers:
 
-**State depends on discipline.** If I forget to close a session, the log
-doesn't get written. The next session starts with stale context. This
-has happened. I added safeguards, but they're also conventions the model
-follows voluntarily. Conventions enforcing conventions is turtles all the
-way down.
+```markdown
+| Question about                          | Read this                              |
+|-----------------------------------------|----------------------------------------|
+| Release dates, code freeze, GA timing   | `knowledge/jira/release-schedule.md`   |
+| Hygiene rules (HYGIENE-XX, SPRINT-XX)   | `knowledge/jira/policy-rules.md`       |
+| Health score, staleness, cadence scoring | `knowledge/jira/health-scoring.md`     |
+```
 
-**No verification.** I can't tell you whether last week's hygiene audit
-was correct. I can't measure whether context loading worked as intended.
-I trust the output because it usually looks right. "Usually looks right"
-is not a confidence level I'd accept in any other system I operate.
+If the model doesn't check the table, it answers from training data instead. I have no way to know whether it checked or the table or not. The answers _usually_ look right, but "looks right" and "came from the right source" aren't the same thing. There's no enforcement, no fallback, no visibility into what actually happened.
 
-**Context gets noisier over time.** The knowledge base grows. The
-routing table grows. The session history grows. More tokens loaded means
-more noise competing for the model's attention. There's no pruning, no
-compression, no intelligence in what gets loaded. It's a flat file read
-every time.
+**Memory can be lost between sessions.** I've established a way of working with Argus that hinges on two primary Cursor Commands - argus.start and argus.end. The end command writes a summary of what happened during a working session - what got done, decisions made, where I left off - and it updates a list of priorities for me. The start command reads the last session's notes and current proirities, then it tells me where I left off and recommends what to do next. The setup is really nice and gives me a sense of control and order. It also is brittle.
 
-**It can't do anything without me.** Argus only activates when I open
-Cursor and type something. It can't run a hygiene scan at 6am and have
-results waiting. It can't watch for a Jira event and react. It sits
-completely inert until I'm in the seat. That's fine for an assistant.
-It's not fine for a system I want to rely on.
+If I forget to close a session, the log doesn't get written. The next session starts with stale context. This
+has happened to me quite a few times and it causes me to have to repeat myself to bring us collectively back into context. I added safeguards, but they're text in a text file - more instructions the model may choose to ignore. The fix has the same weakness as the thing it's fixing.
+
+**Lack of verification lessens confidence.** I can't tell you with high confidence whether last week's hygiene audit was correct. I can't measure whether context loading worked as intended. I trust the output because it usually looks right. "Usually looks right" is not a confidence level I'd accept in any other system I operate so it's made me question the maturity of Argus.
+
+**Context gets heavier and noisier over time.** Every time I teach Argus something new by ingesting a new source of information the system gets heavier. The routing table grows. The session history grows. The knowledge base grows. All of this competes for the model's attention inside a finite context window, and there's nothing particularly smart about how it gets loaded - it's a flat file read every time. This base context loads with every single conversation and it keeps growing, with no awareness of whether it is relevant to what I'm actually doing in the present. Six months from now, this will be meaningfully worse than it is today, and currently I have no strategy for managing it.
+
+**Things don't work without me in the driver's seat.** Argus lives in a single Cursor workspace. If I switch to a different project in a different window, Argus isn't there - all the knowledge, memory, and skills stay behind. I ran into this while editing this very blog post in a separate workspace. My command center doesn't travel with me.
+
+It also can't do anything on its own. If I want a hygiene scan at 6am with results waiting when I sit down, that's not possible. If I want it to notice a Jira event and react, it can't. It sits completely inert until I'm in the seat typing. That's fine for a chat assistant. It's limiting for something I want to depend on.
 
 ---
 
 ## What I learned from looking around
 
-The agent engineering space in 2026 settled some debates that were open
-when I wrote the first post.
+The agent engineering space in 2026 settled some debates that were open when I wrote [my initial post](/posts/harness-vs-framework-agents/).
 
-The core insight: **a harness is the system that turns a model into a
-reliable agent.** The model provides intelligence. The harness provides
-hands, memory, safety boundaries, and verification. The model picks the
-next action. The harness validates it, executes it, captures the output,
-decides what to feed back, decides when to stop. Swap the model for a
-different one of similar quality and a good harness still works. Swap the
-harness for a worse one and the best model in the world still produces
-unreliable results.
+The core insight: **a harness is the system that turns a model into a reliable agent.** The model provides intelligence. The harness provides the mechanics - tool execution, memory, safety boundaries, and verification. The model picks the next action. The harness validates it, executes it, captures the output, decides what to feed back, decides when to stop. Swap the model for a
+different one of similar quality and a good harness still works. Swap the harness for a worse one and the best model in the world still produces unreliable results.
 
-My current system has skills and knowledge (the intelligence input) but
-almost no harness (the reliability infrastructure). The LLM is the
-harness. That's the gap.
+![Model vs Harness responsibilities](/images/model-vs-harness.png)
+
+My current system has skills and knowledge (the intelligence input) but almost no harness (the reliability infrastructure). The LLM is the harness. That's the gap.
 
 Some specific things that stuck:
 
