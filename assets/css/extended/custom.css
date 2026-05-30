@@ -28,9 +28,9 @@ html {
   color: #2d2d2d;
 }
 
-.dark .post-content,
-.dark .post-content p,
-.dark .post-content li {
+[data-theme="dark"] .post-content,
+[data-theme="dark"] .post-content p,
+[data-theme="dark"] .post-content li {
   color: #d4d4d5;
 }
 
@@ -96,8 +96,8 @@ article a {
   min-height: auto;
 }
 
-/* Dark mode: purple hint */
-.dark {
+/* Dark mode: keep teal accent */
+[data-theme="dark"] {
   --accent: #00788C;
 }
 

@@ -9,7 +9,6 @@ paginate = 10
   description = "Engineering leader, AI builder, writer."
   author = "Christopher Bynum"
   defaultTheme = "light"
-  favicon = "/favicon.svg"
   ShowReadingTime = true
   ShowPostNavLinks = true
   ShowBreadCrumbs = true
@@ -33,6 +32,9 @@ paginate = 10
   [[params.socialIcons]]
     name = "linkedin"
     url = "https://www.linkedin.com/in/christopher-bynum-6017942"
+
+  [params.assets]
+    favicon = "/favicon.svg"
 
 [menu]
   [[menu.main]]
