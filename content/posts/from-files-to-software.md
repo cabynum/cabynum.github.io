@@ -11,7 +11,7 @@ I've been running this simpler system for months. It's almost entirely driven th
 
 ---
 
-## Here's what I built
+## Here's what I've built
 
 Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions. When I say for example, "run a hygiene audit," Cursor's skill discovery activates a workflow file that checks my team's Jira board against 25 rules. When I ask "when is code freeze?", a routing table in an always-on rule points to the knowledge file referencing our product release schedule and the answer comes back.
 
@@ -24,7 +24,7 @@ The whole thing is markdown files and conventions. No code. No database. No serv
 
 ---
 
-## The cracks in the design
+## Cracks in the design
 
 Up until now, I haven't experienced any dramatic problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what bothers me, which might be much worse.
 
@@ -55,7 +55,7 @@ It also can't do anything on its own. If I want a hygiene scan at 6am with resul
 
 ---
 
-## What I learned from looking around
+## Reliability lives in the harness
 
 The agent engineering space in 2026 settled some debates that were open when I wrote [my initial post](/posts/harness-vs-framework-agents/).
 
@@ -64,64 +64,13 @@ different one of similar quality and a good harness still works. Swap the harnes
 
 ![Model vs Harness responsibilities](/images/model-vs-harness.png)
 
-My current system has skills and knowledge (the intelligence input) but almost no harness (the reliability infrastructure). The LLM is the harness. That's the gap.
+Cursor is my current harness for Argus. It provides file access, tool execution, conversation memory, and skill discovery. But it's a general-purpose harness. It doesn't know about my domain. My domain-specific reliability needs, like enforcing that the routing table gets checked, that session state gets persisted, that provenance is recorded, are all delegated to the LLM through conventions. That makes things non-deterministic, and worse, invisible. Cursor manages the interaction between my instructions and the model internally. I don't see what context was loaded, which files were read, or whether the model followed the routing table or just answered from memory. If I ask the model, it doesn't know either. The infrastructure work is being done by instructions provided in Markdown instead of code. That's the gap I need to close.
 
-Some specific things that stuck:
+## Argus v2 design inputs
 
-**MCP became the standard integration protocol.** It's not a contender
-anymore, it's the default. Every major model provider backs it. The
-Linux Foundation stewards it. The mental model is clean: tools for
-actions, resources for data, prompts for reusable instructions. An agent
-connects to a server and discovers capabilities at runtime. For anything
-managing multiple integrations, MCP reduces the wiring problem from
-quadratic to linear.
+Some of the early bets landed well and carry forward. What I hadn't accounted for is the infrastructure underneath. The good news is the industry has converged on patterns for the gaps I'm seeing: [evals as a regression safety net](https://machinelearningatscale.substack.com/p/anthropic-shipped-three-regressions), [durable state that survives session boundaries](https://developers.googleblog.com/en/build-long-running-ai-agents-that-pause-resume-and-never-lose-context-with-adk/), and [a standard protocol for agent-to-tool integration](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation).
 
-**Persistent memory got real solutions.** Google's ADK introduced
-checkpoint-and-resume with durable state machines. The research
-community published papers on structured memory that compresses old
-context into high-signal representations instead of dumping raw history.
-The common thread: the fix isn't a bigger context window. It's explicit,
-durable state decoupled from conversation history.
-
-**Evals became non-negotiable.** Every team shipping reliable agents has
-a regression suite. Every team that doesn't ship regressions. One
-industry-leading agent shipped a 47% performance regression and only
-caught it because users complained. If they can't catch it with their
-resources, I'm definitely not catching mine with "it usually looks
-right."
-
-**Skills are interface. Code is infrastructure.** Someone put it well:
-skills make your working style legible for agents. They don't replace
-the actual system underneath. The markdown tells the agent what to do.
-The code makes sure it does it reliably. Neither replaces the other.
-
----
-
-## What stays the same
-
-The things that made Argus worth building haven't changed. They're
-moving from conventions into guarantees.
-
-**Provenance stays.** Every piece of knowledge still traces to a source.
-But in the new system, you can't add knowledge without a source record.
-The system refuses, not requests. Provenance becomes a schema constraint
-instead of a polite instruction.
-
-**Memory stays.** Session continuity is still what makes the whole thing
-worth using over a bare LLM. What changes is the format underneath:
-structured storage with retrieval intelligence instead of append-only
-text. Queryable. Compressible. Durable regardless of how the
-conversation ends.
-
-**Context-is-the-product stays.** The system still loads the right
-context before you ask. But instead of a routing table the model might
-or might not check, a dependency graph makes the decision
-deterministically. Same behavior, actual guarantee.
-
-**Skills stay as markdown.** The workflows that encode how I manage
-sprints, audit boards, and review backlogs. Human-editable.
-Version-controlled. They remain the interface layer. What changes is
-what happens when they execute.
+![Design inputs: keeping and adding](/images/design-inputs.png)
 
 ---
 
