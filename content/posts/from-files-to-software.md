@@ -1,17 +1,17 @@
 ---
-title: "My AI Command Center Outgrew Its Approach"
+title: "My AI Command Center has Outgrown Its Approach"
 date: 2026-05-23
 tags: ["ai", "agents", "architecture", "harness-engineering"]
 description: "What happens after you've been running an AI productivity system for a while and you realize there's more to gain."
 ---
 
-Six months ago I wrote about tearing down a multi-agent system I'd built inside Cursor. The agents I'd built were "fake" - that's to say they weren't called and utilized as a part of my workflows as I'd expected. The skills and knowledge underneath the agents, were very muchreal. I kept those, deleted the rest, and ended up with something simpler that produced the same quality output.
+Six months ago I wrote about tearing down Argus, a multi-agent system I'd built inside Cursor. The agents I'd built turned out to be "fake", meaning I found that they weren't actually utilized as a part of my workflows as I'd expected. We'll get to why that is a bit later. The skills and knowledge underneath the agents, however, were very much real. I kept those, deleted the rest of the system, and ended up with something simpler that produced the same quality output.
 
-I've been running this simpler system for months. It's almost entirely driven through markdown files. It works. It's works quite well actually. But the system also has needs that I can't fix by simply writing better markdown.
+I've been running this simpler version of Argus for months. It's almost entirely driven through markdown files. It works. It's works quite well actually. But I, and in turn Argus, have new needs that I can't fix by simply writing better markdown. It's time for Argus v2.
 
 ---
 
-## Here's what I've built
+## What I built in Argus v1
 
 Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions. When I say for example, "run a hygiene audit," Cursor's skill discovery activates a workflow file that checks my team's Jira board against 25 rules. When I ask "when is code freeze?", a routing table in an always-on rule points to the knowledge file referencing our product release schedule and the answer comes back.
 
