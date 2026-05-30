@@ -21,11 +21,17 @@ html {
   line-height: 1.6;
 }
 
-/* Softer text color (not pure black) */
+/* Softer text color (not pure black in light, not pure white in dark) */
 .post-content,
 .post-content p,
 .post-content li {
   color: #2d2d2d;
+}
+
+.dark .post-content,
+.dark .post-content p,
+.dark .post-content li {
+  color: #d4d4d5;
 }
 
 /* Code blocks: JetBrains Mono feel */
