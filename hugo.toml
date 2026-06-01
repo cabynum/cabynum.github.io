@@ -20,7 +20,7 @@ paginate = 10
 
   [params.homeInfoParams]
     Title = " "
-    Content = "Engineering @Red Hat. Building with AI. Writing about what I learn along the way."
+    Content = "Engineering at Red Hat. Building with AI. Writing about what I learn along the way."
 
   [params.cover]
     hidden = true
@@ -34,7 +34,7 @@ paginate = 10
     url = "https://www.linkedin.com/in/christopher-bynum-6017942"
 
   [params.assets]
-    favicon = "/favicon.svg"
+    favicon = "/favicon.png"
 
 [menu]
   [[menu.main]]

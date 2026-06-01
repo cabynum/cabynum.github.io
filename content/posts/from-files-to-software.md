@@ -1,5 +1,5 @@
 ---
-title: "My AI Command Center has Outgrown Its Approach"
+title: "Argus Has Outgrown Its Approach"
 date: 2026-05-23
 tags: ["ai", "agents", "architecture", "harness-engineering"]
 description: "What happens after you've been running an AI productivity system for a while and you realize there's more to gain."
