@@ -1,8 +1,12 @@
-/* Flexoki-inspired palette: Paper (#FFFCF0) and black */
+/* Flexoki-inspired palette */
 :root {
   --accent: #100F0F;
   --accent-dark: #100F0F;
   --paper: #F2F0E5;
+  --theme: #F2F0E5;
+  --entry: #F2F0E5;
+  --code-bg: #E6E4D9;
+  --border: #E6E4D9;
 }
 
 [data-theme="dark"] {
