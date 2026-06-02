@@ -1,7 +1,13 @@
-/* Charlotte accent colors (Hornets teal + subtle purple) */
+/* Flexoki-inspired palette: Paper (#FFFCF0) and black */
 :root {
-  --accent: #00788C;
-  --accent-dark: #1D1160;
+  --accent: #100F0F;
+  --accent-dark: #100F0F;
+  --paper: #F2F0E5;
+}
+
+[data-theme="dark"] {
+  --accent: #FFFCF0;
+  --accent-dark: #FFFCF0;
 }
 
 /* Typography: larger base font for readability */
@@ -9,7 +15,7 @@ html {
   font-size: 125%;
 }
 
-/* Wider content area (Roland uses 85ch) */
+/* Wider content area */
 .post-content,
 .post-header,
 .main {
@@ -21,7 +27,7 @@ html {
   line-height: 1.6;
 }
 
-/* Softer text color (not pure black in light, not pure white in dark) */
+/* Softer text color */
 .post-content,
 .post-content p,
 .post-content li {
@@ -34,7 +40,7 @@ html {
   color: #e2e2e3;
 }
 
-/* Code blocks: JetBrains Mono feel */
+/* Code blocks */
 code, pre, pre code {
   font-size: 0.85em;
   line-height: 1.5;
@@ -54,7 +60,7 @@ code, pre, pre code {
   font-weight: 700;
 }
 
-/* Links use Hornets teal */
+/* Links */
 .post-content a,
 .toc a:hover,
 article a {
@@ -66,7 +72,7 @@ article a {
   text-decoration-color: var(--accent);
 }
 
-/* Tag pills with teal accent */
+/* Tag pills */
 .post-tags a {
   border: 1px solid var(--accent);
   border-radius: 4px;
@@ -77,10 +83,10 @@ article a {
 
 .post-tags a:hover {
   background: var(--accent);
-  color: #fff;
+  color: var(--paper);
 }
 
-/* Profile mode buttons with teal */
+/* Profile mode buttons */
 .button {
   border-color: var(--accent) !important;
   color: var(--accent) !important;
@@ -88,7 +94,7 @@ article a {
 
 .button:hover {
   background: var(--accent) !important;
-  color: #fff !important;
+  color: var(--paper) !important;
 }
 
 /* Home page profile section spacing */
@@ -96,12 +102,7 @@ article a {
   min-height: auto;
 }
 
-/* Dark mode: keep teal accent */
-[data-theme="dark"] {
-  --accent: #00788C;
-}
-
-/* Subtle purple accent on post titles hover */
+/* Post titles hover */
 .post-entry .entry-header h2:hover {
   color: var(--accent);
 }
