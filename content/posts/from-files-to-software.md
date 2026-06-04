@@ -11,25 +11,17 @@ I've been running this simpler version of Argus for months. It's almost entirely
 
 ---
 
-## What I built in Argus v2
+## Argus v2
 
 Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions.
 
-### On-Demand Context
+I've developed a set of skills that provide me **on-demand context**. For example, when I say "run a hygiene audit," Cursor's skill discovery finds my hygiene-audit skill and activates a workflow file (markdown) that checks my team's Jira issues against 25 rules.
 
-I've developed a set of skills the provide me "on-demand" context. For example, when I say "run a hygiene audit," Cursor's skill discovery finds my hygiene-audit skill and activates a workflow file (markdown) that checks my team's Jira issues against 25 rules.
+I've also built in **passive context**. An example of this is when I ask Argus "when is code freeze?". In this case a master knowledge routing table that I've developed as an "always-on" Cursor rule points to a knowledge file (markdown) referencing our product release schedule and the answer just comes back.
 
-### Passive Context
+**Session continuity** carries context between conversations. I've built thin in the form of an append-only log that records what happened in each session. Separately, a priority list persists what I should be working on. Project memory files track where my long-running work left off in preparation for when I next engage in that particular workstream. Every working session starts by reading the last session's notes.
 
-I've also built in "passive" context. An example of this is when I ask Argus "when is code freeze?". In this case a master knowledge routing table that I've developed as an "always-on" Cursor rule points to a knowledge file (markdown) referencing our product release schedule and the answer just comes back.
-
-### Session Continuity
-
-Session continuity carries context between conversations. I've built thin in the form of an append-only log that records what happened in each session. Separately, a priority list persists what I should be working on. Project memory files track where my long-running work left off in preparation for when I next engage in that particular workstream. Every working session starts by reading the last session's notes.
-
-### Provenance
-
-It was always a personal requirement of mine to be able to validate where information I receive back from my system originated. I built in "source provenance" which means every piece of domain knowledge traces back to a specific document with a date and an ID. When knowledge sources conflict, both positions/perspectives are recorded and acknowledged as conflicting until I resolve them.
+It was always a personal requirement of mine to be able to validate where information I receive back from my system originated. I built in **source provenance** which means every piece of domain knowledge traces back to a specific document with a date and an ID. When knowledge sources conflict, both positions/perspectives are recorded and acknowledged as conflicting until I resolve them.
 
 The whole system is markdown files and conventions. No code. No database. No service. Just structured text that the LLM reads and follows. That's Argus v2.
 
@@ -37,7 +29,7 @@ The whole system is markdown files and conventions. No code. No database. No ser
 
 ## Cracks in the design
 
-Up until now, I haven't experienced any dramatic problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what bothers me, which might be much worse.
+Up until now, I haven't experienced any _real_ problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what bothers me, which might be much worse.
 
 **Nothing enforces accuracy.** Everything in my system works because the LLM voluntarily follows the instructions I provide it. My routing table, driven through an "always apply" Cursor Rule, tells the model where to look for answers:
 
