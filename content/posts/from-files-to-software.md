@@ -15,6 +15,8 @@ I've been running this simpler version of Argus for months. It's almost entirely
 
 Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions.
 
+![Argus v2 in action](/images/argus-v2-comic.png)
+
 I've developed a set of skills that provide me **on-demand context**. For example, when I say "run a hygiene audit," Cursor's skill discovery finds my hygiene-audit skill and activates a workflow file (markdown) that checks my team's Jira issues against 25 rules.
 
 I've also built in **passive context**. An example of this is when I ask Argus "when is code freeze?". In this case a master knowledge routing table that I've developed as an "always-on" Cursor rule points to a knowledge file (markdown) referencing our product release schedule and the answer just comes back.
