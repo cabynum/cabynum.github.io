@@ -5,22 +5,33 @@ tags: ["ai", "agents", "architecture", "harness-engineering"]
 description: "What happens after you've been running an AI productivity system for a while and you realize there's more to gain."
 ---
 
-Six months ago I wrote about tearing down Argus, a multi-agent system I'd built inside Cursor. The agents I'd built turned out to be "fake", meaning I found that they weren't actually utilized as a part of my workflows as I'd expected. We'll get to why that is a bit later. The skills and knowledge underneath the agents, however, were very much real. I kept those, deleted the rest of the system, and ended up with something simpler that produced the same quality output.
+Six months ago I wrote about tearing down Argus, a multi-agent system I'd built inside Cursor; let's call it Argus v1. As it turns out, the agents I built in v1 were "fake". I know this sounds strange, but what I mean to say is I ultimately found that the agents I'd built around specific personas weren't actually utilized as a part of my workflows as I'd expected. We'll get to why that was the case a bit later. However, the skills and knowledge underpinning the agents were very much real. I kept those, deleted the rest of the system, and ended up with something simpler, let's call it Argus v2, that produced the same quality output.
 
-I've been running this simpler version of Argus for months. It's almost entirely driven through markdown files. It works. It's works quite well actually. But I, and in turn Argus, have new needs that I can't fix by simply writing better markdown. It's time for Argus v2.
+I've been running this simpler version of Argus for months. It's almost entirely driven through markdown files. It works. It works quite well actually. But I, and in turn Argus, have new needs that I can't fix by simply writing better markdown. It's time for Argus v3.
 
 ---
 
-## What I built in Argus v1
+## What I built in Argus v2
 
-Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions. When I say for example, "run a hygiene audit," Cursor's skill discovery activates a workflow file that checks my team's Jira board against 25 rules. When I ask "when is code freeze?", a routing table in an always-on rule points to the knowledge file referencing our product release schedule and the answer comes back.
+Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions.
 
-Session continuity carries context between conversations. An append-only log records what happened in each session. A priority list persists what I should be working on. Project memory files track where long-running work left off. Every session starts by reading the last one's notes.
+### On-Demand Context
 
-I've build in "source provenance" which means every piece of domain knowledge traces back to a
-specific document with a date and an ID. When sources conflict, both positions are recorded until I resolve them.
+I've developed a set of skills the provide me "on-demand" context. For example, when I say "run a hygiene audit," Cursor's skill discovery finds my hygiene-audit skill and activates a workflow file (markdown) that checks my team's Jira issues against 25 rules.
 
-The whole thing is markdown files and conventions. No code. No database. No service. Just structured text that the LLM reads and follows.
+### Passive Context
+
+I've also built in "passive" context. An example of this is when I ask Argus "when is code freeze?". In this case a master knowledge routing table that I've developed as an "always-on" Cursor rule points to a knowledge file (markdown) referencing our product release schedule and the answer just comes back.
+
+### Session Continuity
+
+Session continuity carries context between conversations. I've built thin in the form of an append-only log that records what happened in each session. Separately, a priority list persists what I should be working on. Project memory files track where my long-running work left off in preparation for when I next engage in that particular workstream. Every working session starts by reading the last session's notes.
+
+### Provenance
+
+It was always a personal requirement of mine to be able to validate where information I receive back from my system originated. I built in "source provenance" which means every piece of domain knowledge traces back to a specific document with a date and an ID. When knowledge sources conflict, both positions/perspectives are recorded and acknowledged as conflicting until I resolve them.
+
+The whole system is markdown files and conventions. No code. No database. No service. Just structured text that the LLM reads and follows. That's Argus v2.
 
 ---
 
