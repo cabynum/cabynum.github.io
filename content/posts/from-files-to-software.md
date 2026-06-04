@@ -13,7 +13,7 @@ I've been running this simpler version of Argus for months. It's almost entirely
 
 ## Argus v2
 
-Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions.
+Argus is my personal engineering management command center. I use it every day for productivity at work. It runs inside Cursor as a collection of skills, knowledge files, and conventions. I can do fun things like this:
 
 ![Argus v2 in action](/images/argus-v2-comic.png)
 
@@ -31,30 +31,32 @@ The whole system is markdown files and conventions. No code. No database. No ser
 
 ## Cracks in the design
 
-Up until now, I haven't experienced any _real_ problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what bothers me, which might be much worse.
+Up until now, I haven't experienced any _real_ problems. The system doesn't break in many obvious ways. But, the potential for Argus to degrade quietly is what truly bothers me.
 
-**Nothing enforces accuracy.** Everything in my system works because the LLM voluntarily follows the instructions I provide it. My routing table, driven through an "always apply" Cursor Rule, tells the model where to look for answers:
+![What I see vs what's actually happening](/images/cracks-in-design.png)
+
+**Nothing enforces accuracy.** Everything in my system works because the LLM voluntarily follows the instructions I provide it. My routing table (driven via Cursor Rule) tells the model where to look for answers:
 
 ```markdown
 | Question about                          | Read this                              |
 |-----------------------------------------|----------------------------------------|
 | Release dates, code freeze, GA timing   | `knowledge/jira/release-schedule.md`   |
 | Hygiene rules (HYGIENE-XX, SPRINT-XX)   | `knowledge/jira/policy-rules.md`       |
-| Health score, staleness, cadence scoring | `knowledge/jira/health-scoring.md`     |
+| Health score, staleness, cadence        | `knowledge/jira/health-scoring.md`     |
 ```
 
-If the model doesn't check the table, it answers from training data instead. I have no way to know whether it checked or the table or not. The answers _usually_ look right, but "looks right" and "came from the right source" aren't the same thing. There's no enforcement, no fallback, no visibility into what actually happened.
+If the model doesn't check the table, it answers from training data instead. I have no way to know whether it checked or the table or not. The answers _usually_ look right, but "looks right" and "came from the expected workflow and source" aren't the same thing. There's no enforcement, no fallback, no visibility into what actually happened.
 
-**Memory can be lost between sessions.** I've established a way of working with Argus that hinges on two primary Cursor Commands - argus.start and argus.end. The end command writes a summary of what happened during a working session - what got done, decisions made, where I left off - and it updates a list of priorities for me. The start command reads the last session's notes and current proirities, then it tells me where I left off and recommends what to do next. The setup is really nice and gives me a sense of control and order. It also is brittle.
+**Memory can be lost between sessions.** I've established a way of working with Argus that hinges on two primary Cursor Commands - **argus.start** and **argus.end**. The end command writes a summary of what happened during a working session - what got done, decisions made, where I left off - and it updates a list of priorities for me. The start command reads the last session's notes and current proirities, then it tells me where I left off and recommends what to do next. The setup is really nice and gives me a sense of control and order. _It also is brittle._
 
-If I forget to close a session, the log doesn't get written. The next session starts with stale context. This
-has happened to me quite a few times and it causes me to have to repeat myself to bring us collectively back into context. I added safeguards, but they're text in a text file - more instructions the model may choose to ignore. The fix has the same weakness as the thing it's fixing.
+If I forget to manually end a session, the log doesn't get written. The next session starts with stale context. This
+has happened to me a few times and it causes me to have to repeat myself to bring us collectively back into context. I added safeguards to my system to try and ensure it doesn't happen repeatedly, but they're text in a text file - more instructions the model may choose to ignore. The safeguards fix, more markdown, has the same weakness as the thing it's fixing.
 
-**Lack of verification lessens confidence.** I can't tell you with high confidence whether last week's hygiene audit was correct. I can't measure whether context loading worked as intended. I trust the output because it usually looks right. "Usually looks right" is not a confidence level I'd accept in any other system I operate so it's made me question the maturity of Argus.
+**A lack of verification decreases confidence.** I can't tell you with high confidence whether last week's hygiene audit was correct. I can't measure whether context loading worked as intended. I trust the output because it usually looks right. "Usually looks right" is not a confidence level I'd accept in any other system I operate so it's made me question the maturity of Argus.
 
-**Context gets heavier and noisier over time.** Every time I teach Argus something new by ingesting a new source of information the system gets heavier. The routing table grows. The session history grows. The knowledge base grows. All of this competes for the model's attention inside a finite context window, and there's nothing particularly smart about how it gets loaded - it's a flat file read every time. This base context loads with every single conversation and it keeps growing, with no awareness of whether it is relevant to what I'm actually doing in the present. Six months from now, this will be meaningfully worse than it is today, and currently I have no strategy for managing it.
+**Context gets heavier and noisier over time.** Every time I teach Argus something new by ingesting a new source of information, the system gets heavier. The routing table grows. The session history grows. The knowledge base grows. All of this competes for the model's attention inside a finite context window, and there's nothing particularly smart about how it gets loaded - it's a flat file read every time. This base context loads with every single conversation and it keeps growing, with no awareness of whether it is relevant to what I'm actually doing in the present. Six months from now, this will be meaningfully worse than it is today, and currently I have no strategy for managing it.
 
-**Things don't work without me in the driver's seat.** Argus lives in a single Cursor workspace. If I switch to a different project in a different window, Argus isn't there - all the knowledge, memory, and skills stay behind. I ran into this while editing this very blog post in a separate workspace. My command center doesn't travel with me.
+**Things don't GO without me in the driver's seat.** Argus lives in a single Cursor workspace. If I switch to a different project in a different window, Argus isn't there - all the knowledge, memory, and skills stay behind. I ran into this while editing this very blog post in a separate workspace. My command center doesn't travel with me.
 
 It also can't do anything on its own. If I want a hygiene scan at 6am with results waiting when I sit down, that's not possible. If I want it to notice a Jira event and react, it can't. It sits completely inert until I'm in the seat typing. That's fine for a chat assistant. It's limiting for something I want to depend on.
 
