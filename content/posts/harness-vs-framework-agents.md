@@ -7,7 +7,7 @@ description: "The vision of specialized AI agents is real and powerful. But the 
 
 I spent about a month building an AI command center for engineering management. I called it Argus. The idea was specialized AI agents with deep domain knowledge, orchestrated by a Manager agent that routes requests to the right specialist. An Agile Practitioner for Jira work. A Prompt Engineer for crafting prompts. A Rewards Advisor for performance reviews. Each designed with care, each with a portable system prompt I could paste into any LLM.
 
-It was a clean architecture. It was also the wrong one.
+It was a clean architecture. It also turned out to be the wrong one.
 
 ---
 
@@ -27,6 +27,8 @@ Three weeks in, I ran `/argus.trace`, a diagnostic command I'd built to show whi
 
 Every single task - Jira hygiene audits, backlog grooming, Workday data extraction, sprint planning - had been handled by the core LLM. Not one specialist agent had been engaged. My carefully crafted personas were sitting unused in the `agents/` folder.
 
+![The trace results were brutal](/images/argus-trace-reveal.png)
+
 My architecture diagram showed a sophisticated routing system. The reality was a Cursor rule file and some skills that fired when I said the right words. My "Manager agent" was a markdown table that pointed to knowledge files. My "Agile Practitioner" was a system prompt that only loaded when I manually ran a slash command, which I almost never did because the skills already did the job.
 
 ---
@@ -38,6 +40,8 @@ Here's what I missed.
 **Framework agents** live in systems like CrewAI, AutoGen, and the OpenAI Agents SDK. In those environments, you build the orchestration. Each agent is a separate execution context with its own system prompt, its own tool access, its own memory. When Agent A hands off to Agent B, it's a real handoff - context is serialized, the new agent starts fresh with scoped tools and a clear mandate. You control the runtime.
 
 **Harness agents** live inside AI-powered IDEs like Cursor, Windsurf, or Claude Code. The IDE _is_ the runtime. It already handles tool access (MCP servers, browser, shell), context management (rules, skills, knowledge files), and workflow routing (skill auto-discovery matches your request to the right workflow). Building a framework-style orchestration layer on top of what the platform already provides is like building a web framework inside Django.
+
+![Framework vs Harness](/images/harness-vs-framework.png)
 
 I was building framework agents inside a harness. That was my fundamental mistake.
 
