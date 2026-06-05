@@ -11,7 +11,7 @@ It was a clean architecture. It also turned out to be the wrong one.
 
 ---
 
-## My Grande Plan
+## My Master Plan
 
 I wanted something beyond "chat with an LLM." When I asked about sprint health, I wanted an expert Agile Practitioner that would push back on anti-patterns and flag risks I hadn't considered. When I needed to draft Quarterly Connection (performance review) feedback, I wanted a Rewards Advisor that understood performance review conventions and my team's context.
 
