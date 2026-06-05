@@ -6,7 +6,7 @@ paginate = 10
 
 [params]
   env = "production"
-  description = "Engineering leader, AI builder, writer."
+  description = "Engineering leader, AI builder, Writer."
   author = "Christopher Bynum"
   defaultTheme = "auto"
   ShowReadingTime = true
