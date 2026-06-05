@@ -23,7 +23,7 @@ I've read about CrewAI, AutoGen, the OpenAI Agents SDK. The pattern made sense t
 
 ## What actually happened
 
-I stood up Argus, and used it quite happily. It worked! Three weeks in, I became a little suspicious. I'd ask the model questions about the flow of information and responses I'd recieved and what was returned to me was vague - until the model flat out said it wasn't sure. It led me to create and run `/argus.trace`, a diagnostic command I'd built to show which agents actually handled a given task. The results were brutal.
+I stood up Argus, and used it quite happily. It worked! Three weeks in, I became a little suspicious. I'd ask the model questions about the flow of information and responses I'd recieved and what was returned to me was consistently vague - until the model flat out said "I'm not sure." It led me to create and run `/argus.trace`, a diagnostic command I'd built to show which agents actually handled a given task. The results were brutal.
 
 Every single task (Jira hygiene audits, backlog grooming, performance data extraction, sprint planning) had been handled by the core LLM. Not one specialist agent had been engaged. My carefully crafted personas were sitting unused in the `agents/` folder.
 
@@ -59,43 +59,59 @@ So the skills did the work. The persona sat on the shelf.
 
 ## What was actually valuable
 
-Tearing down the Argus didn't mean starting over. It meant taking a honest look at what was working and articlating it.
+Tearing down the Argus didn't mean starting over entirely. It meant taking a honest look at what was working, capturing those capabilities, and ditching the rest.
+
+What was worth keeping...
 
 ### Knowledge routing
 
-A simple table in an always-on Cursor rule that maps question types to knowledge files. "What does Release Pending mean?" goes to `fields-reference.md`. "When is code freeze?" goes to `release-schedule.md`. No agent needed. Just a lookup table the LLM checks before answering.
+This was implemented as a simple table in an always-on Cursor rule that maps question types to knowledge files. "What does Release Pending mean?" maps to `fields-reference.md`. "When is code freeze?" maps to `release-schedule.md`. No agent needed. Just a lookup table the LLM checks before answering.
 
 ### Skills with embedded guardrails
 
-Workflow files that auto-activate via Cursor's platform when my request matches. Each carries its own behavioral preamble containing the most valuable parts of what used to be persona instructions, delivered without any manual activation.
+Skills auto-activate by default in Cursor when my request matches their description. "Run a hygiene audit" fires the hygiene-audit skill, which references a set of scoring rules and knows how to grade each issue. "Plan my sprint" triggers sprint-planning, which knows my team's velocity history and the specific allocation targets (ratios of new feature work to tech debt etc.) for my team's work. Each skill embeds the domain logic it needs to do its job.
 
 ### Structured domain knowledge
 
-Twenty-five hygiene rules, prioritization frameworks, release schedules, delivery level requirements, and field ID mappings, all in Markdown files organized by domain. This is the real depth that makes my system better than a generic LLM.
+I added stuctured domain knowledge to Argus in Markdown files organized by area of focus. This domain knowledge cover everything from Jira hygiene rules to release schedules, to organization strategy. A generic LLM genernally about Jira. Argus knows that disconnected testing is required at Tech Preview, and that Fix Version means committed while Target Version means targeted. This specificity is what makes the system useful.
 
 ### Session continuity
 
-An append-only session log, a priority list that persists across conversations, project memory files that record where work stopped. Every session picks up where the last one left off.
+Session continuity was one of the first things I invested in, and it might be the most important. When chatting with LLMs, every conversation starts from zero unless you do something about it. I built `/argus.start` and `/argus.end` commands around an append-only session log, a live priority list, and per-project memory files. When I open a session, Argus reads the last entry and tells me what I was doing and what to pick up next.
 
-## Source provenance
+This maps to what the industry is calling [agent memory](https://www.linkedin.com/pulse/agent-memory-angie-jones-odrjc/) - conversational, semantic, episodic, procedural. My session logs are episodic memory. My knowledge files are semantic memory. My project files are entity memory. I just built it for myself in Markdown before learning of this terminology.
 
-Every piece of domain knowledge traces back to a source document with a date. When rules conflict (and they did, I tracked nine conflicts across twenty-one sources), both positions are documented until resolved. This is what makes the knowledge trustworthy.
+The next evolution is dropping the ceremony entirely. What I actually want is a system that always knows and maintains persistent awareness across every session.
 
-None of these required the multi-agent model.
+### Source provenance
+
+Every piece of domain knowledge in Argus traces back to a registered source with an ID and a date. I've ingested information sources detailing Jira admin documentation, product strategy decks, release engineering runbooks and more. When rules from different sources conflict, and as you can imagine this happens many times in a large engineering organization, both positions are documented until I resolve them. This is what makes the knowledge trustworthy.
+
+The key takeaway here is, none of these capabilities requires the multi-agent model.
 
 ---
 
-## What I learned
+## Learnings
 
-**Understand your runtime before designing your architecture.** If you're building inside Cursor, Windsurf, or a similar AI harness, the platform already provides tool access, context management, and workflow routing. My job was to give it good knowledge and well-structured skills, not to rebuild orchestration on top of orchestration.
+**Understand your runtime before designing your architecture.**
 
-**Skills beat personas for most work.** A skill with embedded behavioral guardrails fires automatically, carries the constraints that matter, and requires zero activation friction. A persona adds depth for long sessions, but if you find yourself avoiding the activation step, the persona isn't earning its keep.
+If you're building inside Cursor, Windsurf, or a similar AI harness, the platform already provides tool access, context management, and workflow routing. My job was to give it good knowledge and well-structured skills, not to rebuild orchestration on top of orchestration.
 
-**Knowledge is the real differentiator.** A generic LLM knows about Jira. It doesn't know my team's 25 hygiene rules, our Fix Version vs. Target Version policy, or that disconnected testing is required at Tech Preview but deferrable via exception. That structured domain knowledge is what makes the system meaningfully better than a general-purpose chatbot.
+**Skills beat personas for most work.**
 
-**Session continuity is worth investing in.** Most AI tools assume every conversation starts from zero. If you can solve "where did I leave off?" you've built something genuinely useful. This doesn't require agents. It requires a memory convention and the discipline to maintain it.
+A skill with embedded behavioral guardrails fires automatically, carries the constraints that matter, and requires zero activation friction. A persona adds depth for long sessions, but if you find yourself avoiding the activation step, the persona isn't earning its keep.
 
-**Name things honestly.** I called my Cursor rule a "Manager agent" and my skill files "agent capabilities." They weren't agents. They were a routing table and workflow files. The honest names (rule, skill, knowledge) are less exciting but more useful. They tell you exactly what the thing does and how to improve it.
+**Knowledge is the real differentiator.**
+
+A generic LLM knows about Jira. It doesn't know my team's 25 hygiene rules, our Fix Version vs. Target Version policy, or that disconnected testing is required at Tech Preview but deferrable via exception. That structured domain knowledge is what makes the system meaningfully better than a general-purpose chatbot.
+
+**Session continuity is worth investing in.**
+
+Most AI tools assume every conversation starts from zero. If you can solve "where did I leave off?" you've built something genuinely useful. This doesn't require agents. It requires a memory convention and the discipline to maintain it.
+
+**Name things honestly.**
+
+I called my Cursor rule a "Manager agent" and my skill files "agent capabilities." They weren't agents. They were a routing table and workflow files. The honest names (rule, skill, knowledge) are less exciting but more useful. They tell you exactly what the thing does and how to improve it.
 
 ---
 
