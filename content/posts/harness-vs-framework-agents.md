@@ -63,8 +63,6 @@ So the skills did the work. The persona sat on the shelf.
 
 Tearing down the Argus v1 didn't mean starting over entirely. It meant taking a honest look at what was working, capturing those capabilities, and ditching the rest to establish Argus v2.
 
-What was worth keeping...
-
 ![What Survived](/images/what-survived-building-blocks.png)
 
 ### Knowledge routing
