@@ -19,6 +19,8 @@ My plan was to build specialized agents, each with a unique persona that shapes 
 
 I've read about CrewAI, AutoGen, the OpenAI Agents SDK. The pattern made sense to me. Agents with scoped tools, isolated contexts, real handoffs. I built toward that.
 
+![The Plan](/images/the-vision-architecture.png)
+
 ---
 
 ## What actually happened
@@ -62,6 +64,8 @@ So the skills did the work. The persona sat on the shelf.
 Tearing down the Argus didn't mean starting over entirely. It meant taking a honest look at what was working, capturing those capabilities, and ditching the rest.
 
 What was worth keeping...
+
+![What Survived](/images/what-survived-building-blocks.png)
 
 ### Knowledge routing
 
