@@ -11,7 +11,7 @@ It was a clean architecture. It also turned out to be the wrong one.
 
 ---
 
-## The vision
+## My Grande Plan
 
 I wanted something beyond "chat with an LLM." When I asked about sprint health, I wanted an expert Agile Practitioner that would push back on anti-patterns and flag risks I hadn't considered. When I needed to draft Quarterly Connection (performance review) feedback, I wanted a Rewards Advisor that understood performance review conventions and my team's context.
 
@@ -23,7 +23,7 @@ I've read about CrewAI, AutoGen, the OpenAI Agents SDK. The pattern made sense t
 
 ---
 
-## What actually happened
+## Argus v1
 
 I stood up Argus, and used it quite happily. It worked! Three weeks in, I became a little suspicious. I'd ask the model questions about the flow of information and responses I'd received and what was returned to me was consistently vague, until the model flat out said "I'm not sure." It led me to create and run `/argus.trace`, a diagnostic command I'd built to show which agents actually handled a given task. The results were brutal.
 
@@ -59,9 +59,9 @@ So the skills did the work. The persona sat on the shelf.
 
 ---
 
-## What was actually valuable
+## Argus v2 - Reducing to value
 
-Tearing down the Argus didn't mean starting over entirely. It meant taking a honest look at what was working, capturing those capabilities, and ditching the rest.
+Tearing down the Argus v1 didn't mean starting over entirely. It meant taking a honest look at what was working, capturing those capabilities, and ditching the rest to establish Argus v2.
 
 What was worth keeping...
 
