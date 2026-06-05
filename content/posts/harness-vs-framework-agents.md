@@ -23,7 +23,7 @@ I've read about CrewAI, AutoGen, the OpenAI Agents SDK. The pattern made sense t
 
 ## What actually happened
 
-I stood up Argus, and used it quite happily. It worked! Three weeks in, I became a little suspicious. I'd ask the model questions about the flow of information and responses I'd recieved and what was returned to me was consistently vague - until the model flat out said "I'm not sure." It led me to create and run `/argus.trace`, a diagnostic command I'd built to show which agents actually handled a given task. The results were brutal.
+I stood up Argus, and used it quite happily. It worked! Three weeks in, I became a little suspicious. I'd ask the model questions about the flow of information and responses I'd received and what was returned to me was consistently vague, until the model flat out said "I'm not sure." It led me to create and run `/argus.trace`, a diagnostic command I'd built to show which agents actually handled a given task. The results were brutal.
 
 Every single task (Jira hygiene audits, backlog grooming, performance data extraction, sprint planning) had been handled by the core LLM. Not one specialist agent had been engaged. My carefully crafted personas were sitting unused in the `agents/` folder.
 
@@ -73,7 +73,7 @@ Skills auto-activate by default in Cursor when my request matches their descript
 
 ### Structured domain knowledge
 
-I added stuctured domain knowledge to Argus in Markdown files organized by area of focus. This domain knowledge cover everything from Jira hygiene rules to release schedules, to organization strategy. A generic LLM genernally about Jira. Argus knows that disconnected testing is required at Tech Preview, and that Fix Version means committed while Target Version means targeted. This specificity is what makes the system useful.
+I added structured domain knowledge to Argus in Markdown files organized by area of focus. This domain knowledge covers everything from Jira hygiene rules to release schedules, to organization strategy. A generic LLM knows generally about Jira. Argus knows that disconnected testing is required at Tech Preview, and that Fix Version means committed while Target Version means targeted. This specificity is what makes the system useful.
 
 ### Session continuity
 
@@ -91,11 +91,11 @@ The key takeaway here is, none of these capabilities requires the multi-agent mo
 
 ---
 
-## Learnings
+## The Learnings
 
 **Understand your runtime before designing your architecture.**
 
-If you're building inside Cursor, Windsurf, or a similar AI harness, the platform already provides tool access, context management, and workflow routing. My job was to give it good knowledge and well-structured skills, not to rebuild orchestration on top of orchestration.
+If you're building inside Cursor, Windsurf, or a similar AI harness, the platform already provides tool access, context management, and workflow routing. Understanding what the platform handles tells you where to invest your effort, and where the platform's coverage ends and you need to build your own reliability.
 
 **Skills beat personas for most work.**
 
@@ -103,22 +103,22 @@ A skill with embedded behavioral guardrails fires automatically, carries the con
 
 **Knowledge is the real differentiator.**
 
-A generic LLM knows about Jira. It doesn't know my team's 25 hygiene rules, our Fix Version vs. Target Version policy, or that disconnected testing is required at Tech Preview but deferrable via exception. That structured domain knowledge is what makes the system meaningfully better than a general-purpose chatbot.
+A generic LLM doesn't know the specifics of my world. It doesn't know my team's Jira expectations, our Fix Version vs. Target Version policy, or that disconnected testing is required at Tech Preview but deferrable via exception. That structured domain knowledge is what makes Argus meaningfully better than a general-purpose chatbot.
 
 **Session continuity is worth investing in.**
 
-Most AI tools assume every conversation starts from zero. If you can solve "where did I leave off?" you've built something genuinely useful. This doesn't require agents. It requires a memory convention and the discipline to maintain it.
+Most AI tools assume every conversation starts from zero. If you can solve "where did I leave off?" you've built something genuinely useful. I started with memory conventions and manual commands. They work, but they depend on discipline. If I forget to end a session the context goes stale. The convention was the right starting point but whether it's the right long-term solution is a different question.
 
-**Name things honestly.**
+**Learn how your harness works.**
 
-I called my Cursor rule a "Manager agent" and my skill files "agent capabilities." They weren't agents. They were a routing table and workflow files. The honest names (rule, skill, knowledge) are less exciting but more useful. They tell you exactly what the thing does and how to improve it.
+I built agents without fully understanding the building blocks underneath. Cursor has rules (always-on context), skills (workflows that activate when your request matches), and the files those skills reference, which Cursor doesn't even have a formal name for. I didn't understand these distinctions when I started. That's why I ended up building personas that duplicated what skills already did, and a "Manager agent" that was really just a rule. The better I understood the harness, the less I needed to build on top of it.
 
 ---
 
-## Where I landed
+## The Takeaway
 
-Building Argus as a multi-agent system taught me what multi-agent systems are actually for, and what they're not. The vision of specialized AI that reasons differently about different domains is real. But the implementation has to match the runtime. Inside an AI coding assistant, the right architecture isn't agents orchestrating agents. It's deep knowledge, well-structured skills, and a platform that's already good at routing.
+Building Argus as a multi-agent system taught me what multi-agent systems are actually for, and what they're not. The vision of specialized AI that reasons differently about different domains is real. But the implementation has to match the runtime. Inside an AI coding assistant, I didn't find agents orchestrating agents to be the right architecture. I'd love to hear about others' success or failure stories there. I found that deep knowledge, well-structured skills, and a platform that's already good at routing is a powerful combo that addresses most cases.
 
 My system now is simpler, has no activation friction, and produces the same quality output. The things that made it special (session continuity, knowledge provenance, domain depth) were never about agents in the first place.
 
-Sometimes the most important architecture decision is recognizing when you're solving the wrong problem.
+Sometimes the most important architecture decision is recognizing when you're solving the wrong problem. That doesn't mean the work stops. Argus v2 is better than v1, and there's already a v3 forming in my head. Pivoting when things are off is almost always the right call.
