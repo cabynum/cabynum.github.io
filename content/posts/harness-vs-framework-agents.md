@@ -59,17 +59,27 @@ So the skills did the work. The persona sat on the shelf.
 
 ## What was actually valuable
 
-Tearing down the multi-agent architecture didn't mean starting over. It meant honestly naming what was working.
+Tearing down the Argus didn't mean starting over. It meant taking a honest look at what was working and articlating it.
 
-**Knowledge routing.** A simple table in an always-on Cursor rule that maps question types to knowledge files. "What does Release Pending mean?" goes to `fields-reference.md`. "When is code freeze?" goes to `release-schedule.md`. No agent needed. Just a lookup table the LLM checks before answering.
+### Knowledge routing
 
-**Skills with embedded guardrails.** Workflow files that auto-activate via Cursor's platform when my request matches. Each carries its own behavioral preamble containing the most valuable parts of what used to be persona instructions, delivered without any manual activation.
+A simple table in an always-on Cursor rule that maps question types to knowledge files. "What does Release Pending mean?" goes to `fields-reference.md`. "When is code freeze?" goes to `release-schedule.md`. No agent needed. Just a lookup table the LLM checks before answering.
 
-**Structured domain knowledge.** Twenty-five hygiene rules, prioritization frameworks, release schedules, delivery level requirements, and field ID mappings, all in Markdown files organized by domain. This is the real depth that makes my system better than a generic LLM.
+### Skills with embedded guardrails
 
-**Session continuity.** An append-only session log, a priority list that persists across conversations, project memory files that record where work stopped. Every session picks up where the last one left off.
+Workflow files that auto-activate via Cursor's platform when my request matches. Each carries its own behavioral preamble containing the most valuable parts of what used to be persona instructions, delivered without any manual activation.
 
-**Source provenance.** Every piece of domain knowledge traces back to a source document with a date. When rules conflict (and they did, I tracked nine conflicts across twenty-one sources), both positions are documented until resolved. This is what makes the knowledge trustworthy.
+### Structured domain knowledge
+
+Twenty-five hygiene rules, prioritization frameworks, release schedules, delivery level requirements, and field ID mappings, all in Markdown files organized by domain. This is the real depth that makes my system better than a generic LLM.
+
+### Session continuity
+
+An append-only session log, a priority list that persists across conversations, project memory files that record where work stopped. Every session picks up where the last one left off.
+
+## Source provenance
+
+Every piece of domain knowledge traces back to a source document with a date. When rules conflict (and they did, I tracked nine conflicts across twenty-one sources), both positions are documented until resolved. This is what makes the knowledge trustworthy.
 
 None of these required the multi-agent model.
 
