@@ -51,7 +51,7 @@ In a **framework**, a persona constrains an agent's behavior in meaningful ways.
 
 Cursor is my **harness**. There's one conversation with one LLM. "Loading an agent" in this world means reading a system prompt into the shared context window. The LLM doesn't become a different entity, it reads more instructions and tries to follow them all. Tool access can't be enforced per persona, so my Agile Practitioner has access to everything the Prompt Engineer does. Context isn't isolated either. The LLM remembers the entire conversation regardless of which "agent" is active.
 
-I had 290 lines of persona instructions for the Agile Practitioner. My skills already contained the guardrails that mattered: confirm before acting, push back on anti-patterns, never invent data. Those fired automatically when I said "run a hygiene audit." The persona added tone and framing on top of that, but I had to manually activate it with a slash command. I never did because it felt like unnecessary friction.
+I had 200+ lines of persona instructions for my Agile Practitioner persona. The skills I'd created already contained the guardrails that mattered for me, to confirm before acting, push back on anti-patterns, and never invent data. Those fired automatically when I said "run a hygiene audit." The persona would have added tone and framing on top of that, but I would have to manually activate it with a slash command. I never did that because it felt unnecessary.
 
 So the skills did the work. The persona sat on the shelf.
 
