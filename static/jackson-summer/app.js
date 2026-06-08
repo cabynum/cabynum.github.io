@@ -175,7 +175,7 @@
   function renderProgress() {
     const booksComplete = Object.values(state.books).filter(Boolean).length;
     document.getElementById('books-fill').style.width = (booksComplete / 4 * 100) + '%';
-    document.getElementById('books-count').textContent = booksComplete + '/4';
+    document.getElementById('books-count').textContent = booksComplete + ' / 4';
 
     if (state.math.level) {
       const total = MATH_LEVELS[state.math.level].problems;

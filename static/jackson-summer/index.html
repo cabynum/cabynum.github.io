@@ -6,7 +6,7 @@
   <title>Jackson's Summer 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,7 +20,7 @@
   </header>
 
   <main>
-    <!-- TODAY SECTION -->
+    <!-- TODAY -->
     <section class="section" id="section-today">
       <div class="today-card" id="today-card">
         <div class="today-meta" id="today-meta"></div>
@@ -29,126 +29,123 @@
     </section>
 
     <!-- PROGRESS -->
-    <section class="section section-muted">
-      <div class="progress-strip">
-        <div class="progress-item">
-          <span class="progress-label">Books</span>
-          <div class="progress-bar"><div class="progress-fill books-fill" id="books-fill"></div></div>
-          <span class="progress-count" id="books-count">0/4</span>
-        </div>
-        <div class="progress-item">
-          <span class="progress-label">Math</span>
-          <div class="progress-bar"><div class="progress-fill math-fill" id="math-fill"></div></div>
-          <span class="progress-count" id="math-count">0%</span>
+    <div class="section-alt">
+      <div class="section-inner">
+        <div class="progress-strip">
+          <div class="progress-item">
+            <div class="progress-label">Books Read</div>
+            <div class="progress-bar"><div class="progress-fill books-fill" id="books-fill"></div></div>
+            <span class="progress-count" id="books-count">0 / 4</span>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label">Math Packet</div>
+            <div class="progress-bar"><div class="progress-fill math-fill" id="math-fill"></div></div>
+            <span class="progress-count" id="math-count">0%</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- READING SECTION -->
+    <!-- READING -->
     <section class="section" id="section-reading">
       <h2>Reading</h2>
-      <p class="lead">You have 4 books to read this summer. Three of them require an AR test on campus. One requires a written project.</p>
+      <p class="lead">4 books this summer. Three need an AR test on campus. One needs a written project.</p>
 
-      <div class="book" id="book-2">
-        <div class="book-img">
-          <img src="https://covers.openlibrary.org/b/isbn/9780142407332-L.jpg" alt="The Outsiders cover">
-        </div>
-        <div class="book-body">
-          <span class="label">Book 1 · Required</span>
-          <h3>The Outsiders</h3>
-          <p class="author">S.E. Hinton</p>
-          <p>Everyone reads this one. While you read, fill in the <strong>Need to Read Fiction</strong> guide — a few questions each day about what you're reading. You'll hand it in before your AR test.</p>
-          <div class="book-footer">
-            <span class="due">AR test by Aug 14</span>
-            <button class="check-btn" data-book="book2">
-              <span class="check-icon"></span>
-              <span class="check-text">Mark Complete</span>
-            </button>
+      <div class="books-grid">
+        <!-- Book 2: The Outsiders (required, listed first) -->
+        <div class="book-card" id="card-book2">
+          <div class="book-cover-area">
+            <img src="https://covers.openlibrary.org/b/isbn/9780142407332-L.jpg" alt="The Outsiders">
+          </div>
+          <div class="book-body">
+            <span class="label">Required</span>
+            <h3>The Outsiders</h3>
+            <p class="author">S.E. Hinton</p>
+            <p>Everyone reads this one. Fill in the Need to Read guide daily while you read.</p>
+            <div class="book-footer">
+              <span class="due">AR test by Aug 14</span>
+              <button class="check-btn" data-book="book2"><span class="check-icon"></span><span class="check-text">Done</span></button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="book" id="book-1">
-        <div class="book-img">
-          <div class="book-placeholder-text">?</div>
-        </div>
-        <div class="book-body">
-          <span class="label">Book 2 · Your Choice</span>
-          <h3>Reader's Choice</h3>
-          <p>Pick any book from the Reader's Choice list that you haven't read before.</p>
-          <div class="book-footer">
-            <span class="due">AR test by Aug 14</span>
-            <button class="check-btn" data-book="book1">
-              <span class="check-icon"></span>
-              <span class="check-text">Mark Complete</span>
-            </button>
+        <!-- Book 1: Reader's Choice -->
+        <div class="book-card" id="card-book1">
+          <div class="book-cover-area gradient-teal">
+            <div class="book-cover-text">Your<br>Choice</div>
+          </div>
+          <div class="book-body">
+            <span class="label">Reader's Choice</span>
+            <h3>Pick Any Book</h3>
+            <p>Choose one from the Reader's Choice list you haven't read before.</p>
+            <div class="book-footer">
+              <span class="due">AR test by Aug 14</span>
+              <button class="check-btn" data-book="book1"><span class="check-icon"></span><span class="check-text">Done</span></button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="book" id="book-3">
-        <div class="book-img">
-          <img src="https://covers.openlibrary.org/b/isbn/9781452134772-L.jpg" alt="House Arrest cover">
-        </div>
-        <div class="book-body">
-          <span class="label">Book 3 · Pick One</span>
-          <h3>House Arrest <span class="or">or</span> Martin Luther King Jr.</h3>
-          <p class="author">K.A. Holt · or · Amy Pastan</p>
-          <p>Choose one of these two. Read it and take the AR test.</p>
-          <div class="book-footer">
-            <span class="due">AR test by Aug 14</span>
-            <button class="check-btn" data-book="book3">
-              <span class="check-icon"></span>
-              <span class="check-text">Mark Complete</span>
-            </button>
+        <!-- Book 3: House Arrest or MLK -->
+        <div class="book-card" id="card-book3">
+          <div class="book-cover-area">
+            <img src="https://covers.openlibrary.org/b/isbn/9781452134772-L.jpg" alt="House Arrest">
+          </div>
+          <div class="book-body">
+            <span class="label">Pick One</span>
+            <h3>House Arrest <span class="or">or</span> MLK Jr.</h3>
+            <p class="author">K.A. Holt · or · Amy Pastan</p>
+            <p>Choose one. Read it. Take the AR test.</p>
+            <div class="book-footer">
+              <span class="due">AR test by Aug 14</span>
+              <button class="check-btn" data-book="book3"><span class="check-icon"></span><span class="check-text">Done</span></button>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="book" id="book-4">
-        <div class="book-img">
-          <div class="book-placeholder-text">BIO</div>
-        </div>
-        <div class="book-body">
-          <span class="label">Book 4 · Biography</span>
-          <h3>Biography + Written Project</h3>
-          <p>Pick one of the 10 biography options. After reading, write the project and turn it in to your English teacher on the first day of school. No AR test for this one.</p>
-          <div class="book-footer">
-            <span class="due">Written project due first day of school</span>
-            <button class="check-btn" data-book="book4">
-              <span class="check-icon"></span>
-              <span class="check-text">Mark Complete</span>
-            </button>
+        <!-- Book 4: Biography -->
+        <div class="book-card" id="card-book4">
+          <div class="book-cover-area gradient-orange">
+            <div class="book-cover-text">Biography<br>+ Written Project</div>
+          </div>
+          <div class="book-body">
+            <span class="label">Biography</span>
+            <h3>Pick 1 of 10 Options</h3>
+            <p>Read a biography, then write the project. Turn it in to your English teacher day one.</p>
+            <div class="book-footer">
+              <span class="due">Written project due first day</span>
+              <button class="check-btn" data-book="book4"><span class="check-icon"></span><span class="check-text">Done</span></button>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- NEED TO READ -->
-    <section class="section section-muted">
-      <div class="callout">
-        <h3>About the Need to Read Guide</h3>
-        <p>This is a short worksheet you fill in <strong>while</strong> you're reading <em>The Outsiders</em> — not after. A few questions each day. It trains your brain to pay attention and remember what you read, which makes the AR test easy.</p>
-        <p>You hand it in before taking your AR test.</p>
-      </div>
-    </section>
+    <!-- NEED TO READ + AR -->
+    <div class="section-alt">
+      <section class="section">
+        <div class="callout">
+          <h3>About the Need to Read Guide</h3>
+          <p>This is a short worksheet you fill in <strong>while</strong> you read <em>The Outsiders</em> — not after. A few questions each day. It trains your brain to pay attention and makes the AR test easy.</p>
+          <p>Hand it in before your AR test.</p>
+        </div>
+      </section>
+    </div>
 
-    <!-- AR TESTING -->
     <section class="section" id="section-ar">
       <h2>AR Testing</h2>
-      <p class="lead">AR stands for Accelerated Reader. It's a short multiple-choice quiz you take on a computer at school after you finish a book. Takes about 15 minutes. It just checks that you read and understood the book — not a big deal.</p>
+      <p class="lead">A short quiz you take on a computer at school after finishing a book. Multiple choice, ~15 minutes. Not a big deal.</p>
 
       <div class="info-box">
-        <h3>You have to go to campus to take these.</h3>
-        <p>The library is open on specific days this summer. Pick a day after you finish a book and show up — no appointment needed. Bring your GAC laptop if you have one.</p>
+        <h3>You have to go to campus.</h3>
+        <p>The library is open on specific days. Show up after finishing a book — no appointment needed. Bring your GAC laptop if you have one.</p>
         <div class="ar-schedule" id="ar-schedule"></div>
       </div>
     </section>
 
-    <!-- MATH SECTION -->
+    <!-- MATH -->
     <section class="section" id="section-math">
       <h2>Math</h2>
-      <p class="lead">One math packet to complete over the summer. Due on the first day of school. Pick your level and chip away at it — a few problems each day.</p>
+      <p class="lead">One packet to complete. Due first day of school. Pick your level, then chip away at it daily.</p>
 
       <div id="math-selector">
         <p class="pick-prompt">Which packet are you doing?</p>
@@ -172,22 +169,24 @@
       </div>
     </section>
 
-    <!-- SCHEDULE SECTION -->
-    <section class="section section-muted" id="section-schedule">
-      <h2>Your Summer Plan</h2>
-      <p class="lead">June 8 through August 1. Weekdays only, about 1–2 hours. Everything wraps up the week before school starts.</p>
-      <div class="schedule-timeline" id="schedule-timeline"></div>
-    </section>
+    <!-- SCHEDULE -->
+    <div class="section-alt">
+      <section class="section" id="section-schedule">
+        <h2>Your Summer Plan</h2>
+        <p class="lead">June 8 → August 1. Weekdays, ~1–2 hours. Done the week before school.</p>
+        <div class="schedule-timeline" id="schedule-timeline"></div>
+      </section>
+    </div>
 
-    <!-- OPTIONAL CHALLENGE -->
+    <!-- BONUS -->
     <section class="section">
       <details class="bonus-section">
         <summary><h3>Optional: Reading Challenge</h3></summary>
-        <p>For extra recognition and special privileges, read 3 more books:</p>
+        <p>For extra recognition and privileges, read 3 more books:</p>
         <ol>
-          <li>One from the 8th grade <strong>Challenge Level Fiction</strong> list</li>
-          <li>One from the 8th grade <strong>Challenge Level Non-Fiction</strong> list</li>
-          <li>One book of your choice with an AR point value of 9+ (use <a href="https://www.arbookfind.com" target="_blank">Renaissance Book Finder</a>)</li>
+          <li>One from 8th grade <strong>Challenge Level Fiction</strong></li>
+          <li>One from 8th grade <strong>Challenge Level Non-Fiction</strong></li>
+          <li>One book with AR point value of 9+ (use <a href="https://www.arbookfind.com" target="_blank">Renaissance Book Finder</a>)</li>
         </ol>
         <p>Pass an AR test on each and you're in.</p>
       </details>
