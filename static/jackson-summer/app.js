@@ -1,10 +1,8 @@
 (function() {
   'use strict';
 
-  // ─── DATA ─────────────────────────────────────────────────────────────────
-  const SCHEDULE_START = new Date(2026, 5, 8); // June 8, 2026
-  const SCHEDULE_END = new Date(2026, 7, 1);   // August 1, 2026
-  const SCHOOL_START = new Date(2026, 7, 9);   // August 9, 2026
+  const SCHEDULE_START = new Date(2026, 5, 8);
+  const SCHEDULE_END = new Date(2026, 7, 1);
 
   const AR_DATES = [
     { date: new Date(2026, 5, 10), time: '9:30 AM – 12:00 PM' },
@@ -15,48 +13,6 @@
     { date: new Date(2026, 7, 7),  time: '2:30 – 7:00 PM' },
   ];
 
-  const BOOKS = [
-    {
-      id: 'book1',
-      number: 'Book 1',
-      title: 'Reader\'s Choice',
-      details: 'Pick one book from the Reader\'s Choice list you haven\'t read before.',
-      ar: true,
-      dueLabel: 'AR test by Aug 14',
-      coverEmoji: '📖',
-    },
-    {
-      id: 'book2',
-      number: 'Book 2',
-      title: 'The Outsiders',
-      author: 'S.E. Hinton',
-      details: 'Required for all 8th graders. Complete the Need to Read Fiction guide while reading (daily, not after).',
-      ar: true,
-      dueLabel: 'AR test by Aug 14',
-      coverEmoji: '📕',
-      coverUrl: 'https://covers.openlibrary.org/b/isbn/9780142407332-M.jpg',
-    },
-    {
-      id: 'book3',
-      number: 'Book 3',
-      title: 'Choose One',
-      options: ['House Arrest by K.A. Holt', 'Martin Luther King Jr. by Amy Pastan'],
-      details: 'Pick one of these two books.',
-      ar: true,
-      dueLabel: 'AR test by Aug 14',
-      coverEmoji: '📗',
-    },
-    {
-      id: 'book4',
-      number: 'Book 4',
-      title: 'Biography',
-      details: 'Choose 1 of the 10 biography options. Complete the written project (due first day of school).',
-      ar: false,
-      dueLabel: 'Written project due first day',
-      coverEmoji: '📘',
-    },
-  ];
-
   const MATH_LEVELS = {
     prealgebra: { label: 'Pre-Algebra', problems: 60 },
     algebra1: { label: 'Algebra 1', problems: 60 },
@@ -65,53 +21,28 @@
 
   // ─── STATE ────────────────────────────────────────────────────────────────
   function loadState() {
-    const saved = localStorage.getItem('jackson-summer-state');
+    const saved = localStorage.getItem('jackson-summer-2026');
     return saved ? JSON.parse(saved) : {
-      books: {
-        book1: { status: 'not-started', choice: '' },
-        book2: { status: 'not-started' },
-        book3: { status: 'not-started', choice: '' },
-        book4: { status: 'not-started', choice: '' },
-      },
+      books: { book1: false, book2: false, book3: false, book4: false },
       math: { level: null, completed: [] },
-      todayTasks: {},
-      needToRead: { started: false },
+      todayDone: {},
     };
   }
 
   function saveState() {
-    localStorage.setItem('jackson-summer-state', JSON.stringify(state));
+    localStorage.setItem('jackson-summer-2026', JSON.stringify(state));
   }
 
   let state = loadState();
 
-  // ─── NAVIGATION ───────────────────────────────────────────────────────────
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const view = link.dataset.view;
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById('view-' + view).classList.add('active');
-      if (view === 'today') renderToday();
-      if (view === 'reading') renderReading();
-      if (view === 'math') renderMath();
-      if (view === 'schedule') renderSchedule();
-    });
-  });
-
   // ─── HELPERS ──────────────────────────────────────────────────────────────
   function today() {
-    return new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    const n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate());
   }
 
-  function formatDate(d) {
-    return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-  }
-
-  function formatShort(d) {
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  function dayKey(d) {
+    return d.toISOString().slice(0, 10);
   }
 
   function isWeekday(d) {
@@ -129,8 +60,12 @@
     return days;
   }
 
-  function dayKey(d) {
-    return d.toISOString().slice(0, 10);
+  function formatDate(d) {
+    return d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function formatWeekday(d) {
+    return d.toLocaleDateString('en-US', { weekday: 'short' });
   }
 
   function getNextARDate() {
@@ -138,236 +73,159 @@
     return AR_DATES.find(a => a.date >= now);
   }
 
-  function getOverallProgress() {
-    let total = 0, done = 0;
-    // Books: 4 items
-    total += 4;
-    Object.values(state.books).forEach(b => {
-      if (b.status === 'complete') done += 1;
-      else if (b.status === 'in-progress') done += 0.3;
-    });
-    // Math
-    if (state.math.level) {
-      const level = MATH_LEVELS[state.math.level];
-      total += level.problems;
-      done += state.math.completed.length;
+  // ─── GREETING ─────────────────────────────────────────────────────────────
+  function renderGreeting() {
+    const hour = new Date().getHours();
+    const greet = hour < 12 ? 'Morning, Jackson' : hour < 17 ? 'Hey Jackson' : 'Evening, Jackson';
+    document.getElementById('greeting').textContent = greet;
+
+    const now = today();
+    if (now < SCHEDULE_START) {
+      document.getElementById('hero-sub').textContent = 'Summer work starts June 8. You\'re ahead of the game.';
+    } else if (now > SCHEDULE_END) {
+      document.getElementById('hero-sub').textContent = 'Summer work is done. Nice job. 🎉';
+    } else if (!isWeekday(now)) {
+      document.getElementById('hero-sub').textContent = 'It\'s the weekend. Rest up — back at it Monday.';
     } else {
-      total += 60;
+      document.getElementById('hero-sub').textContent = 'Here\'s what\'s on deck today.';
     }
-    // Need to read
-    total += 1;
-    if (state.needToRead.started) done += 0.5;
-    return Math.round((done / total) * 100);
   }
 
-  // ─── TODAY VIEW ───────────────────────────────────────────────────────────
+  // ─── TODAY ────────────────────────────────────────────────────────────────
   function renderToday() {
     const now = today();
-    const greeting = document.querySelector('.today-greeting');
-    const dateEl = document.querySelector('.today-date');
-    const hour = new Date().getHours();
-    const timeGreeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-    greeting.textContent = `${timeGreeting}, Jackson`;
-    dateEl.textContent = formatDate(now);
-
-    // Progress ring
-    const pct = getOverallProgress();
-    const ring = document.getElementById('overall-ring');
-    const circumference = 2 * Math.PI * 54;
-    ring.style.strokeDashoffset = circumference - (pct / 100) * circumference;
-    document.getElementById('overall-pct').textContent = pct + '%';
-
-    // Today's tasks
+    const metaEl = document.getElementById('today-meta');
     const tasksEl = document.getElementById('today-tasks');
-    const tasks = generateTodayTasks(now);
-    tasksEl.innerHTML = tasks.map(task => {
-      const doneKey = dayKey(now) + '-' + task.id;
-      const isDone = state.todayTasks[doneKey];
+
+    metaEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+
+    const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
+    const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(now));
+
+    if (!isWeekday(now) || todayIdx < 0) {
+      if (now > SCHEDULE_END) {
+        tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">All done for the summer!</div><div class="task-desc">Make sure all AR tests are taken and your written project is ready.</div></div></div>';
+      } else if (now < SCHEDULE_START) {
+        tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">Plan starts June 8</div><div class="task-desc">Nothing to do yet. Enjoy the break.</div></div></div>';
+      } else {
+        tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">Weekend — no work today</div><div class="task-desc">Pick it back up Monday.</div></div></div>';
+      }
+      return;
+    }
+
+    const tasks = buildTodayTasks(todayIdx, weekdays.length);
+    tasksEl.innerHTML = tasks.map(t => {
+      const key = dayKey(now) + '-' + t.id;
+      const done = state.todayDone[key];
       return `
-        <div class="task-card ${task.type} ${isDone ? 'done' : ''}" data-task-key="${doneKey}">
-          <div class="task-check"></div>
-          <div class="task-content">
-            <div class="task-title">${task.title}</div>
-            <div class="task-meta">${task.meta}</div>
+        <div class="today-task ${done ? 'done' : ''}" data-key="${key}">
+          <div class="task-dot ${t.type}"></div>
+          <div class="task-body">
+            <div class="task-name">${t.name}</div>
+            <div class="task-desc">${t.desc}</div>
           </div>
+          <div class="task-check-box"></div>
         </div>
       `;
     }).join('');
 
-    tasksEl.querySelectorAll('.task-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const key = card.dataset.taskKey;
-        state.todayTasks[key] = !state.todayTasks[key];
+    tasksEl.querySelectorAll('.today-task[data-key]').forEach(el => {
+      el.addEventListener('click', () => {
+        const key = el.dataset.key;
+        state.todayDone[key] = !state.todayDone[key];
         saveState();
         renderToday();
+        renderProgress();
       });
     });
-
-    // AR reminder
-    const arEl = document.getElementById('ar-reminder');
-    const nextAR = getNextARDate();
-    if (nextAR) {
-      const daysUntil = Math.ceil((nextAR.date - now) / (1000 * 60 * 60 * 24));
-      if (daysUntil <= 7) {
-        arEl.innerHTML = `
-          <div class="ar-reminder-card">
-            <h4>📅 AR Test Coming Up</h4>
-            <p>${formatDate(nextAR.date)} · ${nextAR.time} — ${daysUntil === 0 ? 'Today!' : daysUntil + ' days away'}</p>
-          </div>
-        `;
-      } else {
-        arEl.innerHTML = `
-          <div class="ar-reminder-card">
-            <h4>📅 Next AR Test Date</h4>
-            <p>${formatDate(nextAR.date)} · ${nextAR.time}</p>
-          </div>
-        `;
-      }
-    } else {
-      arEl.innerHTML = '';
-    }
   }
 
-  function generateTodayTasks(now) {
+  function buildTodayTasks(dayIdx, totalDays) {
     const tasks = [];
-    const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
-    const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(now));
+    const bookPhase = Math.floor((dayIdx / (totalDays * 0.7)) * 4);
+    const bookOrder = [
+      { id: 'read-outsiders', name: 'Read The Outsiders', desc: '~30 pages + fill in Need to Read guide' },
+      { id: 'read-choice', name: 'Read your Reader\'s Choice book', desc: '~30-40 pages' },
+      { id: 'read-book3', name: 'Read Book 3 (House Arrest or MLK)', desc: '~30-40 pages' },
+      { id: 'read-bio', name: 'Read your biography', desc: 'Read + take notes for your written project' },
+    ];
+    const current = bookOrder[Math.min(bookPhase, 3)];
+    tasks.push({ ...current, type: 'reading' });
 
-    if (todayIdx < 0 || !isWeekday(now)) {
-      tasks.push({ id: 'rest', type: 'reading', title: 'Rest day!', meta: 'Enjoy your weekend. Back at it Monday.' });
-      return tasks;
-    }
-
-    if (now < SCHEDULE_START) {
-      tasks.push({ id: 'notyet', type: 'reading', title: 'Not started yet', meta: 'Your summer plan begins June 8.' });
-      return tasks;
-    }
-
-    if (now > SCHEDULE_END) {
-      tasks.push({ id: 'done', type: 'reading', title: 'Summer work complete!', meta: 'Nice job. Get ready for school.' });
-      return tasks;
-    }
-
-    // Determine which book phase we're in based on schedule position
-    const totalDays = weekdays.length;
-    const readingDays = Math.floor(totalDays * 0.7);
-    const phase = Math.floor((todayIdx / readingDays) * 4);
-
-    const bookOrder = ['book2', 'book1', 'book3', 'book4'];
-    const currentBook = bookOrder[Math.min(phase, 3)];
-    const bookData = BOOKS.find(b => b.id === currentBook);
-    const bookStatus = state.books[currentBook].status;
-
-    if (bookStatus !== 'complete') {
-      const pagesPerDay = '~30-40 pages';
-      tasks.push({
-        id: 'read-' + currentBook,
-        type: 'reading',
-        title: `Read: ${bookData.title}`,
-        meta: bookStatus === 'not-started' ? 'Time to start this one!' : pagesPerDay,
-      });
-
-      if (currentBook === 'book2') {
-        tasks.push({
-          id: 'needtoread',
-          type: 'reading',
-          title: 'Fill in Need to Read guide',
-          meta: 'A few questions about today\'s reading',
-        });
-      }
-    }
-
-    // Math daily
     if (state.math.level) {
       const level = MATH_LEVELS[state.math.level];
-      const problemsPerDay = Math.ceil(level.problems / totalDays);
-      const startProblem = todayIdx * problemsPerDay + 1;
-      const endProblem = Math.min(startProblem + problemsPerDay - 1, level.problems);
-      if (startProblem <= level.problems) {
-        tasks.push({
-          id: 'math',
-          type: 'math',
-          title: `Math: Problems ${startProblem}-${endProblem}`,
-          meta: `${level.label} packet`,
-        });
+      const perDay = Math.ceil(level.problems / totalDays);
+      const start = dayIdx * perDay + 1;
+      const end = Math.min(start + perDay - 1, level.problems);
+      if (start <= level.problems) {
+        tasks.push({ id: 'math', type: 'math', name: `Math: problems ${start}–${end}`, desc: level.label + ' packet' });
       }
     } else {
-      tasks.push({
-        id: 'math-pick',
-        type: 'math',
-        title: 'Pick your math level',
-        meta: 'Go to Math tab to select your packet',
-      });
+      tasks.push({ id: 'math-pick', type: 'math', name: 'Pick your math packet', desc: 'Scroll down to the Math section' });
     }
 
-    // Writing project (last 2 weeks)
-    if (todayIdx > totalDays - 10 && state.books.book4.status !== 'complete') {
-      tasks.push({
-        id: 'writing',
-        type: 'writing',
-        title: 'Work on biography project',
-        meta: 'Written project due first day of school',
-      });
+    if (dayIdx > totalDays - 10) {
+      tasks.push({ id: 'writing', type: 'writing', name: 'Work on biography written project', desc: 'Draft, revise, or finalize' });
     }
 
     return tasks;
   }
 
-  // ─── READING VIEW ─────────────────────────────────────────────────────────
-  function renderReading() {
-    const grid = document.getElementById('books-grid');
-    grid.innerHTML = BOOKS.map(book => {
-      const bookState = state.books[book.id];
-      const statusClass = bookState.status;
-      const statusLabel = bookState.status === 'not-started' ? 'Not Started' :
-                          bookState.status === 'in-progress' ? 'In Progress' : 'Complete';
-      const coverHtml = book.coverUrl
-        ? `<img src="${book.coverUrl}" alt="${book.title}">`
-        : book.coverEmoji;
+  // ─── PROGRESS ─────────────────────────────────────────────────────────────
+  function renderProgress() {
+    const booksComplete = Object.values(state.books).filter(Boolean).length;
+    document.getElementById('books-fill').style.width = (booksComplete / 4 * 100) + '%';
+    document.getElementById('books-count').textContent = booksComplete + '/4';
 
-      return `
-        <div class="book-card">
-          <div class="book-cover">${coverHtml}</div>
-          <div class="book-info">
-            <div class="book-number">${book.number}</div>
-            <div class="book-title">${book.title}${book.author ? ' — ' + book.author : ''}</div>
-            <div class="book-details">${book.details}</div>
-            <div class="book-status">
-              <span class="status-badge ${statusClass}">${statusLabel}</span>
-              <span class="task-meta">${book.dueLabel}</span>
-            </div>
-            <div class="book-actions">
-              ${bookState.status === 'not-started' ? `<button class="btn-small" data-book="${book.id}" data-action="start">Start Reading</button>` : ''}
-              ${bookState.status === 'in-progress' ? `<button class="btn-small" data-book="${book.id}" data-action="finish">Mark Complete</button>` : ''}
-            </div>
-          </div>
-        </div>
-      `;
-    }).join('');
+    if (state.math.level) {
+      const total = MATH_LEVELS[state.math.level].problems;
+      const done = state.math.completed.length;
+      const pct = Math.round((done / total) * 100);
+      document.getElementById('math-fill').style.width = pct + '%';
+      document.getElementById('math-count').textContent = pct + '%';
+    }
+  }
 
-    grid.querySelectorAll('.btn-small').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const bookId = btn.dataset.book;
-        const action = btn.dataset.action;
-        if (action === 'start') state.books[bookId].status = 'in-progress';
-        if (action === 'finish') state.books[bookId].status = 'complete';
-        saveState();
-        renderReading();
-      });
+  // ─── BOOKS ────────────────────────────────────────────────────────────────
+  function renderBooks() {
+    document.querySelectorAll('.check-btn').forEach(btn => {
+      const bookId = btn.dataset.book;
+      if (state.books[bookId]) {
+        btn.classList.add('completed');
+        btn.querySelector('.check-text').textContent = 'Done!';
+      } else {
+        btn.classList.remove('completed');
+        btn.querySelector('.check-text').textContent = 'Mark Complete';
+      }
     });
+  }
 
-    // AR dates
-    const arDatesEl = document.getElementById('ar-dates');
+  document.querySelectorAll('.check-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const bookId = btn.dataset.book;
+      state.books[bookId] = !state.books[bookId];
+      saveState();
+      renderBooks();
+      renderProgress();
+    });
+  });
+
+  // ─── AR SCHEDULE ──────────────────────────────────────────────────────────
+  function renderAR() {
+    const container = document.getElementById('ar-schedule');
     const now = today();
-    arDatesEl.innerHTML = AR_DATES.map(a => {
+    const next = getNextARDate();
+
+    container.innerHTML = AR_DATES.map(a => {
       const past = a.date < now;
-      const next = !past && a.date === getNextARDate()?.date;
-      const cls = past ? 'past' : next ? 'next' : '';
-      return `<div class="ar-date-item ${cls}">${formatShort(a.date)} · ${a.time}</div>`;
+      const isNext = next && dayKey(a.date) === dayKey(next.date);
+      const cls = past ? 'past' : isNext ? 'next' : '';
+      const label = a.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' · ' + a.time;
+      return `<div class="ar-date ${cls}"><span class="ar-dot"></span>${label}</div>`;
     }).join('');
   }
 
-  // ─── MATH VIEW ────────────────────────────────────────────────────────────
+  // ─── MATH ─────────────────────────────────────────────────────────────────
   function renderMath() {
     const selector = document.getElementById('math-selector');
     const tracker = document.getElementById('math-tracker');
@@ -378,153 +236,138 @@
     } else {
       selector.classList.add('hidden');
       tracker.classList.remove('hidden');
-      renderMathTracker();
-    }
-  }
 
-  function renderMathTracker() {
-    const level = MATH_LEVELS[state.math.level];
-    document.getElementById('math-level-title').textContent = level.label + ' Packet';
+      const level = MATH_LEVELS[state.math.level];
+      document.getElementById('math-title').textContent = level.label;
 
-    const completed = state.math.completed.length;
-    const pct = Math.round((completed / level.problems) * 100);
-    document.getElementById('math-progress-fill').style.width = pct + '%';
-    document.getElementById('math-progress-text').textContent = `${completed} / ${level.problems} problems`;
+      const done = state.math.completed.length;
+      const pct = Math.round((done / level.problems) * 100);
+      document.getElementById('math-detail-fill').style.width = pct + '%';
+      document.getElementById('math-detail-text').textContent = `${done} of ${level.problems} problems done`;
 
-    // Show today's problems
-    const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
-    const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(today()));
-    const problemsPerDay = Math.ceil(level.problems / weekdays.length);
-    const start = Math.max(0, todayIdx) * problemsPerDay;
-    const end = Math.min(start + problemsPerDay, level.problems);
+      // Today's problems
+      const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
+      const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(today()));
+      const perDay = Math.ceil(level.problems / weekdays.length);
+      const start = Math.max(0, todayIdx) * perDay;
+      const end = Math.min(start + perDay, level.problems);
 
-    const dailyEl = document.getElementById('math-daily');
-    if (todayIdx >= 0 && start < level.problems) {
-      const problems = [];
-      for (let i = start; i < end; i++) {
-        const done = state.math.completed.includes(i);
-        problems.push(`
-          <div class="math-problem">
-            <input type="checkbox" id="prob-${i}" ${done ? 'checked' : ''} data-problem="${i}">
-            <label for="prob-${i}">Problem ${i + 1}</label>
-          </div>
-        `);
-      }
-      dailyEl.innerHTML = `<h4>Today's Problems</h4><div class="math-problems">${problems.join('')}</div>`;
+      const mathToday = document.getElementById('math-today');
+      if (todayIdx >= 0 && start < level.problems && isWeekday(today())) {
+        const chips = [];
+        for (let i = start; i < end; i++) {
+          const checked = state.math.completed.includes(i);
+          chips.push(`<div class="problem-chip"><input type="checkbox" id="p${i}" data-idx="${i}" ${checked ? 'checked' : ''}><label for="p${i}">#${i+1}</label></div>`);
+        }
+        mathToday.innerHTML = `<h4>Today's problems</h4><div class="problem-list">${chips.join('')}</div>`;
 
-      dailyEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', () => {
-          const idx = parseInt(cb.dataset.problem);
-          if (cb.checked) {
-            if (!state.math.completed.includes(idx)) state.math.completed.push(idx);
-          } else {
-            state.math.completed = state.math.completed.filter(p => p !== idx);
-          }
-          saveState();
-          renderMathTracker();
+        mathToday.querySelectorAll('input').forEach(cb => {
+          cb.addEventListener('change', () => {
+            const idx = parseInt(cb.dataset.idx);
+            if (cb.checked && !state.math.completed.includes(idx)) {
+              state.math.completed.push(idx);
+            } else {
+              state.math.completed = state.math.completed.filter(x => x !== idx);
+            }
+            saveState();
+            renderMath();
+            renderProgress();
+          });
         });
-      });
-    } else {
-      dailyEl.innerHTML = '<p class="task-meta">No math problems scheduled for today.</p>';
+      } else {
+        mathToday.innerHTML = '';
+      }
     }
   }
 
-  document.querySelectorAll('.math-option').forEach(btn => {
+  document.querySelectorAll('.level-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       state.math.level = btn.dataset.level;
       state.math.completed = [];
       saveState();
       renderMath();
+      renderProgress();
+      renderToday();
     });
   });
 
-  document.getElementById('math-change').addEventListener('click', () => {
-    if (confirm('Change your math level? This will reset your progress.')) {
+  document.getElementById('math-reset').addEventListener('click', () => {
+    if (confirm('Change your math level? This resets progress.')) {
       state.math.level = null;
       state.math.completed = [];
       saveState();
       renderMath();
+      renderProgress();
     }
   });
 
-  // ─── SCHEDULE VIEW ────────────────────────────────────────────────────────
+  // ─── SCHEDULE TIMELINE ────────────────────────────────────────────────────
   function renderSchedule() {
-    const weeksEl = document.getElementById('schedule-weeks');
+    const container = document.getElementById('schedule-timeline');
     const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
     const now = today();
-
-    // Group by week
-    const weeks = [];
-    let currentWeek = null;
-
-    weekdays.forEach(d => {
-      const weekStart = new Date(d);
-      weekStart.setDate(weekStart.getDate() - weekStart.getDay() + 1); // Monday
-      const weekKey = dayKey(weekStart);
-
-      if (!currentWeek || currentWeek.key !== weekKey) {
-        currentWeek = { key: weekKey, start: weekStart, days: [] };
-        weeks.push(currentWeek);
-      }
-      currentWeek.days.push(d);
-    });
-
     const totalDays = weekdays.length;
+
     const bookPhases = [
-      { book: 'The Outsiders + Need to Read', end: Math.floor(totalDays * 0.25) },
-      { book: 'Reader\'s Choice', end: Math.floor(totalDays * 0.45) },
-      { book: 'Book 3 Choice', end: Math.floor(totalDays * 0.65) },
-      { book: 'Biography + Written Project', end: totalDays },
+      { label: 'The Outsiders + Need to Read', end: Math.floor(totalDays * 0.25) },
+      { label: 'Reader\'s Choice', end: Math.floor(totalDays * 0.45) },
+      { label: 'Book 3', end: Math.floor(totalDays * 0.65) },
+      { label: 'Biography + Writing', end: totalDays },
     ];
 
-    weeksEl.innerHTML = weeks.map((week, wi) => {
-      const weekEnd = new Date(week.start);
-      weekEnd.setDate(weekEnd.getDate() + 4);
-      const isCurrent = now >= week.start && now <= weekEnd;
-      const weekLabel = `Week ${wi + 1} — ${formatShort(week.start)} to ${formatShort(weekEnd)}`;
+    // Group into weeks
+    const weeks = [];
+    let current = null;
+    weekdays.forEach((d, i) => {
+      const monday = new Date(d);
+      monday.setDate(monday.getDate() - (monday.getDay() - 1));
+      const key = dayKey(monday);
+      if (!current || current.key !== key) {
+        current = { key, monday, days: [], startIdx: i };
+        weeks.push(current);
+      }
+      current.days.push({ date: d, idx: i });
+    });
 
-      const daysHtml = week.days.map(d => {
-        const idx = weekdays.findIndex(wd => dayKey(wd) === dayKey(d));
-        const isToday = dayKey(d) === dayKey(now);
-        const isPast = d < now;
-        const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+    container.innerHTML = weeks.map((week, wi) => {
+      const friday = new Date(week.monday);
+      friday.setDate(friday.getDate() + 4);
+      const isCurrent = now >= week.monday && now <= friday;
+      const weekNum = wi + 1;
+      const label = `Week ${weekNum} · ${formatDate(week.monday).slice(5)} – ${formatDate(friday).slice(5)}`;
 
-        // Determine tasks for this day
-        const tags = [];
-        const phase = bookPhases.findIndex(p => idx < p.end);
-        if (phase >= 0) {
-          tags.push(`<span class="day-tag reading">${bookPhases[phase].book}</span>`);
-        }
-        tags.push('<span class="day-tag math">Math</span>');
-
-        // Writing in last ~8 days
-        if (idx > totalDays - 10) {
-          tags.push('<span class="day-tag writing">Writing</span>');
-        }
-
-        // AR test dates
-        const arOnDay = AR_DATES.find(a => dayKey(a.date) === dayKey(d));
-        if (arOnDay) {
-          tags.push('<span class="day-tag ar">AR Test Available</span>');
-        }
-
-        return `
-          <div class="schedule-day ${isToday ? 'today' : ''} ${isPast ? 'past' : ''}">
-            <span class="day-label">${dayName}</span>
-            <div class="day-tasks">${tags.join('')}</div>
-          </div>
-        `;
+      const bars = week.days.map(({ date, idx }) => {
+        const isToday = dayKey(date) === dayKey(now);
+        const isPast = date < now;
+        const isAR = AR_DATES.some(a => dayKey(a.date) === dayKey(date));
+        let cls = '';
+        if (isToday) cls = 'today';
+        else if (isPast) cls = 'past';
+        if (isAR) cls += ' ar-day';
+        return `<div class="day-block ${cls}">${formatWeekday(date).slice(0,2)}</div>`;
       }).join('');
 
+      // What's the focus this week?
+      const phase = bookPhases.find(p => week.startIdx < p.end);
+      const tags = [`<span class="tag reading">${phase ? phase.label : 'Reading'}</span>`, `<span class="tag math">Math</span>`];
+      if (week.startIdx > totalDays - 10) tags.push(`<span class="tag writing">Writing</span>`);
+
       return `
-        <div class="schedule-week">
-          <div class="week-header ${isCurrent ? 'current' : ''}">${weekLabel}</div>
-          <div class="week-days">${daysHtml}</div>
+        <div class="week-block">
+          <div class="week-label ${isCurrent ? 'current' : ''}">${label}</div>
+          <div class="week-bar">${bars}</div>
+          <div class="week-focus">${tags.join(' ')}</div>
         </div>
       `;
     }).join('');
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────────────
+  renderGreeting();
   renderToday();
+  renderProgress();
+  renderBooks();
+  renderAR();
+  renderMath();
+  renderSchedule();
 })();
