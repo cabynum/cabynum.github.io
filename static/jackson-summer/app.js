@@ -489,12 +489,10 @@
       const bars = week.days.map(({ date, idx }) => {
         const isToday = dayKey(date) === dayKey(now);
         const isPast = date < now;
-        const isAR = AR_DATES.some(a => dayKey(a.date) === dayKey(date));
         let cls = '';
         if (isToday) cls = 'today';
         else if (isPast) cls = 'past';
-        if (isAR) cls += ' ar-day';
-        return `<div class="day-block ${cls}">${formatWeekday(date).slice(0,2)}</div>`;
+        return `<div class="day-block ${cls}" data-day-idx="${idx}" title="Click for details">${formatWeekday(date).slice(0,2)}</div>`;
       }).join('');
 
       // What's the focus this week?
@@ -507,9 +505,34 @@
           <div class="week-label ${isCurrent ? 'current' : ''}">${label}</div>
           <div class="week-bar">${bars}</div>
           <div class="week-focus">${tags.join(' ')}</div>
+          <div class="day-detail hidden"></div>
         </div>
       `;
     }).join('');
+
+    // Make days clickable
+    container.querySelectorAll('.day-block[data-day-idx]').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', () => {
+        const idx = parseInt(el.dataset.dayIdx);
+        const detailEl = el.closest('.week-block').querySelector('.day-detail');
+        const tasks = buildTodayTasks(idx, totalDays);
+        const dayDate = weekdays[idx];
+        const dateLabel = dayDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+
+        if (!detailEl.classList.contains('hidden') && detailEl.dataset.showIdx === String(idx)) {
+          detailEl.classList.add('hidden');
+          return;
+        }
+
+        detailEl.dataset.showIdx = String(idx);
+        detailEl.classList.remove('hidden');
+        detailEl.innerHTML = `
+          <div class="day-detail-header">${dateLabel}</div>
+          ${tasks.map(t => `<div class="day-detail-task"><span class="task-dot ${t.type}"></span>${t.name}</div>`).join('')}
+        `;
+      });
+    });
   }
 
   // ─── QUIZ ──────────────────────────────────────────────────────────────────

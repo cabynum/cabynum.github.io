@@ -712,6 +712,32 @@ h3 {
   flex-wrap: wrap;
 }
 
+.day-detail {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  border: 1px solid var(--card-border);
+}
+
+.day-detail-header {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.day-detail-task {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  padding: 0.3rem 0;
+  color: var(--text);
+}
+
 .tag {
   display: inline-block;
   padding: 0.15rem 0.5rem;
