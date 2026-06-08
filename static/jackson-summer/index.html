@@ -214,18 +214,83 @@
       </section>
     </div>
 
-    <!-- BONUS -->
-    <section class="section">
-      <details class="bonus-section">
-        <summary><h3>Optional: Reading Challenge</h3></summary>
-        <p>For extra recognition and privileges, read 3 more books:</p>
-        <ol>
-          <li>One from 8th grade <strong>Challenge Level Fiction</strong></li>
-          <li>One from 8th grade <strong>Challenge Level Non-Fiction</strong></li>
-          <li>One book with AR point value of 9+ (use <a href="https://www.arbookfind.com" target="_blank">Renaissance Book Finder</a>)</li>
-        </ol>
-        <p>Pass an AR test on each and you're in.</p>
-      </details>
+    <!-- MASTER CHECKLIST -->
+    <section class="section" id="section-checklist">
+      <h2>Master Checklist</h2>
+      <p class="lead">Everything that needs to be done before school starts. Check them off as you go.</p>
+
+      <div class="checklist-card">
+        <h4>Reading</h4>
+        <div class="checklist-items">
+          <label class="checklist-item" data-check="cl-outsiders-read">
+            <input type="checkbox" data-check="cl-outsiders-read">
+            <span>I read <strong>The Outsiders</strong></span>
+          </label>
+          <label class="checklist-item" data-check="cl-outsiders-ar">
+            <input type="checkbox" data-check="cl-outsiders-ar">
+            <span>I took the AR test for The Outsiders</span>
+          </label>
+          <label class="checklist-item" data-check="cl-outsiders-guide">
+            <input type="checkbox" data-check="cl-outsiders-guide">
+            <span>I completed the Need to Read graphic organizer</span>
+          </label>
+          <label class="checklist-item" data-check="cl-choice-read">
+            <input type="checkbox" data-check="cl-choice-read">
+            <span>I read my Reader's Choice book</span>
+          </label>
+          <label class="checklist-item" data-check="cl-choice-ar">
+            <input type="checkbox" data-check="cl-choice-ar">
+            <span>I took the AR test for Reader's Choice</span>
+          </label>
+          <label class="checklist-item" data-check="cl-book3-read">
+            <input type="checkbox" data-check="cl-book3-read">
+            <span>I read <strong>House Arrest</strong> or <strong>MLK Jr.</strong></span>
+          </label>
+          <label class="checklist-item" data-check="cl-book3-ar">
+            <input type="checkbox" data-check="cl-book3-ar">
+            <span>I took the AR test for Book 3</span>
+          </label>
+          <label class="checklist-item" data-check="cl-bio-read">
+            <input type="checkbox" data-check="cl-bio-read">
+            <span>I read my biography</span>
+          </label>
+          <label class="checklist-item" data-check="cl-bio-project">
+            <input type="checkbox" data-check="cl-bio-project">
+            <span>I completed the biography written project</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="checklist-card">
+        <h4>Math</h4>
+        <div class="checklist-items">
+          <label class="checklist-item" data-check="cl-math-packet">
+            <input type="checkbox" data-check="cl-math-packet">
+            <span>I completed the math practice packet</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="checklist-card checklist-optional">
+        <h4>Optional: Reading Challenge</h4>
+        <p class="checklist-note">For extra recognition and privileges. Read 3 more books and pass AR tests on each.</p>
+        <div class="checklist-items">
+          <label class="checklist-item" data-check="cl-challenge-nf">
+            <input type="checkbox" data-check="cl-challenge-nf">
+            <span>Challenge Level Non-Fiction</span>
+          </label>
+          <label class="checklist-item" data-check="cl-challenge-fic">
+            <input type="checkbox" data-check="cl-challenge-fic">
+            <span>Challenge Level Fiction</span>
+          </label>
+          <label class="checklist-item" data-check="cl-challenge-9pt">
+            <input type="checkbox" data-check="cl-challenge-9pt">
+            <span>My Choice, 9+ AR points (use <a href="https://www.arbookfind.com" target="_blank">Book Finder</a>)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="checklist-progress" id="checklist-progress"></div>
     </section>
   </main>
 

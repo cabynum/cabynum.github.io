@@ -749,6 +749,47 @@
     });
   }
 
+  // ─── MASTER CHECKLIST ───────────────────────────────────────────────────
+  function renderChecklist() {
+    if (!state.checklist) state.checklist = {};
+    const items = document.querySelectorAll('.checklist-item input[type="checkbox"]');
+    let done = 0;
+    const required = [];
+
+    items.forEach(input => {
+      const key = input.dataset.check;
+      if (state.checklist[key]) {
+        input.checked = true;
+      }
+      // Count required items (not in optional card)
+      if (!input.closest('.checklist-optional')) {
+        required.push(key);
+        if (state.checklist[key]) done++;
+      }
+    });
+
+    const progressEl = document.getElementById('checklist-progress');
+    if (progressEl) {
+      const total = required.length;
+      if (done === total) {
+        progressEl.textContent = '🎉 All done! You\'re ready for school.';
+        progressEl.style.color = 'var(--success)';
+      } else {
+        progressEl.textContent = `${done} of ${total} required items complete`;
+        progressEl.style.color = '';
+      }
+    }
+  }
+
+  document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(input => {
+    input.addEventListener('change', () => {
+      if (!state.checklist) state.checklist = {};
+      state.checklist[input.dataset.check] = input.checked;
+      saveState();
+      renderChecklist();
+    });
+  });
+
   // ─── INIT ─────────────────────────────────────────────────────────────────
   renderGreeting();
   renderToday();
@@ -758,4 +799,5 @@
   renderMath();
   renderSchedule();
   renderQuiz();
+  renderChecklist();
 })();
