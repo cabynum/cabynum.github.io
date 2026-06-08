@@ -637,6 +637,115 @@ h3 {
   cursor: pointer;
 }
 
+/* ═══════════════════ MATH WORKSHEET ═══════════════════ */
+.worksheet-problems {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.worksheet-problem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  transition: all 0.2s;
+}
+
+.worksheet-problem.correct {
+  background: rgba(16, 185, 129, 0.06);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.worksheet-problem.wrong {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.4);
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+.wp-number {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 24px;
+}
+
+.wp-question {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.wp-input {
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border: 1.5px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  text-align: center;
+  background: white;
+  transition: border-color 0.15s;
+}
+
+.wp-input:focus {
+  outline: none;
+  border-color: var(--math);
+}
+
+.wp-input:disabled {
+  background: transparent;
+  border-color: transparent;
+  color: var(--success);
+  font-weight: 600;
+}
+
+.wp-check {
+  padding: 0.35rem 0.65rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--math);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.wp-check:hover:not(:disabled) {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+.wp-check:disabled {
+  background: var(--success);
+  opacity: 0.6;
+  cursor: default;
+}
+
+.worksheet-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.worksheet-nav .link-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
 /* ═══════════════════ SCHEDULE TIMELINE ═══════════════════ */
 .schedule-timeline {
   display: flex;

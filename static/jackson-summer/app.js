@@ -387,47 +387,164 @@
       selector.classList.add('hidden');
       tracker.classList.remove('hidden');
 
-      const level = MATH_LEVELS[state.math.level];
-      document.getElementById('math-title').textContent = level.label;
+      const data = MATH_DATA[state.math.level];
+      const allProblems = data.sections.flatMap((s, si) => s.problems.map((p, pi) => ({ ...p, key: si + '-' + pi })));
+      const total = allProblems.length;
+
+      document.getElementById('math-title').textContent = data.label;
 
       const done = state.math.completed.length;
-      const pct = Math.round((done / level.problems) * 100);
+      const pct = Math.round((done / total) * 100);
       document.getElementById('math-detail-fill').style.width = pct + '%';
-      document.getElementById('math-detail-text').textContent = `${done} of ${level.problems} problems done`;
+      document.getElementById('math-detail-text').textContent = `${done} of ${total} problems done`;
 
-      // Today's problems
+      // Show today's section
       const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
-      const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(today()));
-      const perDay = Math.ceil(level.problems / weekdays.length);
-      const start = Math.max(0, todayIdx) * perDay;
-      const end = Math.min(start + perDay, level.problems);
+      const todayIdx = Math.max(0, weekdays.findIndex(d => dayKey(d) === dayKey(today())));
+      const sectionsPerDay = Math.ceil(data.sections.length / weekdays.length) || 1;
+      const sectionIdx = Math.min(Math.floor(todayIdx * sectionsPerDay), data.sections.length - 1);
+      const currentSection = data.sections[sectionIdx] || data.sections[0];
 
       const mathToday = document.getElementById('math-today');
-      if (todayIdx >= 0 && start < level.problems && isWeekday(today())) {
-        const chips = [];
-        for (let i = start; i < end; i++) {
-          const checked = state.math.completed.includes(i);
-          chips.push(`<div class="problem-chip"><input type="checkbox" id="p${i}" data-idx="${i}" ${checked ? 'checked' : ''}><label for="p${i}">#${i+1}</label></div>`);
-        }
-        mathToday.innerHTML = `<h4>Today's problems</h4><div class="problem-list">${chips.join('')}</div>`;
+      if (currentSection && currentSection.problems[0].a !== '') {
+        const problemsHtml = currentSection.problems.map((p, i) => {
+          const key = sectionIdx + '-' + i;
+          const isCorrect = state.math.completed.includes(key);
+          return `
+            <div class="worksheet-problem ${isCorrect ? 'correct' : ''}">
+              <span class="wp-number">${i + 1}.</span>
+              <span class="wp-question">${p.q}</span>
+              <input class="wp-input" type="text" placeholder="?" data-key="${key}" data-answer="${p.a}" ${isCorrect ? 'disabled value="✓ ' + p.a + '"' : ''}>
+              <button class="wp-check" data-key="${key}" data-answer="${p.a}" ${isCorrect ? 'disabled' : ''}>Check</button>
+            </div>
+          `;
+        }).join('');
 
-        mathToday.querySelectorAll('input').forEach(cb => {
-          cb.addEventListener('change', () => {
-            const idx = parseInt(cb.dataset.idx);
-            if (cb.checked && !state.math.completed.includes(idx)) {
-              state.math.completed.push(idx);
+        mathToday.innerHTML = `
+          <h4>${currentSection.title}</h4>
+          <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem">Type your answer and hit Check. Show your work on paper.</p>
+          <div class="worksheet-problems">${problemsHtml}</div>
+          <div class="worksheet-nav">
+            <button class="link-btn" id="math-prev" ${sectionIdx === 0 ? 'disabled' : ''}>← Previous section</button>
+            <span style="font-size:0.78rem;color:var(--text-muted)">Section ${sectionIdx + 1} of ${data.sections.length}</span>
+            <button class="link-btn" id="math-next" ${sectionIdx >= data.sections.length - 1 ? 'disabled' : ''}>Next section →</button>
+          </div>
+        `;
+
+        // Check answer handlers
+        mathToday.querySelectorAll('.wp-check').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const key = btn.dataset.key;
+            const answer = btn.dataset.answer.toLowerCase().trim();
+            const input = mathToday.querySelector(`input[data-key="${key}"]`);
+            const userAnswer = input.value.toLowerCase().trim();
+
+            if (userAnswer === answer) {
+              if (!state.math.completed.includes(key)) {
+                state.math.completed.push(key);
+                saveState();
+              }
+              input.disabled = true;
+              input.value = '✓ ' + btn.dataset.answer;
+              btn.disabled = true;
+              input.closest('.worksheet-problem').classList.add('correct');
+              renderProgress();
+              // Update the count
+              const newDone = state.math.completed.length;
+              const newPct = Math.round((newDone / total) * 100);
+              document.getElementById('math-detail-fill').style.width = newPct + '%';
+              document.getElementById('math-detail-text').textContent = `${newDone} of ${total} problems done`;
             } else {
-              state.math.completed = state.math.completed.filter(x => x !== idx);
+              input.closest('.worksheet-problem').classList.add('wrong');
+              setTimeout(() => input.closest('.worksheet-problem').classList.remove('wrong'), 800);
             }
-            saveState();
-            renderMath();
-            renderProgress();
           });
         });
+
+        // Enter key submits
+        mathToday.querySelectorAll('.wp-input').forEach(input => {
+          input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              const btn = input.parentElement.querySelector('.wp-check');
+              if (btn && !btn.disabled) btn.click();
+            }
+          });
+        });
+
+        // Nav handlers
+        const prevBtn = document.getElementById('math-prev');
+        const nextBtn = document.getElementById('math-next');
+        if (prevBtn) prevBtn.addEventListener('click', () => { state.math.viewSection = sectionIdx - 1; renderMathSection(sectionIdx - 1); });
+        if (nextBtn) nextBtn.addEventListener('click', () => { state.math.viewSection = sectionIdx + 1; renderMathSection(sectionIdx + 1); });
       } else {
-        mathToday.innerHTML = '';
+        mathToday.innerHTML = '<p style="color:var(--text-muted);font-size:0.9rem">This packet is being loaded. Download the PDF in the meantime.</p>';
       }
     }
+  }
+
+  function renderMathSection(idx) {
+    // Re-render with a specific section index
+    const data = MATH_DATA[state.math.level];
+    if (idx < 0 || idx >= data.sections.length) return;
+
+    const allProblems = data.sections.flatMap((s, si) => s.problems.map((p, pi) => ({ ...p, key: si + '-' + pi })));
+    const total = allProblems.length;
+    const currentSection = data.sections[idx];
+    const mathToday = document.getElementById('math-today');
+
+    const problemsHtml = currentSection.problems.map((p, i) => {
+      const key = idx + '-' + i;
+      const isCorrect = state.math.completed.includes(key);
+      return `
+        <div class="worksheet-problem ${isCorrect ? 'correct' : ''}">
+          <span class="wp-number">${i + 1}.</span>
+          <span class="wp-question">${p.q}</span>
+          <input class="wp-input" type="text" placeholder="?" data-key="${key}" data-answer="${p.a}" ${isCorrect ? 'disabled value="✓ ' + p.a + '"' : ''}>
+          <button class="wp-check" data-key="${key}" data-answer="${p.a}" ${isCorrect ? 'disabled' : ''}>Check</button>
+        </div>
+      `;
+    }).join('');
+
+    mathToday.innerHTML = `
+      <h4>${currentSection.title}</h4>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:1rem">Type your answer and hit Check. Show your work on paper.</p>
+      <div class="worksheet-problems">${problemsHtml}</div>
+      <div class="worksheet-nav">
+        <button class="link-btn" id="math-prev" ${idx === 0 ? 'disabled' : ''}>← Previous section</button>
+        <span style="font-size:0.78rem;color:var(--text-muted)">Section ${idx + 1} of ${data.sections.length}</span>
+        <button class="link-btn" id="math-next" ${idx >= data.sections.length - 1 ? 'disabled' : ''}>Next section →</button>
+      </div>
+    `;
+
+    mathToday.querySelectorAll('.wp-check').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.key;
+        const answer = btn.dataset.answer.toLowerCase().trim();
+        const input = mathToday.querySelector(`input[data-key="${key}"]`);
+        const userAnswer = input.value.toLowerCase().trim();
+        if (userAnswer === answer) {
+          if (!state.math.completed.includes(key)) { state.math.completed.push(key); saveState(); }
+          input.disabled = true; input.value = '✓ ' + btn.dataset.answer; btn.disabled = true;
+          input.closest('.worksheet-problem').classList.add('correct');
+          renderProgress();
+          const newDone = state.math.completed.length;
+          document.getElementById('math-detail-fill').style.width = Math.round((newDone / total) * 100) + '%';
+          document.getElementById('math-detail-text').textContent = `${newDone} of ${total} problems done`;
+        } else {
+          input.closest('.worksheet-problem').classList.add('wrong');
+          setTimeout(() => input.closest('.worksheet-problem').classList.remove('wrong'), 800);
+        }
+      });
+    });
+
+    mathToday.querySelectorAll('.wp-input').forEach(input => {
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { const btn = input.parentElement.querySelector('.wp-check'); if (btn && !btn.disabled) btn.click(); } });
+    });
+
+    const prevBtn = document.getElementById('math-prev');
+    const nextBtn = document.getElementById('math-next');
+    if (prevBtn) prevBtn.addEventListener('click', () => renderMathSection(idx - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => renderMathSection(idx + 1));
   }
 
   document.querySelectorAll('.level-btn').forEach(btn => {
