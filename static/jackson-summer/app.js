@@ -621,6 +621,8 @@
   });
 
   // ─── SCHEDULE TIMELINE ────────────────────────────────────────────────────
+  let scheduleWeekIdx = null; // null = auto (current week)
+
   function renderSchedule() {
     const container = document.getElementById('schedule-timeline');
     const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
@@ -648,43 +650,75 @@
       current.days.push({ date: d, idx: i });
     });
 
-    container.innerHTML = weeks.map((week, wi) => {
-      const friday = new Date(week.monday);
-      friday.setDate(friday.getDate() + 4);
-      const isCurrent = now >= week.monday && now <= friday;
-      const weekNum = wi + 1;
-      const label = `Week ${weekNum} · ${formatDate(week.monday).slice(5)} – ${formatDate(friday).slice(5)}`;
+    // Find current week
+    const currentWeekIdx = weeks.findIndex(w => {
+      const friday = new Date(w.monday);
+      friday.setDate(friday.getDate() + 6);
+      return now >= w.monday && now <= friday;
+    });
+    const activeIdx = scheduleWeekIdx !== null ? scheduleWeekIdx : Math.max(0, currentWeekIdx);
+    const week = weeks[activeIdx];
+    if (!week) return;
 
-      const bars = week.days.map(({ date, idx }) => {
-        const isToday = dayKey(date) === dayKey(now);
-        const isPast = date < now;
-        let cls = '';
-        if (isToday) cls = 'today';
-        else if (isPast) cls = 'past';
-        return `<div class="day-block ${cls}" data-day-idx="${idx}" title="Click for details">${formatWeekday(date).slice(0,2)}</div>`;
-      }).join('');
+    const friday = new Date(week.monday);
+    friday.setDate(friday.getDate() + 4);
+    const weekNum = activeIdx + 1;
+    const totalWeeks = weeks.length;
+    const isCurrent = activeIdx === currentWeekIdx;
 
-      // What's the focus this week?
-      const phase = bookPhases.find(p => week.startIdx < p.end);
-      const tags = [`<span class="tag reading">${phase ? phase.label : 'Reading'}</span>`, `<span class="tag math">Math</span>`];
-      if (week.startIdx > totalDays - 10) tags.push(`<span class="tag writing">Writing</span>`);
-
-      return `
-        <div class="week-block">
-          <div class="week-label ${isCurrent ? 'current' : ''}">${label}</div>
-          <div class="week-bar">${bars}</div>
-          <div class="week-focus">${tags.join(' ')}</div>
-          <div class="day-detail hidden"></div>
-        </div>
-      `;
+    const bars = week.days.map(({ date, idx }) => {
+      const isToday = dayKey(date) === dayKey(now);
+      const isPast = date < now;
+      let cls = '';
+      if (isToday) cls = 'today';
+      else if (isPast) cls = 'past';
+      return `<div class="day-block ${cls}" data-day-idx="${idx}" title="Click for details">${formatWeekday(date).slice(0,2)}</div>`;
     }).join('');
 
-    // Make days clickable
+    const phase = bookPhases.find(p => week.startIdx < p.end);
+    const tags = [`<span class="tag reading">${phase ? phase.label : 'Reading'}</span>`, `<span class="tag math">Math</span>`];
+    if (week.startIdx > totalDays - 10) tags.push(`<span class="tag writing">Writing</span>`);
+
+    container.innerHTML = `
+      <div class="schedule-nav">
+        <button class="schedule-nav-btn" id="sched-prev" ${activeIdx === 0 ? 'disabled' : ''}>←</button>
+        <div class="schedule-nav-label">
+          <span class="schedule-week-title ${isCurrent ? 'current' : ''}">Week ${weekNum} of ${totalWeeks}</span>
+          <span class="schedule-week-dates">${formatDate(week.monday).slice(5)} – ${formatDate(friday).slice(5)}</span>
+        </div>
+        <button class="schedule-nav-btn" id="sched-next" ${activeIdx >= totalWeeks - 1 ? 'disabled' : ''}>→</button>
+      </div>
+      <div class="week-block">
+        <div class="week-bar">${bars}</div>
+        <div class="week-focus">${tags.join(' ')}</div>
+        <div class="day-detail hidden"></div>
+      </div>
+      ${!isCurrent && currentWeekIdx >= 0 ? '<button class="schedule-today-btn" id="sched-today">Back to this week</button>' : ''}
+    `;
+
+    // Nav handlers
+    document.getElementById('sched-prev').addEventListener('click', () => {
+      scheduleWeekIdx = activeIdx - 1;
+      renderSchedule();
+    });
+    document.getElementById('sched-next').addEventListener('click', () => {
+      scheduleWeekIdx = activeIdx + 1;
+      renderSchedule();
+    });
+    const todayBtn = document.getElementById('sched-today');
+    if (todayBtn) {
+      todayBtn.addEventListener('click', () => {
+        scheduleWeekIdx = null;
+        renderSchedule();
+      });
+    }
+
+    // Day click handlers
     container.querySelectorAll('.day-block[data-day-idx]').forEach(el => {
       el.style.cursor = 'pointer';
       el.addEventListener('click', () => {
         const idx = parseInt(el.dataset.dayIdx);
-        const detailEl = el.closest('.week-block').querySelector('.day-detail');
+        const detailEl = container.querySelector('.day-detail');
         const tasks = buildTodayTasks(idx, totalDays);
         const dayDate = weekdays[idx];
         const dateLabel = dayDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });

@@ -803,6 +803,83 @@ h3 {
   gap: 1rem;
 }
 
+.schedule-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.schedule-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--card-border);
+  background: var(--surface);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  color: var(--text);
+}
+
+.schedule-nav-btn:hover:not(:disabled) {
+  border-color: var(--books);
+  color: var(--books);
+  transform: scale(1.1);
+}
+
+.schedule-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.schedule-nav-label {
+  text-align: center;
+  flex: 1;
+}
+
+.schedule-week-title {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.schedule-week-title.current {
+  color: var(--books);
+}
+
+.schedule-week-dates {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.schedule-today-btn {
+  display: block;
+  margin: 0.75rem auto 0;
+  padding: 0.4rem 1rem;
+  background: none;
+  border: 1.5px solid var(--books);
+  border-radius: 99px;
+  color: var(--books);
+  font-size: 0.78rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.schedule-today-btn:hover {
+  background: rgba(124, 58, 237, 0.05);
+}
+
 .week-block {
   background: var(--surface);
   border: 1px solid var(--card-border);
