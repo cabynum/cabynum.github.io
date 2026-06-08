@@ -778,6 +778,90 @@ footer {
   display: none !important;
 }
 
+/* ═══════════════════ QUIZ CARD ═══════════════════ */
+.quiz-card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  box-shadow: var(--shadow);
+  margin-top: 1.25rem;
+  border-left: 4px solid var(--books);
+}
+
+.quiz-card h3 {
+  margin-bottom: 0.25rem;
+}
+
+.quiz-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.quiz-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.quiz-item {
+  background: var(--bg-alt);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.quiz-item .q-text {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-item .q-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: white;
+  transition: border-color 0.15s;
+}
+
+.quiz-item .q-input:focus {
+  outline: none;
+  border-color: var(--books);
+}
+
+.quiz-item .q-reveal {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+}
+
+.quiz-item .q-reveal button {
+  background: none;
+  border: none;
+  color: var(--books);
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.quiz-item .q-reveal button:hover {
+  text-decoration: underline;
+}
+
+.quiz-item .q-answer {
+  margin-top: 0.35rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(124, 58, 237, 0.06);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
 /* ═══════════════════ RESPONSIVE ═══════════════════ */
 @media (max-width: 700px) {
   .hero h1 {

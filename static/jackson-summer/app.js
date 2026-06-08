@@ -19,6 +19,109 @@
     geometry: { label: 'Honors Geometry', problems: 50 },
   };
 
+  // ─── THE OUTSIDERS: Chapter Plan + Quiz ────────────────────────────────────
+  const OUTSIDERS_PLAN = [
+    {
+      day: 0,
+      chapters: 'Chapters 1–2',
+      pages: '~30 pages',
+      summary: 'Meet Ponyboy, the Greasers, and the Socs. Pony gets jumped walking home.',
+      quiz: [
+        { q: 'What are the two rival groups in the story?', a: 'The Greasers and the Socs' },
+        { q: 'Who is the narrator?', a: 'Ponyboy Curtis' },
+        { q: 'What happens to Ponyboy on his walk home from the movies?', a: 'He gets jumped/attacked by Socs' },
+      ]
+    },
+    {
+      day: 1,
+      chapters: 'Chapter 3',
+      pages: '~18 pages',
+      summary: 'Ponyboy and Johnny meet Cherry and Marcia at the drive-in. Two-Bit joins them.',
+      quiz: [
+        { q: 'Who does Ponyboy talk to at the drive-in?', a: 'Cherry Valance' },
+        { q: 'What does Cherry say is the difference between Socs and Greasers?', a: 'Socs are emotionally detached/cold; Greasers feel things too much' },
+        { q: 'Why does Ponyboy get in trouble when he gets home late?', a: 'Darry hits him / they get in a fight' },
+      ]
+    },
+    {
+      day: 2,
+      chapters: 'Chapter 4',
+      pages: '~15 pages',
+      summary: 'Ponyboy runs away. He and Johnny are attacked in the park. Johnny kills Bob.',
+      quiz: [
+        { q: 'Why do the Socs attack Johnny and Ponyboy in the park?', a: 'They\'re angry about their girlfriends talking to Greasers / they\'re drunk' },
+        { q: 'Who does Johnny kill?', a: 'Bob Sheldon' },
+        { q: 'Who do they go to for help?', a: 'Dally (Dallas Winston)' },
+      ]
+    },
+    {
+      day: 3,
+      chapters: 'Chapter 5',
+      pages: '~20 pages',
+      summary: 'Hiding in the abandoned church. They disguise themselves. Johnny brings Gone with the Wind.',
+      quiz: [
+        { q: 'Where do Ponyboy and Johnny hide?', a: 'An abandoned church in Windrixville' },
+        { q: 'How do they disguise themselves?', a: 'They cut and bleach/dye their hair' },
+        { q: 'What poem does Ponyboy recite to Johnny?', a: '"Nothing Gold Can Stay" by Robert Frost' },
+      ]
+    },
+    {
+      day: 4,
+      chapters: 'Chapter 6',
+      pages: '~18 pages',
+      summary: 'Dally visits. They decide to turn themselves in. The church catches fire. Johnny is badly hurt.',
+      quiz: [
+        { q: 'What happens to the church while they\'re gone?', a: 'It catches fire' },
+        { q: 'Why do Ponyboy and Johnny run into the burning church?', a: 'To save the kids trapped inside' },
+        { q: 'What injuries does Johnny suffer?', a: 'A broken back / severe burns' },
+      ]
+    },
+    {
+      day: 5,
+      chapters: 'Chapters 7–8',
+      pages: '~28 pages',
+      summary: 'The boys are in the newspaper. Johnny is dying. The rumble is planned.',
+      quiz: [
+        { q: 'How does the town react to Ponyboy and Johnny?', a: 'They\'re called heroes in the newspaper' },
+        { q: 'What does Johnny say when Ponyboy visits him in the hospital?', a: 'He says he doesn\'t want to die / "Stay gold"' },
+        { q: 'What is the rumble?', a: 'A big fight between the Greasers and the Socs' },
+      ]
+    },
+    {
+      day: 6,
+      chapters: 'Chapter 9',
+      pages: '~18 pages',
+      summary: 'The rumble. The Greasers win. Pony and Dally rush to the hospital.',
+      quiz: [
+        { q: 'Who wins the rumble?', a: 'The Greasers' },
+        { q: 'What does Ponyboy realize about fighting during the rumble?', a: 'That fighting doesn\'t solve anything / he doesn\'t enjoy it' },
+        { q: 'Why do Dally and Pony rush to the hospital after?', a: 'Johnny is dying' },
+      ]
+    },
+    {
+      day: 7,
+      chapters: 'Chapters 10–11',
+      pages: '~22 pages',
+      summary: 'Johnny and Dally die. Ponyboy is in shock, drifts through days in bed.',
+      quiz: [
+        { q: 'What are Johnny\'s last words?', a: '"Stay gold, Ponyboy. Stay gold."' },
+        { q: 'What does Dally do after Johnny dies?', a: 'He robs a store and gets shot by police (dies)' },
+        { q: 'How does Ponyboy cope with the deaths?', a: 'He\'s in denial / gets sick / stays in bed' },
+      ]
+    },
+    {
+      day: 8,
+      chapters: 'Chapter 12',
+      pages: '~16 pages',
+      summary: 'The court hearing. Ponyboy finds Johnny\'s letter. He starts writing his theme.',
+      quiz: [
+        { q: 'What is the verdict at Ponyboy\'s hearing?', a: 'He\'s acquitted / found not guilty' },
+        { q: 'What does Johnny\'s letter tell Pony?', a: 'That saving the kids was worth it, and to "stay gold"' },
+        { q: 'What does Ponyboy decide to write his English theme about?', a: 'His own story (which becomes the book itself)' },
+      ]
+    },
+  ];
+
   // ─── STATE ────────────────────────────────────────────────────────────────
   function loadState() {
     const saved = localStorage.getItem('jackson-summer-2026');
@@ -26,6 +129,7 @@
       books: { book1: false, book2: false, book3: false, book4: false },
       math: { level: null, completed: [] },
       todayDone: {},
+      quizAnswers: {},
     };
   }
 
@@ -34,6 +138,7 @@
   }
 
   let state = loadState();
+  if (!state.quizAnswers) state.quizAnswers = {};
 
   // ─── HELPERS ──────────────────────────────────────────────────────────────
   function today() {
@@ -73,6 +178,14 @@
     return AR_DATES.find(a => a.date >= now);
   }
 
+  function getNextWeekday(fromDate) {
+    const d = new Date(fromDate);
+    do {
+      d.setDate(d.getDate() + 1);
+    } while (!isWeekday(d));
+    return d;
+  }
+
   // ─── GREETING ─────────────────────────────────────────────────────────────
   function renderGreeting() {
     const hour = new Date().getHours();
@@ -103,12 +216,25 @@
     const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(now));
 
     if (!isWeekday(now) || todayIdx < 0) {
+      // Show what's coming next instead of "nothing to do"
+      const nextWeekday = getNextWeekday(now);
+      const nextIdx = weekdays.findIndex(d => dayKey(d) === dayKey(nextWeekday));
+
       if (now > SCHEDULE_END) {
         tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">All done for the summer!</div><div class="task-desc">Make sure all AR tests are taken and your written project is ready.</div></div></div>';
-      } else if (now < SCHEDULE_START) {
-        tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">Plan starts June 8</div><div class="task-desc">Nothing to do yet. Enjoy the break.</div></div></div>';
       } else {
-        tasksEl.innerHTML = '<div class="today-task"><div class="task-body"><div class="task-name">Weekend — no work today</div><div class="task-desc">Pick it back up Monday.</div></div></div>';
+        const previewTasks = nextIdx >= 0 ? buildTodayTasks(nextIdx, weekdays.length) : buildTodayTasks(0, weekdays.length);
+        const dayLabel = nextWeekday.toLocaleDateString('en-US', { weekday: 'long' });
+        tasksEl.innerHTML = `<div class="today-task"><div class="task-body"><div class="task-name" style="color:var(--text-muted);font-size:0.82rem;font-weight:500;margin-bottom:0.5rem">COMING UP ${dayLabel.toUpperCase()}</div></div></div>` +
+          previewTasks.map(t => `
+            <div class="today-task" style="opacity:0.7">
+              <div class="task-dot ${t.type}"></div>
+              <div class="task-body">
+                <div class="task-name">${t.name}</div>
+                <div class="task-desc">${t.desc}</div>
+              </div>
+            </div>
+          `).join('');
       }
       return;
     }
@@ -142,16 +268,39 @@
 
   function buildTodayTasks(dayIdx, totalDays) {
     const tasks = [];
-    const bookPhase = Math.floor((dayIdx / (totalDays * 0.7)) * 4);
-    const bookOrder = [
-      { id: 'read-outsiders', name: 'Read The Outsiders', desc: '~30 pages + fill in Need to Read guide' },
-      { id: 'read-choice', name: 'Read your Reader\'s Choice book', desc: '~30-40 pages' },
-      { id: 'read-book3', name: 'Read Book 3 (House Arrest or MLK)', desc: '~30-40 pages' },
-      { id: 'read-bio', name: 'Read your biography', desc: 'Read + take notes for your written project' },
-    ];
-    const current = bookOrder[Math.min(bookPhase, 3)];
-    tasks.push({ ...current, type: 'reading' });
+    const outsidersDays = OUTSIDERS_PLAN.length; // 9 days for The Outsiders
 
+    // Determine reading phase
+    if (dayIdx < outsidersDays) {
+      // THE OUTSIDERS phase -- specific chapters
+      const plan = OUTSIDERS_PLAN[dayIdx];
+      tasks.push({
+        id: 'read-outsiders-' + dayIdx,
+        type: 'reading',
+        name: `Read: ${plan.chapters}`,
+        desc: `${plan.pages} — ${plan.summary}`,
+      });
+      tasks.push({
+        id: 'needtoread-' + dayIdx,
+        type: 'reading',
+        name: 'Fill in Need to Read guide',
+        desc: 'Answer the daily questions for today\'s chapters',
+      });
+      tasks.push({
+        id: 'quiz-' + dayIdx,
+        type: 'reading',
+        name: 'Quick quiz (3 questions)',
+        desc: 'Check what you remember from today\'s reading',
+      });
+    } else if (dayIdx < Math.floor(totalDays * 0.45)) {
+      tasks.push({ id: 'read-choice', type: 'reading', name: 'Read your Reader\'s Choice book', desc: '~30-40 pages' });
+    } else if (dayIdx < Math.floor(totalDays * 0.65)) {
+      tasks.push({ id: 'read-book3', type: 'reading', name: 'Read Book 3 (House Arrest or MLK)', desc: '~30-40 pages' });
+    } else {
+      tasks.push({ id: 'read-bio', type: 'reading', name: 'Read your biography', desc: 'Read + take notes for your written project' });
+    }
+
+    // Math
     if (state.math.level) {
       const level = MATH_LEVELS[state.math.level];
       const perDay = Math.ceil(level.problems / totalDays);
@@ -164,6 +313,7 @@
       tasks.push({ id: 'math-pick', type: 'math', name: 'Pick your math packet', desc: 'Scroll down to the Math section' });
     }
 
+    // Writing project in final stretch
     if (dayIdx > totalDays - 10) {
       tasks.push({ id: 'writing', type: 'writing', name: 'Work on biography written project', desc: 'Draft, revise, or finalize' });
     }
@@ -309,7 +459,7 @@
     const totalDays = weekdays.length;
 
     const bookPhases = [
-      { label: 'The Outsiders + Need to Read', end: Math.floor(totalDays * 0.25) },
+      { label: 'The Outsiders', end: OUTSIDERS_PLAN.length },
       { label: 'Reader\'s Choice', end: Math.floor(totalDays * 0.45) },
       { label: 'Book 3', end: Math.floor(totalDays * 0.65) },
       { label: 'Biography + Writing', end: totalDays },
@@ -362,6 +512,51 @@
     }).join('');
   }
 
+  // ─── QUIZ ──────────────────────────────────────────────────────────────────
+  function renderQuiz() {
+    const quizCard = document.getElementById('quiz-card');
+    const quizContainer = document.getElementById('quiz-questions');
+    const now = today();
+    const weekdays = getWeekdays(SCHEDULE_START, SCHEDULE_END);
+    const todayIdx = weekdays.findIndex(d => dayKey(d) === dayKey(now));
+
+    // Only show quiz during Outsiders phase on weekdays
+    if (todayIdx < 0 || todayIdx >= OUTSIDERS_PLAN.length || !isWeekday(now)) {
+      quizCard.classList.add('hidden');
+      return;
+    }
+
+    quizCard.classList.remove('hidden');
+    const plan = OUTSIDERS_PLAN[todayIdx];
+    const quizKey = 'quiz-day-' + todayIdx;
+
+    quizContainer.innerHTML = plan.quiz.map((item, i) => {
+      const answerKey = quizKey + '-' + i;
+      const revealed = state.quizAnswers[answerKey];
+      return `
+        <div class="quiz-item">
+          <div class="q-text">${i + 1}. ${item.q}</div>
+          <input class="q-input" type="text" placeholder="Type your answer..." data-qi="${answerKey}">
+          <div class="q-reveal">
+            ${revealed
+              ? `<div class="q-answer">✓ ${item.a}</div>`
+              : `<button data-reveal="${answerKey}" data-answer="${item.a}">Show answer</button>`
+            }
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    quizContainer.querySelectorAll('button[data-reveal]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.reveal;
+        state.quizAnswers[key] = true;
+        saveState();
+        renderQuiz();
+      });
+    });
+  }
+
   // ─── INIT ─────────────────────────────────────────────────────────────────
   renderGreeting();
   renderToday();
@@ -370,4 +565,5 @@
   renderAR();
   renderMath();
   renderSchedule();
+  renderQuiz();
 })();
