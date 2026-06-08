@@ -127,6 +127,7 @@
     const saved = localStorage.getItem('jackson-summer-2026');
     return saved ? JSON.parse(saved) : {
       books: { book1: false, book2: false, book3: false, book4: false },
+      bookPicks: { book1: '', book3: '', book4: '' },
       math: { level: null, completed: [] },
       todayDone: {},
       quizAnswers: {},
@@ -139,6 +140,7 @@
 
   let state = loadState();
   if (!state.quizAnswers) state.quizAnswers = {};
+  if (!state.bookPicks) state.bookPicks = { book1: '', book3: '', book4: '' };
 
   // ─── HELPERS ──────────────────────────────────────────────────────────────
   function today() {
@@ -272,32 +274,40 @@
 
     // Determine reading phase
     if (dayIdx < outsidersDays) {
-      // THE OUTSIDERS phase -- specific chapters
       const plan = OUTSIDERS_PLAN[dayIdx];
       tasks.push({
         id: 'read-outsiders-' + dayIdx,
         type: 'reading',
-        name: `Read: ${plan.chapters}`,
+        name: `The Outsiders — ${plan.chapters}`,
         desc: `${plan.pages} — ${plan.summary}`,
       });
       tasks.push({
         id: 'needtoread-' + dayIdx,
         type: 'reading',
         name: 'Fill in Need to Read guide',
-        desc: 'Answer the daily questions for today\'s chapters',
+        desc: 'The Outsiders — answer the daily questions for today\'s chapters',
       });
       tasks.push({
         id: 'quiz-' + dayIdx,
         type: 'reading',
         name: 'Quick quiz (3 questions)',
-        desc: 'Check what you remember from today\'s reading',
+        desc: 'Check what you remember from today\'s Outsiders reading',
       });
     } else if (dayIdx < Math.floor(totalDays * 0.45)) {
-      tasks.push({ id: 'read-choice', type: 'reading', name: 'Read your Reader\'s Choice book', desc: '~30-40 pages' });
+      const pick = state.bookPicks.book1;
+      const title = pick || 'Reader\'s Choice book';
+      const desc = pick ? '~30-40 pages' : '~30-40 pages · Pick your book in the Reading section below';
+      tasks.push({ id: 'read-choice', type: 'reading', name: `Read: ${title}`, desc });
     } else if (dayIdx < Math.floor(totalDays * 0.65)) {
-      tasks.push({ id: 'read-book3', type: 'reading', name: 'Read Book 3 (House Arrest or MLK)', desc: '~30-40 pages' });
+      const pick = state.bookPicks.book3;
+      const title = pick || 'House Arrest or MLK Jr.';
+      const desc = pick ? '~30-40 pages' : '~30-40 pages · Pick your book in the Reading section below';
+      tasks.push({ id: 'read-book3', type: 'reading', name: `Read: ${title}`, desc });
     } else {
-      tasks.push({ id: 'read-bio', type: 'reading', name: 'Read your biography', desc: 'Read + take notes for your written project' });
+      const pick = state.bookPicks.book4;
+      const title = pick || 'your biography';
+      const desc = pick ? 'Read + take notes for your written project' : 'Pick your biography in the Reading section below';
+      tasks.push({ id: 'read-bio', type: 'reading', name: `Read: ${title}`, desc });
     }
 
     // Math
@@ -348,6 +358,22 @@
         btn.querySelector('.check-text').textContent = 'Mark Complete';
       }
     });
+
+    // Restore book picks
+    document.querySelectorAll('.book-pick-input').forEach(input => {
+      const key = input.dataset.pick;
+      if (state.bookPicks[key]) {
+        input.value = state.bookPicks[key];
+        input.closest('.book-pick').classList.add('picked');
+      }
+    });
+    document.querySelectorAll('.book-pick-select').forEach(select => {
+      const key = select.dataset.pick;
+      if (state.bookPicks[key]) {
+        select.value = state.bookPicks[key];
+        select.closest('.book-pick').classList.add('picked');
+      }
+    });
   }
 
   document.querySelectorAll('.check-btn').forEach(btn => {
@@ -357,6 +383,32 @@
       saveState();
       renderBooks();
       renderProgress();
+    });
+  });
+
+  // Book pick handlers
+  document.querySelectorAll('.book-pick-input').forEach(input => {
+    input.addEventListener('change', () => {
+      const key = input.dataset.pick;
+      state.bookPicks[key] = input.value.trim();
+      saveState();
+      if (input.value.trim()) {
+        input.closest('.book-pick').classList.add('picked');
+      } else {
+        input.closest('.book-pick').classList.remove('picked');
+      }
+    });
+  });
+  document.querySelectorAll('.book-pick-select').forEach(select => {
+    select.addEventListener('change', () => {
+      const key = select.dataset.pick;
+      state.bookPicks[key] = select.value;
+      saveState();
+      if (select.value) {
+        select.closest('.book-pick').classList.add('picked');
+      } else {
+        select.closest('.book-pick').classList.remove('picked');
+      }
     });
   });
 

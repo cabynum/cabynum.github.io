@@ -406,6 +406,56 @@ h3 {
   flex: 1;
 }
 
+/* ═══════════════════ BOOK PICKS ═══════════════════ */
+.book-pick {
+  margin-top: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-alt);
+  border-radius: 10px;
+  border: 1.5px dashed var(--card-border);
+  transition: all 0.2s;
+}
+
+.book-pick.picked {
+  border-style: solid;
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+.book-pick label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.35rem;
+}
+
+.book-pick-input,
+.book-pick-select {
+  width: 100%;
+  padding: 0.45rem 0.6rem;
+  border: 1.5px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  background: white;
+  transition: border-color 0.15s;
+}
+
+.book-pick-input:focus,
+.book-pick-select:focus {
+  outline: none;
+  border-color: var(--books);
+}
+
+.book-pick.picked .book-pick-input,
+.book-pick.picked .book-pick-select {
+  border-color: var(--success);
+  font-weight: 600;
+}
+
 .book-footer {
   display: flex;
   align-items: center;
