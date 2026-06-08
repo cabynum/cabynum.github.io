@@ -284,7 +284,7 @@
       tasks.push({
         id: 'needtoread-' + dayIdx,
         type: 'reading',
-        name: 'Fill in Need to Read guide',
+        name: '<a href="outsiders-guide.html" style="color:inherit;text-decoration:underline">Fill in Need to Read guide</a>',
         desc: 'The Outsiders — answer the daily questions for today\'s chapters',
       });
       tasks.push({

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Need to Read — The Outsiders</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+  <header class="hero hero-short">
+    <div class="hero-inner">
+      <a href="index.html" class="back-link">← Back to home</a>
+      <h1>Need to Read</h1>
+      <p class="hero-sub">The Outsiders · Graphic Organizer</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <p class="lead">Fill this in as you read — a few questions each day. When you're done, print it and hand it in before your campus quiz.</p>
+
+      <div class="guide-progress" id="guide-progress"></div>
+
+      <!-- BOX 1: Chapters 1 & 2 -->
+      <div class="guide-box" id="box-1">
+        <div class="box-header">
+          <span class="box-number">1</span>
+          <div>
+            <h3>Characters</h3>
+            <span class="box-chapters">Chapters 1 & 2</span>
+          </div>
+        </div>
+
+        <div class="box-grid box-grid-3">
+          <div class="char-card">
+            <h4>Main Character & Narrator</h4>
+            <label>Name<input type="text" data-field="b1-narrator-name" placeholder="..."></label>
+            <label>What does he care about?<textarea data-field="b1-narrator-cares" rows="3" placeholder="..."></textarea></label>
+            <label>What happens to him?<textarea data-field="b1-narrator-happens" rows="3" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card">
+            <h4>Middle Brother</h4>
+            <label>Name<input type="text" data-field="b1-middle-name" placeholder="..."></label>
+            <label>What's he good at?<textarea data-field="b1-middle-good" rows="2" placeholder="..."></textarea></label>
+            <label>How old is he?<input type="text" data-field="b1-middle-age" placeholder="..."></label>
+            <label>Physical description<textarea data-field="b1-middle-desc" rows="2" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card">
+            <h4>Oldest Brother</h4>
+            <label>Name<input type="text" data-field="b1-oldest-name" placeholder="..."></label>
+            <label>Why does he act like a parent?<textarea data-field="b1-oldest-parent" rows="2" placeholder="..."></textarea></label>
+            <label>How old is he?<input type="text" data-field="b1-oldest-age" placeholder="..."></label>
+            <label>Physical description<textarea data-field="b1-oldest-desc" rows="2" placeholder="..."></textarea></label>
+          </div>
+        </div>
+
+        <h4 style="margin-top:1.5rem">The Gang</h4>
+        <div class="box-grid box-grid-4">
+          <div class="char-card char-card-sm">
+            <h5>Steve</h5>
+            <label>What does Ponyboy think of him?<textarea data-field="b1-steve-think" rows="2" placeholder="..."></textarea></label>
+            <label>What is he good at?<textarea data-field="b1-steve-good" rows="2" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card char-card-sm">
+            <h5>Dally / Dallas</h5>
+            <label>When is he brave?<textarea data-field="b1-dally-brave" rows="2" placeholder="..."></textarea></label>
+            <label>What breaks him?<textarea data-field="b1-dally-breaks" rows="2" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card char-card-sm">
+            <h5>Two-Bit</h5>
+            <label>Explain the nickname<textarea data-field="b1-twobit-name" rows="3" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card char-card-sm char-card-highlight">
+            <h5>Johnny</h5>
+            <label>Why is he so nervous?<textarea data-field="b1-johnny-nervous" rows="3" placeholder="..."></textarea></label>
+            <p class="char-note">Johnny is important! Come back and add more about him as you learn more.</p>
+          </div>
+        </div>
+
+        <label class="full-width-field">Notes<textarea data-field="b1-notes" rows="2" placeholder="Anything else you noticed..."></textarea></label>
+      </div>
+
+      <!-- BOX 2: Chapters 3 & 4 -->
+      <div class="guide-box" id="box-2">
+        <div class="box-header">
+          <span class="box-number">2</span>
+          <div>
+            <h3>Soc vs. Greaser</h3>
+            <span class="box-chapters">Chapters 3 & 4</span>
+          </div>
+        </div>
+
+        <div class="box-grid box-grid-2">
+          <div class="char-card">
+            <h4>What is a Greaser?</h4>
+            <textarea data-field="b2-greaser-what" rows="3" placeholder="..."></textarea>
+            <label>What problems do they have?<textarea data-field="b2-greaser-problems" rows="3" placeholder="..."></textarea></label>
+          </div>
+          <div class="char-card">
+            <h4>What is a Soc?</h4>
+            <textarea data-field="b2-soc-what" rows="3" placeholder="..."></textarea>
+            <label>What problems do they have?<textarea data-field="b2-soc-problems" rows="3" placeholder="..."></textarea></label>
+          </div>
+        </div>
+
+        <label class="full-width-field">What do they have in common?<textarea data-field="b2-common" rows="3" placeholder="..."></textarea></label>
+
+        <h4 style="margin-top:1.5rem">Slang</h4>
+        <p class="box-instruction">Define these words as you find them in the book.</p>
+        <div class="slang-grid">
+          <label>Weed<input type="text" data-field="b2-slang-weed" placeholder="tobacco"></label>
+          <label>Heater<input type="text" data-field="b2-slang-heater" placeholder="..."></label>
+          <label>Cancer Stick<input type="text" data-field="b2-slang-cancer" placeholder="..."></label>
+          <label>Blade<input type="text" data-field="b2-slang-blade" placeholder="..."></label>
+          <label>Tuff<input type="text" data-field="b2-slang-tuff" placeholder="..."></label>
+          <label>Hood<input type="text" data-field="b2-slang-hood" placeholder="..."></label>
+          <label>Fuzz<input type="text" data-field="b2-slang-fuzz" placeholder="..."></label>
+          <label>Jumped<input type="text" data-field="b2-slang-jumped" placeholder="..."></label>
+          <label>Rumble<input type="text" data-field="b2-slang-rumble" placeholder="..."></label>
+          <label>Savvy<input type="text" data-field="b2-slang-savvy" placeholder="..."></label>
+          <label>J.D.<input type="text" data-field="b2-slang-jd" placeholder="..."></label>
+        </div>
+      </div>
+
+      <!-- BOX 3: Chapters 5 & 6 — Character Traits -->
+      <div class="guide-box" id="box-3">
+        <div class="box-header">
+          <span class="box-number">3</span>
+          <div>
+            <h3>Character Traits</h3>
+            <span class="box-chapters">Chapters 5 & 6</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Give an example of something a person does that reveals who they are on the inside. First explain what happened, then draw a conclusion about their character traits.</p>
+
+        <div class="trait-words">
+          <span>Use words like:</span>
+          creative · dishonest · generous · fair-minded · greedy · arrogant · brave · humble · ambitious · curious · selfish · resilient · intelligent · jealous · shy · fearful · lonely · loyal · thoughtful · depressed · aggressive
+        </div>
+
+        <label class="full-width-field">What happened?<textarea data-field="b3-happened" rows="4" placeholder="Describe something a character did..."></textarea></label>
+        <label class="inline-field">Page #<input type="text" data-field="b3-page" placeholder="#"></label>
+        <label class="full-width-field">Your conclusions<textarea data-field="b3-conclusions" rows="4" placeholder="What does this action reveal about who they are?"></textarea></label>
+      </div>
+
+      <!-- BOX 4: Chapters 5 & 6 — Cherry, Randy, Shout Outs -->
+      <div class="guide-box" id="box-4">
+        <div class="box-header">
+          <span class="box-number">4</span>
+          <div>
+            <h3>Cherry, Randy & Shout Outs</h3>
+            <span class="box-chapters">Chapters 5 & 6</span>
+          </div>
+        </div>
+
+        <div class="box-grid box-grid-3">
+          <div class="char-card">
+            <h5>Cherry</h5>
+            <label>What does she think Socs/Greasers have in common?<textarea data-field="b4-cherry-common" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-cherry-common-pg" placeholder="#"></label>
+            <label>What differences does she find?<textarea data-field="b4-cherry-diff" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-cherry-diff-pg" placeholder="#"></label>
+          </div>
+          <div class="char-card">
+            <h5>Randy</h5>
+            <label>When does he change his mind about Greasers?<textarea data-field="b4-randy-change" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-randy-change-pg" placeholder="#"></label>
+            <label>What does he say to explain Bob's actions?<textarea data-field="b4-randy-bob" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-randy-bob-pg" placeholder="#"></label>
+          </div>
+          <div class="char-card">
+            <h5>Bob</h5>
+            <label>When did you realize the importance of his rings?<textarea data-field="b4-bob-rings" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-bob-rings-pg" placeholder="#"></label>
+          </div>
+        </div>
+
+        <h4 style="margin-top:1.5rem">Shout Outs to Other Novels</h4>
+        <p class="box-instruction">Hinton mentions two classic novels in The Outsiders. What are they and how do they impact characters?</p>
+
+        <div class="box-grid box-grid-2">
+          <div class="char-card">
+            <label>Title<input type="text" data-field="b4-novel1-title" placeholder="..."></label>
+            <label>How does the book cause a character to think about their life?<textarea data-field="b4-novel1-impact" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-novel1-pg" placeholder="#"></label>
+          </div>
+          <div class="char-card">
+            <label>Title<input type="text" data-field="b4-novel2-title" placeholder="..."></label>
+            <label>How does the book cause a character to think about their life?<textarea data-field="b4-novel2-impact" rows="3" placeholder="..."></textarea></label>
+            <label class="inline-field">Pg. #<input type="text" data-field="b4-novel2-pg" placeholder="#"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 5: Chapters 7 & 8 — Relate -->
+      <div class="guide-box" id="box-5">
+        <div class="box-header">
+          <span class="box-number">5</span>
+          <div>
+            <h3>Relate</h3>
+            <span class="box-chapters">Chapters 7 & 8</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Pick something from the book that relates to your life or your world. It could be a problem, a character trait, a situation, or an event. Explain what happened in the book and why it relates to something you have experienced.</p>
+
+        <label class="full-width-field">The book:<textarea data-field="b5-book" rows="4" placeholder="What happened in the book..."></textarea></label>
+        <label class="inline-field">Pg. #<input type="text" data-field="b5-book-pg" placeholder="#"></label>
+        <label class="full-width-field">You:<textarea data-field="b5-you" rows="5" placeholder="How this relates to your life..."></textarea></label>
+      </div>
+
+      <!-- BOX 6: House Arrest or MLK — AR Questions -->
+      <div class="guide-box" id="box-6">
+        <div class="box-header">
+          <span class="box-number">6</span>
+          <div>
+            <h3>Write 2 AR-Style Questions</h3>
+            <span class="box-chapters">House Arrest or MLK Jr.</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Write 2 multiple-choice questions about the plot of your second book. They should have clear right and wrong answers (not opinion). Wrong answers should sound reasonable.</p>
+
+        <label class="full-width-field">Book Title<input type="text" data-field="b6-book-title" placeholder="House Arrest or Martin Luther King Jr."></label>
+
+        <div class="ar-question-block">
+          <h5>Question #1</h5>
+          <label class="full-width-field"><textarea data-field="b6-q1-question" rows="2" placeholder="Write your question..."></textarea></label>
+          <label class="answer-field correct">Right answer<input type="text" data-field="b6-q1-right" placeholder="..."></label>
+          <label class="answer-field wrong">Wrong answer<input type="text" data-field="b6-q1-wrong1" placeholder="..."></label>
+          <label class="answer-field wrong">Wrong answer<input type="text" data-field="b6-q1-wrong2" placeholder="..."></label>
+          <label class="inline-field">Page # for right answer<input type="text" data-field="b6-q1-pg" placeholder="#"></label>
+        </div>
+
+        <div class="ar-question-block">
+          <h5>Question #2</h5>
+          <label class="full-width-field"><textarea data-field="b6-q2-question" rows="2" placeholder="Write your question..."></textarea></label>
+          <label class="answer-field correct">Right answer<input type="text" data-field="b6-q2-right" placeholder="..."></label>
+          <label class="answer-field wrong">Wrong answer<input type="text" data-field="b6-q2-wrong1" placeholder="..."></label>
+          <label class="answer-field wrong">Wrong answer<input type="text" data-field="b6-q2-wrong2" placeholder="..."></label>
+          <label class="inline-field">Page # for right answer<input type="text" data-field="b6-q2-pg" placeholder="#"></label>
+        </div>
+      </div>
+
+      <!-- BOX 7: Chapters 9-12 — Left Out -->
+      <div class="guide-box" id="box-7">
+        <div class="box-header">
+          <span class="box-number">7</span>
+          <div>
+            <h3>Left Out</h3>
+            <span class="box-chapters">Chapters 9–12</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Choose a person from your second book (House Arrest or MLK) who is an outsider or is made to feel like they are not fully part of their community. Describe one example that shows how this person is an outsider. Include one short quote with author and page number in parentheses.</p>
+
+        <label class="full-width-field">Person's name<input type="text" data-field="b7-person" placeholder="..."></label>
+        <label class="full-width-field">How are they an outsider? (include a quote)<textarea data-field="b7-outsider" rows="6" placeholder='Example: One of my favorite quotes comes from Booker T. Washington, it is "I shall allow no man to belittle my soul by making me hate him" (Washington 173).'></textarea></label>
+      </div>
+
+      <!-- BOX 8: Brought In -->
+      <div class="guide-box" id="box-8">
+        <div class="box-header">
+          <span class="box-number">8</span>
+          <div>
+            <h3>Brought In</h3>
+            <span class="box-chapters">House Arrest or MLK Jr.</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Give an example of a person or event where an outsider is brought in or included. Correctly use a short quote as part of your example.</p>
+
+        <label class="full-width-field"><textarea data-field="b8-brought-in" rows="6" placeholder="Describe the example with a quote..."></textarea></label>
+        <label class="inline-field">Pg. #<input type="text" data-field="b8-pg" placeholder="#"></label>
+      </div>
+
+      <!-- BOX 9: Silver Lining -->
+      <div class="guide-box" id="box-9">
+        <div class="box-header">
+          <span class="box-number">9</span>
+          <div>
+            <h3>Silver Lining</h3>
+            <span class="box-chapters">House Arrest or MLK Jr.</span>
+          </div>
+        </div>
+
+        <p class="box-instruction">Sometimes being an outsider isn't all bad. Explain a time when separation from a community was an advantage. It can be a situation you have experienced or one from House Arrest or Martin Luther King Jr.</p>
+
+        <label class="full-width-field"><textarea data-field="b9-silver-lining" rows="6" placeholder="..."></textarea></label>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="guide-actions">
+        <button class="btn-print" onclick="window.print()">Print for Turn-In</button>
+        <p class="guide-actions-note">Print this when you're done and hand it to your English teacher before your campus quiz.</p>
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with ❤️ by Dad · GAC 8th Grade Summer 2026</p>
+  </footer>
+
+  <script src="guide.js"></script>
+</body>
+</html>

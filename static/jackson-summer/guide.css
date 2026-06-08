@@ -1,0 +1,371 @@
+/* ═══════════════════ GUIDE-SPECIFIC STYLES ═══════════════════ */
+
+.hero-short {
+  padding: 2.5rem 2rem 2rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  margin-bottom: 0.75rem;
+  transition: color 0.15s;
+}
+
+.back-link:hover {
+  color: white;
+}
+
+/* ═══════════════════ PROGRESS ═══════════════════ */
+.guide-progress {
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.guide-progress .progress-bar {
+  flex: 1;
+}
+
+.guide-progress-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ═══════════════════ GUIDE BOXES ═══════════════════ */
+.guide-box {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.box-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.box-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.box-header h3 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.box-chapters {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.box-instruction {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+/* ═══════════════════ GRIDS ═══════════════════ */
+.box-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.box-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.box-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.box-grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ═══════════════════ CHARACTER CARDS ═══════════════════ */
+.char-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.char-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.char-card h5 {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--books);
+}
+
+.char-card-sm {
+  padding: 0.85rem;
+}
+
+.char-card-highlight {
+  border-color: var(--books);
+  border-width: 2px;
+}
+
+.char-note {
+  font-size: 0.72rem;
+  color: var(--books);
+  font-weight: 600;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ═══════════════════ FORM FIELDS ═══════════════════ */
+.guide-box label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.guide-box input[type="text"],
+.guide-box textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: 1.5px solid var(--card-border);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: inherit;
+  background: white;
+  transition: border-color 0.15s;
+  margin-top: 0.25rem;
+  resize: vertical;
+}
+
+.guide-box input[type="text"]:focus,
+.guide-box textarea:focus {
+  outline: none;
+  border-color: var(--books);
+}
+
+.guide-box input.has-value,
+.guide-box textarea.has-value {
+  border-color: var(--success);
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.full-width-field {
+  margin-top: 1rem;
+}
+
+.inline-field {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.inline-field input {
+  width: 60px !important;
+  display: inline-block !important;
+  margin-top: 0 !important;
+}
+
+/* ═══════════════════ SLANG GRID ═══════════════════ */
+.slang-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.slang-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  background: var(--bg-alt);
+  border-radius: 8px;
+  padding: 0.5rem 0.6rem;
+}
+
+.slang-grid input {
+  margin-top: 0.15rem !important;
+}
+
+/* ═══════════════════ TRAIT WORDS ═══════════════════ */
+.trait-words {
+  background: rgba(124, 58, 237, 0.05);
+  border: 1px solid rgba(124, 58, 237, 0.15);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+  line-height: 1.7;
+}
+
+.trait-words span {
+  font-weight: 700;
+  color: var(--books);
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════ AR QUESTIONS ═══════════════════ */
+.ar-question-block {
+  background: var(--bg-alt);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-top: 1rem;
+}
+
+.ar-question-block h5 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+}
+
+.answer-field {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem !important;
+}
+
+.answer-field input {
+  flex: 1;
+  margin-top: 0 !important;
+}
+
+.answer-field.correct {
+  color: var(--success) !important;
+}
+
+.answer-field.wrong {
+  color: #ef4444 !important;
+}
+
+/* ═══════════════════ ACTIONS ═══════════════════ */
+.guide-actions {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.btn-print {
+  display: inline-block;
+  padding: 0.85rem 2.5rem;
+  background: linear-gradient(135deg, #7c3aed, #a78bfa);
+  color: white;
+  border: none;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  transition: all 0.2s;
+}
+
+.btn-print:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(124, 58, 237, 0.4);
+}
+
+.guide-actions-note {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+}
+
+/* ═══════════════════ PRINT STYLES ═══════════════════ */
+@media print {
+  .hero, .guide-progress, .guide-actions, .back-link, footer {
+    display: none !important;
+  }
+
+  body {
+    font-size: 11pt;
+    color: black;
+  }
+
+  .section {
+    padding: 0;
+    max-width: none;
+  }
+
+  .lead {
+    display: none;
+  }
+
+  .guide-box {
+    break-inside: avoid;
+    border: 1px solid #ccc;
+    box-shadow: none;
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .box-number {
+    background: black;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .guide-box input[type="text"],
+  .guide-box textarea {
+    border: none;
+    border-bottom: 1px solid #999;
+    border-radius: 0;
+    padding: 0.2rem 0;
+    font-size: 10pt;
+  }
+
+  .char-card {
+    background: none;
+    border: 1px solid #ddd;
+  }
+}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media (max-width: 700px) {
+  .box-grid-2,
+  .box-grid-3,
+  .box-grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .slang-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .guide-box {
+    padding: 1.25rem;
+  }
+}
