@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jackson's Summer Prep</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">Summer Prep</div>
+    <div class="nav-links">
+      <a href="#" data-view="today" class="nav-link active">Today</a>
+      <a href="#" data-view="reading" class="nav-link">Reading</a>
+      <a href="#" data-view="math" class="nav-link">Math</a>
+      <a href="#" data-view="schedule" class="nav-link">Schedule</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- TODAY VIEW -->
+    <section id="view-today" class="view active">
+      <div class="today-header">
+        <h1 class="today-greeting"></h1>
+        <p class="today-date"></p>
+      </div>
+      <div class="progress-ring-container">
+        <div class="progress-ring">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" class="ring-bg"/>
+            <circle cx="60" cy="60" r="54" class="ring-fill" id="overall-ring"/>
+          </svg>
+          <span class="ring-label" id="overall-pct">0%</span>
+        </div>
+        <p class="progress-subtitle">Overall Progress</p>
+      </div>
+      <div class="today-tasks" id="today-tasks"></div>
+      <div class="ar-reminder" id="ar-reminder"></div>
+    </section>
+
+    <!-- READING VIEW -->
+    <section id="view-reading" class="view">
+      <h2>Reading</h2>
+      <p class="section-desc">4 books this summer. Finish each before your next AR test date.</p>
+      <div class="books-grid" id="books-grid"></div>
+      <div class="ar-info-card">
+        <h3>What is AR Testing?</h3>
+        <p>AR (Accelerated Reader) is a short quiz you take on campus after finishing a book. It's multiple choice, about 15-20 minutes, and just checks that you read and understood it. Not a big deal — just show up to the library on one of the open days.</p>
+        <h4>Library Hours (on campus, no appointment needed)</h4>
+        <div class="ar-dates" id="ar-dates"></div>
+        <p class="ar-note">Bring your GAC laptop if you have one. Final deadline: first Friday of the school year.</p>
+      </div>
+      <div class="need-to-read-card">
+        <h3>Need to Read Guide</h3>
+        <p>Required for <em>The Outsiders</em> — use the "Need to Read Fiction" version. Fill it in <strong>daily while reading</strong>, not after you finish. You must hand it in before your AR test.</p>
+        <p class="tip">Why? It trains your brain to ask questions and remember what you read. Makes the AR test way easier.</p>
+      </div>
+    </section>
+
+    <!-- MATH VIEW -->
+    <section id="view-math" class="view">
+      <h2>Math</h2>
+      <div id="math-selector" class="math-selector">
+        <p class="section-desc">Pick your packet. Due the first day of school.</p>
+        <div class="math-options">
+          <button class="math-option" data-level="prealgebra">Pre-Algebra</button>
+          <button class="math-option" data-level="algebra1">Algebra 1</button>
+          <button class="math-option" data-level="geometry">Honors Geometry</button>
+        </div>
+      </div>
+      <div id="math-tracker" class="math-tracker hidden">
+        <div class="math-header">
+          <h3 id="math-level-title"></h3>
+          <button class="btn-small" id="math-change">Change</button>
+        </div>
+        <div class="math-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="math-progress-fill"></div>
+          </div>
+          <span class="progress-text" id="math-progress-text">0 / 0 problems</span>
+        </div>
+        <div class="math-daily" id="math-daily"></div>
+      </div>
+    </section>
+
+    <!-- SCHEDULE VIEW -->
+    <section id="view-schedule" class="view">
+      <h2>Schedule</h2>
+      <p class="section-desc">Your full summer plan — weekdays, ~1-2 hours per day.</p>
+      <div class="schedule-legend">
+        <span class="legend-item"><span class="dot reading-dot"></span> Reading</span>
+        <span class="legend-item"><span class="dot math-dot"></span> Math</span>
+        <span class="legend-item"><span class="dot writing-dot"></span> Writing</span>
+        <span class="legend-item"><span class="dot ar-dot"></span> AR Test</span>
+      </div>
+      <div class="schedule-weeks" id="schedule-weeks"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>GAC 8th Grade Summer 2026 · Built with ❤️ by Dad</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
