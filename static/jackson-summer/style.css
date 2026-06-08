@@ -1,18 +1,18 @@
 :root {
-  --bg: #fafaf9;
-  --surface: #ffffff;
-  --muted-bg: #f5f3f0;
-  --text: #1c1917;
-  --text-secondary: #57534e;
-  --text-muted: #a8a29e;
-  --accent: #7c3aed;
-  --accent-light: #ede9fe;
-  --books: #7c3aed;
-  --math: #0891b2;
-  --writing: #ea580c;
-  --ar: #db2777;
-  --success: #16a34a;
-  --border: #e7e5e4;
+  --bg: #0f111b;
+  --surface: #1a1e33;
+  --muted-bg: #16192b;
+  --text: #ecf0c1;
+  --text-secondary: #c1c3a7;
+  --text-muted: #686f9a;
+  --accent: #7a5ccc;
+  --accent-light: #2e3459;
+  --books: #5ccc96;
+  --math: #00a3cc;
+  --writing: #e39400;
+  --ar: #ce6f8f;
+  --success: #5ccc96;
+  --border: #2e3459;
   --radius: 12px;
   --radius-lg: 16px;
 }
@@ -54,9 +54,10 @@ h3 {
 
 /* HERO */
 .hero {
-  background: var(--accent);
-  color: white;
+  background: linear-gradient(135deg, #1a1e33 0%, #2e3459 100%);
+  color: var(--text);
   padding: 3rem 1.5rem 2.5rem;
+  border-bottom: 1px solid #2e3459;
 }
 
 .hero-inner {
@@ -68,7 +69,7 @@ h3 {
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  opacity: 0.7;
+  color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 
@@ -80,7 +81,7 @@ h3 {
 
 .hero-sub {
   font-size: 1.1rem;
-  opacity: 0.85;
+  color: var(--text-secondary);
 }
 
 /* SECTIONS */
@@ -280,7 +281,7 @@ h3 {
   height: 120px;
   object-fit: cover;
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .book-placeholder {
@@ -369,7 +370,7 @@ h3 {
 .check-btn.completed {
   background: var(--success);
   border-color: var(--success);
-  color: white;
+  color: #0f111b;
 }
 
 .check-btn.completed .check-icon::after {
@@ -444,9 +445,10 @@ h3 {
   gap: 0.5rem;
   padding: 0.6rem 0.75rem;
   border-radius: var(--radius);
-  background: var(--muted-bg);
+  background: var(--surface);
   font-size: 0.85rem;
   font-weight: 500;
+  color: var(--text);
 }
 
 .ar-date.past {
@@ -455,9 +457,10 @@ h3 {
 }
 
 .ar-date.next {
-  background: #fce7f3;
+  background: rgba(206, 111, 143, 0.15);
   color: var(--ar);
   font-weight: 600;
+  border: 1px solid rgba(206, 111, 143, 0.3);
 }
 
 .ar-date .ar-dot {
@@ -497,7 +500,7 @@ h3 {
 
 .level-btn:hover {
   border-color: var(--math);
-  background: #ecfeff;
+  background: rgba(0, 163, 204, 0.1);
 }
 
 .math-status {
@@ -607,11 +610,11 @@ h3 {
 
 .day-block.past {
   background: var(--muted-bg);
-  opacity: 0.6;
+  opacity: 0.5;
 }
 
 .day-block.ar-day {
-  background: #fce7f3;
+  background: rgba(206, 111, 143, 0.15);
   border-color: var(--ar);
 }
 
@@ -629,9 +632,9 @@ h3 {
   margin-right: 0.25rem;
 }
 
-.tag.reading { background: var(--accent-light); color: var(--books); }
-.tag.math { background: #ecfeff; color: var(--math); }
-.tag.writing { background: #fff7ed; color: var(--writing); }
+.tag.reading { background: rgba(92, 204, 150, 0.15); color: var(--books); }
+.tag.math { background: rgba(0, 163, 204, 0.15); color: var(--math); }
+.tag.writing { background: rgba(227, 148, 0, 0.15); color: var(--writing); }
 
 /* BONUS */
 .bonus-section {
@@ -678,7 +681,7 @@ h3 {
 }
 
 .bonus-section a {
-  color: var(--accent);
+  color: var(--books);
 }
 
 /* FOOTER */
