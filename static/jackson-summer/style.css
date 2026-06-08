@@ -347,6 +347,15 @@ h3 {
   background: linear-gradient(135deg, #ec4899, #f472b6);
 }
 
+.book-cover-area.book-cover-duo {
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.book-cover-area.book-cover-duo img {
+  height: 140px;
+}
+
 .book-cover-text {
   font-size: 1rem;
   font-weight: 700;
