@@ -124,3 +124,7 @@ Building Argus as a multi-agent system taught me what multi-agent systems are ac
 My system now is simpler, has no activation friction, and produces the same quality output. The things that made it special (session continuity, knowledge provenance, domain depth) were never about agents in the first place.
 
 Sometimes the most important architecture decision is recognizing when you're solving the wrong problem. That doesn't mean the work stops. Argus v2 is better than v1, and there's already a v3 forming in my head. Pivoting when things are off is almost always the right call.
+
+---
+
+*Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*

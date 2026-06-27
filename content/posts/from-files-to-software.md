@@ -138,3 +138,7 @@ My (current) goal isn't to build a full-fledged platform. It's to build a person
 In part, I wrote this to force my own thinking into a coherent form. Also, I've learned a great deal about roadblocks that have been overcome and sound design decisions by listening to people that have built similar productivity systems. There's plenty written about getting started with AI productivity setups. Not much about what happens after you've been running the thing for a while and the shine wears off.
 
 The skills that will matter long term: context engineering, tool design, eval discipline, and the harness mindset. Lasting power will be the result.
+
+---
+
+*Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*
