@@ -1,7 +1,7 @@
 ---
 title: "Henry Ford Would Be Proud: We're Building a Software Factory"
 date: 2026-06-26T00:00:00-04:00
-draft: true
+draft: false
 tags: ["ai", "software-factory", "agentic-sdlc", "engineering-leadership"]
 description: "My org is building a pipeline of AI agents across the entire delivery lifecycle. Here's what that means and why we're doing it."
 ---
