@@ -58,7 +58,7 @@ There's a personal connection here too. I've been building [Argus](/posts/from-f
 
 ### Bringing the team along
 
-In my 1:1 conversations with my team, I can tell they "get it", but it's still abstract. "What will the work _be_?" is the question I hear most. Fair question. How we work, our roles, how we're evaluated, all of that changes with this shift. I don't have a complete answer yet, and I tell them that. What I do emphasize is that for us to succeed in this organization, we need to be all in. Half-adopting a factory is just extra process on top of the process you already have.
+In my 1:1 conversations with my team, I can tell they "get it", but it's still abstract. "What will the work _be_?" is the question I hear most. Fair question. How we work, our roles, how we're evaluated, all of that changes with this shift. I don't have a complete answer yet, and I tell them that. What I do emphasize is that for us to succeed in this organization, we need to be all in. Going halfway actually works against you. One foot in and one foot out means you're carrying the overhead of a new model without any of the payoff, and frankly, the engineers who lean in hardest are the ones best positioned for what comes next in this industry.
 
 Shipping current commitments while adopting a new delivery model isn't easy. But the entire organization, PM and Engineering alike, understands and is involved in the transformation. We're already making concessions as we look at future releases, accepting that new feature work will likely slow as we work out the kinks.
 
