@@ -141,4 +141,5 @@ The skills that will matter long term: context engineering, tool design, eval di
 
 ---
 
+![Crafted with love](/images/crafted-with-love.png)
 *Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*

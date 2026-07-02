@@ -127,4 +127,5 @@ Sometimes the most important architecture decision is recognizing when you're so
 
 ---
 
+![Crafted with love](/images/crafted-with-love.png)
 *Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*

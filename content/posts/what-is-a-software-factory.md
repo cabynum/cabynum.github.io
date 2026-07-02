@@ -116,4 +116,5 @@ If you're an engineering leader thinking about whether AI changes delivery beyon
 
 ---
 
+![Crafted with love](/images/crafted-with-love.png)
 *Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*
