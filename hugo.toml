@@ -62,3 +62,6 @@ paginate = 10
     lineNos = false
     codeFences = true
     guessSyntax = true
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
