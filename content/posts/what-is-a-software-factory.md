@@ -96,9 +96,15 @@ The factory model makes specs the primary focus. If the spec is wrong, the gener
 
 ### Selling artists on the assembly line
 
-This is where leadership and management anticipate the most friction, and I'll be honest about that. While "engineers become spec writers" is true in the abstract, many engineers consider themselves artists, and the code is their art. Stepping back from direct implementation doesn't make people feel warm and fuzzy. It can feel like a loss, or perhaps a path toward failure.
+This is where I anticipate the most friction, and we all need to be honest when we discuss this. I believe an obvious concern is identity. For engineers who see their code as their craft, stepping back from direct implementation can feel like being commoditized, like the thing that made you valuable just became automatable.
 
-The angle we discuss as leaders is that while the work looks different, time is spent on higher-value activity. Everyone moves closer to customer conversations, system design choices, and broader understanding of the product and the agentic AI space. The daily tasks change, but the importance of engineering judgment doesn't diminish. If anything, it concentrates.
+But that's only part of the story. Engineering has always been rewarding because of deep immersion, hours disappearing into a hard problem, the satisfaction of understanding a system well enough to reshape it. AI-assisted work replaces that with a different cognitive mode where you're prompting, evaluating, and context-switching between your mental model and the model's output. The work isn't harder, but the parts that most engineers find _rewarding_ have been replaced with supervision.
+
+Then there's what I'd call the **understanding gap**. When you write code yourself, you build a mental model that pays dividends every time you debug, every architecture discussion, every judgment call about tradeoffs. When you generate code with AI and review it, the understanding is shallower, and you end up shipping faster while knowing less about what you shipped. Engineers feel that as a loss of confidence, and it's not irrational.
+
+I don't have satisfying answers to any of this yet, and I don't think anyone does. The factory isn't in full swing. There's a very real possibility that the new model doesn't work out to meet all of it's lofty dreams, or that engineers simply don't like the new way of working, or both. What's being asked of us right now is to walk this road in earnest because as a company we believe it will deepen our own understanding of how to apply AI in a forward-thinking way, and yield the best outcomes for our paying customers in the long run.
+
+The messaging for my team is that yes, the work changes, but time shifts to higher-value activity. Everyone moves closer to customer conversations, system design choices, and broader product understanding. The daily tasks change, but engineering judgment matters more, not less, when you're writing the specs that drive an entire pipeline. I believe that, but I also think we make a mistake as leaders if we treat these concerns as resistance to be managed. If the factory optimizes for throughput and accidentally kills the things that make good engineers stay and care, the failure mode isn't slow delivery but disengaged delivery.
 
 ### Why now?
 
