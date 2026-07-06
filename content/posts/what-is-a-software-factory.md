@@ -8,7 +8,7 @@ description: "My org is building a pipeline of AI agents across our entire deliv
 
 ![The Software Factory floor](/images/software-factory-floor.png)
 
-There's irony in software engineers building a factory. Software engineers carry the stigma of being "white collar" and they tend to see themselves as artisans. The code is their craft and constructing an elegant solution is the point, and generally speaking, no two implementations should look the same. "Factory" implies the opposite, something standardized, repeatable, and interchangeable. People hear "factory" and picture assembly lines and shift work, which feels a long way from the craft engineers signed up for. I think it's fair to wonder how the workday changes and what our jobs will actually look like, and I'll try to unpack that over a series of posts. But I have to admit, saying "factory" in a room full of software engineers is like showing up to a black-tie event in a pink tux. And yet here we are, eagerly and aggressively designing one, so surely there's something to it. Right?
+There's irony in software engineers building a factory. Engineers see themselves as artisans. The code is their craft, constructing an elegant solution is the point, and no two implementations should look the same. "Factory" implies the opposite, something standardized, repeatable, and interchangeable. People hear "factory" and picture assembly lines and shift work, which feels a long way from the craft engineers signed up for. I'll try to unpack how the workday changes and what our jobs will actually look like over a series of posts. But I have to admit, saying "factory" in a room full of software engineers is like showing up to a black-tie event in a pink tux. And yet here we are, eagerly and aggressively designing one, so surely there's something to it. Right?
 
 Say "AI in software development" and most people picture the same thing. An engineer with a chat panel, writing code faster. That's useful, and most teams are getting real value from it. But it solves one link in a much longer chain.
 
@@ -20,7 +20,7 @@ In my organization, we're attempting an answer. We're building what we call a So
 
 ## Moving beyond copilot
 
-It's helpful to think about AI adoption in software delivery as a spectrum. Not every team is at the same point, and most don't realize there's a level beyond where they currently sit.
+AI adoption in software delivery is a spectrum. Not every team is at the same point, and most don't realize there's a level beyond where they currently sit.
 
 **One-shot, or "vibe coding."**
 
@@ -40,13 +40,11 @@ The gap between copilot and this next step isn't obvious. Copilots feel like the
 
 ## An Agentic SDLC
 
-In Red Hat AI, the direction is an Agentic SDLC, a delivery model where AI agents participate across the entire software development lifecycle, from requirements through release.
+In Red Hat AI, we call this an Agentic SDLC, a delivery model where AI agents participate across the full software development lifecycle, from requirements through release. The implementation is a Software Factory.
 
-The concrete form this takes is a Software Factory.
+Quick terminology note because these terms get conflated. An "AI Factory" is what our _customers_ build, the full stack of infrastructure, models, data, and agents for delivering AI solutions. That's the product we sell. A "Software Factory" is how our _engineering org_ builds software. This post is about the latter.
 
-A quick terminology note, because these terms get conflated. An "AI Factory" is what our _customers_ build, a 5-layer ecosystem of infrastructure, models, data, agents, and applications for delivering agentic solutions. That's the product we sell. A "Software Factory" is how our _engineering org_ builds software. This post is about the latter.
-
-This isn't a side project or a skunkworks experiment, it's the organizational direction. ASDLC adoption is the #1 focus area in our leadership priorities, with enablement sessions running across the org and engineering leaders driving the vision, staffing model, and rollout plan.
+This isn't a side project or a skunkworks experiment, it's the organizational direction. ASDLC adoption is the top priority for our leadership, with enablement sessions running across the org and engineering leaders working through the staffing model and rollout plan.
 
 ### Not just "slideware"
 
@@ -78,7 +76,7 @@ It's a pipeline of scored agents with human checkpoints. Nothing runs unsupervis
 
 ## Why a factory?
 
-The hypothesis is that by improving the quality of inputs (requirements into specifications), you can improve the scope, instructions, and validations for individual work items. Feeding those improved specs into agents that code, test, and evaluate repeatedly will drive better output across the board.
+By improving the quality of inputs, turning requirements into real specifications, you improve the scope, instructions, and validations for individual work items. Feed those specs into agents that code, test, and evaluate repeatedly, and the output follows.
 
 In plain language, garbage in, garbage out applies to agents too. The factory only works if the specifications are good. Which means requirements, refinement, and acceptance criteria become the most important work in the entire pipeline.
 
@@ -88,7 +86,7 @@ What you optimize for changes:
 
 ### Implementation was never the bottleneck
 
-Velocity is always the biggest driver in our industry. Of course velocity without quality does more harm than help, but the goal is to deliver value to customers as quickly as possible.
+Velocity is always the biggest driver in our industry. Of course velocity without quality does more harm than help, but the goal is to get working software to customers as quickly as possible.
 
 And the spec problem isn't theoretical. Lack of actual customer use cases, incomplete requirements, question marks when it comes to understanding process (where approvals are needed, who signs off on what) - these are the things that slow my team down on a regular basis. Implementation is rarely the issue. We have talented engineers who can build what's needed. The problem is usually that what's needed isn't quite well-defined enough by the time the requirements reach them.
 
@@ -102,7 +100,7 @@ But that's only part of the story. Engineering has always been rewarding because
 
 Then there's what I'd call the **understanding gap**. When you write code yourself, you build a mental model that pays dividends every time you debug, every architecture discussion, every judgment call about tradeoffs. When you generate code with AI and review it, the understanding is shallower, and you end up shipping faster while knowing less about what you shipped. Engineers feel that as a loss of confidence, and it's not irrational.
 
-I don't have satisfying answers to any of this yet, and I don't think anyone does. The factory isn't in full swing. There's a very real possibility that the new model doesn't work out to meet all of it's lofty dreams, or that engineers simply don't like the new way of working, or both. What's being asked of us right now is to walk this road in earnest because as a company we believe it will deepen our own understanding of how to apply AI in a forward-thinking way, and yield the best outcomes for our paying customers in the long run.
+I don't have satisfying answers to any of this yet, and I don't think anyone does. The factory isn't in full swing. There's a very real possibility that the new model doesn't work out to meet all of its lofty dreams, or that engineers simply don't like the new way of working, or both. What's being asked of us right now is to walk this road in earnest because as a company we believe it will deepen our own understanding of how to apply AI in a forward-thinking way, and yield the best outcomes for our paying customers in the long run.
 
 The messaging for my team is that yes, the work changes, but time shifts to higher-value activity. Everyone moves closer to customer conversations, system design choices, and broader product understanding. The daily tasks change, but engineering judgment matters more, not less, when you're writing the specs that drive an entire pipeline. I believe that, but I also think we make a mistake as leaders if we treat these concerns as resistance to be managed. If the factory optimizes for throughput and accidentally kills the things that make good engineers stay and care, the failure mode isn't slow delivery but disengaged delivery.
 
