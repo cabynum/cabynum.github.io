@@ -110,11 +110,9 @@ There's honestly never a "good" time to transform how an engineering organizatio
 
 ---
 
-## Stay tuned
+## What's next
 
-This post describes our interpretation of a Software Factory and why we've chosen to pursue one. It doesn't get into what our pipeline actually looks like in practice, stage by stage, with evidence and the honest gaps.
-
-That's the next post. I'll walk through what's active, what's working, and what we haven't built yet.
+This post describes our interpretation of a Software Factory and why we've chosen to pursue one. In [the next post](/posts/software-factory-floor/), I walk through what's actually on the factory floor, the components that exist today, how they connect through Jira as a shared coordination layer, and what we haven't built yet.
 
 If you're an engineering leader thinking about whether AI changes delivery beyond "help me code faster," it does, and this is one version of what that looks like. If you're an engineer wondering what the work becomes, honestly, so am I. That's part of what makes it interesting.
 
