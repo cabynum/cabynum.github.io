@@ -34,7 +34,7 @@ Most of the components are built as [Claude Code](https://docs.anthropic.com/en/
 
 Here's what's on our factory floor today.
 
-### [rfe-creator](https://github.com/opendatahub-io/rfe-creator) + [assess-rfe](https://github.com/opendatahub-io/assess-rfe)
+### [RFE Creator](https://github.com/opendatahub-io/rfe-creator) + [Assess RFE](https://github.com/opendatahub-io/assess-rfe)
 
 Incoming feature requests scored against a 5-criterion rubric, auto-revised where possible, and submitted to Jira.
 
@@ -42,7 +42,7 @@ Incoming feature requests scored against a 5-criterion rubric, auto-revised wher
 
 The rubric scoring engine is a separate, reusable plugin that other components can plug into. The full lifecycle (create, review, revise, split, submit) runs in CI with headless and dry-run modes, so it can process batches without human interaction until the review step.
 
-### [strat-creator](https://github.com/ederign/strat-creator)
+### [STRAT Creator](https://github.com/ederign/strat-creator)
 
 Approved RFEs become features that our teams will implement, each with a technical strategy attached.
 
@@ -50,7 +50,7 @@ Approved RFEs become features that our teams will implement, each with a technic
 
 A scoring rubric evaluates each feature across four dimensions. CI generates the feature strategies and scoring reports, and engineers pull them into a local workspace for review. The strategy agent also pulls from a shared architecture context repository to ground its recommendations in existing system design decisions.
 
-### [autofix-skills](https://github.com/opendatahub-io/autofix-skills)
+### [Autofix](https://github.com/opendatahub-io/autofix-skills)
 
 This component has a two-layer architecture.
 
@@ -58,15 +58,15 @@ This component has a two-layer architecture.
 
 An inner layer of skills runs inside an agent container handling the actual bug fixing and code generation. An outer layer, powered by [agentic-ci](https://github.com/opendatahub-io/agentic-ci) (more on this in the shared infrastructure section below), manages orchestration and Jira ticket management. The agent triages bug tickets for AI readiness, generates code fixes as PRs, and iterates on review feedback. Security gates include secret scanning and filtering to internal reviewers only.
 
-### [odh-test-gen](https://github.com/opendatahub-io/odh-test-gen)
+### [Test Generator](https://github.com/opendatahub-io/odh-test-gen)
 
 Generates structured test plans from features, scored across five dimensions where all five must reach the top score to pass. Auto-revises up to two cycles before a human test engineer signs off. The team developing this component is moving toward generating tests directly from a feature's acceptance criteria, which connects feature creation to test generation without needing code to exist first.
 
-### [doc-creator](https://github.com/tarilabs/doc-creator)
+### [Docs Generator](https://github.com/tarilabs/doc-creator)
 
 Label-triggered doc generation. When a feature is ready for documentation, adding a label (`ai1st-doc-start`) to the Jira issue triggers the doc generator. The label swaps through a lifecycle (`invoked`, then `contributed`) as the agent generates documentation merge requests. What used to take roughly two weeks now takes about two hours.
 
-### [aiops-skills](https://github.com/opendatahub-io/aiops-infra) (build and release)
+### [AI Ops](https://github.com/opendatahub-io/aiops-infra) (build and release)
 
 When a new component needs to be onboarded into the build system, this plugin handles it. An interactive skill collects onboarding parameters, validates them against a schema, and creates a Jira ticket with a structured YAML attachment. From there, a CI job running every two hours picks up the ticket, executes the onboarding steps sequentially across multiple repositories (container registry, Konflux, operator bundles, product listings), and raises PRs for each step. Every PR gets human review before merging. What used to take nearly a month per component now takes about three days.
 
