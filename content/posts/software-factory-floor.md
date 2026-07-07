@@ -38,7 +38,7 @@ Here's what's on our factory floor today.
 
 Incoming feature requests scored against a 5-criterion rubric, auto-revised where possible, and submitted to Jira.
 
-![RFE Quality Rubric](/images/rfe-rubric.png)
+<img src="/images/rfe-rubric.png" alt="RFE Quality Rubric" style="display:block;max-width:360px;margin:1em auto;">
 
 The rubric scoring engine is a separate, reusable plugin that other components can plug into. The full lifecycle (create, review, revise, split, submit) runs in CI with headless and dry-run modes, so it can process batches without human interaction until the review step.
 
