@@ -60,11 +60,17 @@ An inner layer of skills runs inside an agent container handling the actual bug 
 
 ### [Test Generator](https://github.com/opendatahub-io/odh-test-gen)
 
-Generates structured test plans from features, scored across five dimensions where all five must reach the top score to pass. Auto-revises up to two cycles before a human test engineer signs off. The team developing this component is moving toward generating tests directly from a feature's acceptance criteria, which connects feature creation to test generation without needing code to exist first.
+Generates structured test plans from features, scored across five dimensions where all five must reach the top score to pass. Auto-revises up to two cycles before a human test engineer signs off.
+
+![Test generation flow](/images/test-gen-flow.png)
+
+The team developing this component is moving toward generating tests directly from a feature's acceptance criteria, which connects feature creation to test generation without needing code to exist first.
 
 ### [Docs Generator](https://github.com/tarilabs/doc-creator)
 
-Label-triggered doc generation. When a feature is ready for documentation, adding a label (`ai1st-doc-start`) to the Jira issue triggers the doc generator. The label swaps through a lifecycle (`invoked`, then `contributed`) as the agent generates documentation merge requests. What used to take roughly two weeks now takes about two hours.
+Label-triggered doc generation. When a feature is ready for documentation, adding a label to the Jira issue triggers the doc generator. The label swaps through a lifecycle as the agent generates documentation merge requests.
+
+![Doc creator label lifecycle](/images/doc-creator-flow.png)
 
 ### [AI Ops](https://github.com/opendatahub-io/aiops-infra) (build and release)
 
