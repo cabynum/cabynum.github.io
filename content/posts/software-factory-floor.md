@@ -36,35 +36,27 @@ Here's what's on our factory floor today.
 
 ### [RFE Creator](https://github.com/opendatahub-io/rfe-creator) + [Assess RFE](https://github.com/opendatahub-io/assess-rfe)
 
-Incoming feature requests scored against a 5-criterion rubric, auto-revised where possible, and submitted to Jira.
+Incoming feature requests scored against a 5-criterion rubric, auto-revised where possible, and submitted to Jira. The rubric scoring engine is a separate, reusable plugin that other components can plug into. The full lifecycle (create, review, revise, split, submit) runs in CI with headless and dry-run modes, so it can process batches without human interaction until the review step.
 
 <img src="/images/rfe-rubric.png" alt="RFE Quality Rubric" style="display:block;max-width:360px;margin:1em auto;">
 
-The rubric scoring engine is a separate, reusable plugin that other components can plug into. The full lifecycle (create, review, revise, split, submit) runs in CI with headless and dry-run modes, so it can process batches without human interaction until the review step.
-
 ### [STRAT Creator](https://github.com/ederign/strat-creator)
 
-Approved RFEs become features that our teams will implement, each with a technical strategy attached.
+Approved RFEs become features that our teams will implement, each with a technical strategy attached. A scoring rubric evaluates each feature across four dimensions. CI generates the feature strategies and scoring reports, and engineers pull them into a local workspace for review. The strategy agent also pulls from a shared architecture context repository to ground its recommendations in existing system design decisions.
 
 ![Feature scoring rubric, two-workspace model, and architecture context](/images/strat-creator-flow.png)
 
-A scoring rubric evaluates each feature across four dimensions. CI generates the feature strategies and scoring reports, and engineers pull them into a local workspace for review. The strategy agent also pulls from a shared architecture context repository to ground its recommendations in existing system design decisions.
-
 ### [Autofix](https://github.com/opendatahub-io/autofix-skills)
 
-This component has a two-layer architecture.
+This component has a two-layer architecture. An inner layer of skills runs inside an agent container handling the actual bug fixing and code generation. An outer layer, powered by [agentic-ci](https://github.com/opendatahub-io/agentic-ci) (more on this in the shared infrastructure section below), manages orchestration and Jira ticket management. The agent triages bug tickets for AI readiness, generates code fixes as PRs, and iterates on review feedback. Security gates include secret scanning and filtering to internal reviewers only.
 
 ![Autofix two-layer architecture](/images/autofix-architecture.png)
 
-An inner layer of skills runs inside an agent container handling the actual bug fixing and code generation. An outer layer, powered by [agentic-ci](https://github.com/opendatahub-io/agentic-ci) (more on this in the shared infrastructure section below), manages orchestration and Jira ticket management. The agent triages bug tickets for AI readiness, generates code fixes as PRs, and iterates on review feedback. Security gates include secret scanning and filtering to internal reviewers only.
-
 ### [Test Generator](https://github.com/opendatahub-io/odh-test-gen)
 
-Generates structured test plans from features, scored across five dimensions where all five must reach the top score to pass. Auto-revises up to two cycles before a human test engineer signs off.
+Generates structured test plans from features, scored across five dimensions where all five must reach the top score to pass. Auto-revises up to two cycles before a human test engineer signs off. The team developing this component is moving toward generating tests directly from a feature's acceptance criteria, which connects feature creation to test generation without needing code to exist first.
 
 ![Test generation flow](/images/test-gen-flow.png)
-
-The team developing this component is moving toward generating tests directly from a feature's acceptance criteria, which connects feature creation to test generation without needing code to exist first.
 
 ### [Docs Generator](https://github.com/tarilabs/doc-creator)
 
