@@ -1,15 +1,15 @@
 /* Custom giscus theme matching the Flexoki-inspired blog palette */
 main {
-  --color-canvas-default: #F2F0E5;
-  --color-canvas-subtle: #E6E4D9;
-  --color-border-default: #E6E4D9;
-  --color-border-muted: #E6E4D9;
+  --color-canvas-default: #E6E4D9;
+  --color-canvas-subtle: #DAD8CD;
+  --color-border-default: #B8B6AB;
+  --color-border-muted: #C8C6BB;
   --color-fg-default: #2d2d2d;
   --color-fg-muted: #6b6b6b;
   --color-neutral-muted: rgba(100, 100, 100, 0.1);
   --color-accent-fg: #100F0F;
   --color-accent-emphasis: #100F0F;
-  --color-btn-bg: #E6E4D9;
-  --color-btn-border: #d4d2c7;
-  --color-btn-hover-bg: #dad8cd;
+  --color-btn-bg: #DAD8CD;
+  --color-btn-border: #cecdbe;
+  --color-btn-hover-bg: #d0cec3;
 }
