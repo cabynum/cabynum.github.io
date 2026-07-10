@@ -17,6 +17,7 @@ paginate = 10
   ShowShareButtons = false
   ShowToc = true
   TocOpen = false
+  comments = true
 
   [params.homeInfoParams]
     Title = " "
