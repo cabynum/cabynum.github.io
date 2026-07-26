@@ -18,12 +18,11 @@
     {{- end }}
 {{- end }}
 
-{{- if eq hugo.Environment "production" -}}
-    {{- $scratch.Add "meta" (slice "<span class=\"gc-views\" data-gc-path=\"\"></span>") }}
-{{- end }}
-
 {{/* Combine all meta information into a single string with separators and render it as HTML.*/}}
 
 {{- with ($scratch.Get "meta") }}
     {{- delimit . "&nbsp;·&nbsp;" | safeHTML -}}
+{{- end -}}
+{{- if eq hugo.Environment "production" -}}
+<span class="gc-views" style="display:none"></span>
 {{- end -}}
