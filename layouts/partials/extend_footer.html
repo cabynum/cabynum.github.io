@@ -1,0 +1,18 @@
+{{- if eq hugo.Environment "production" -}}
+<script>
+(function() {
+  var el = document.querySelector('.gc-views');
+  if (!el) return;
+  var path = window.location.pathname;
+  el.setAttribute('data-gc-path', path);
+  fetch('https://cabynum.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+    .then(function(r) { return r.ok ? r.json() : null; })
+    .then(function(data) {
+      if (data && data.count) {
+        el.textContent = data.count + ' views';
+      }
+    })
+    .catch(function() {});
+})();
+</script>
+{{- end -}}
