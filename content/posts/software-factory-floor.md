@@ -145,4 +145,4 @@ If you read the first post and wondered what the factory actually looks like in 
 
 ---
 
-<img src="/images/crafted-with-love.png" alt="Crafted with love" style="display:block;width:250px;margin:0 auto 4px auto;"><p style="text-align:center;margin:0;">*Author: Christopher Bynum · AI-assisted drafting (Claude Opus 4) · Human-directed, human-reviewed*</p>
+<img src="/images/crafted-with-love.png" alt="Crafted with love" style="display:block;width:250px;margin:0 auto 4px auto;"><p style="text-align:center;margin:0;">*Author: Christopher Bynum · Human-written, AI-assisted (Claude Opus 4)*</p>
