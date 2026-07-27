@@ -1,18 +1,20 @@
 {{- if eq hugo.Environment "production" -}}
 <script>
 (function() {
-  var el = document.querySelector('.gc-views');
-  if (!el) return;
-  var path = window.location.pathname.replace(/\/+$/, '');
-  fetch('https://cabynum.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
-    .then(function(r) { return r.ok ? r.json() : null; })
-    .then(function(data) {
-      if (data && data.count) {
-        el.textContent = '\u00a0\u00b7\u00a0' + data.count + ' views';
-        el.style.display = 'inline';
-      }
-    })
-    .catch(function() {});
+  var els = document.querySelectorAll('.gc-views[data-path]');
+  els.forEach(function(el) {
+    var path = el.getAttribute('data-path');
+    if (!path) return;
+    fetch('https://cabynum.goatcounter.com/counter/' + encodeURIComponent(path) + '.json')
+      .then(function(r) { return r.ok ? r.json() : null; })
+      .then(function(data) {
+        if (data && data.count && data.count !== '0') {
+          el.textContent = '\u00a0\u00b7\u00a0' + data.count + ' views';
+          el.style.display = 'inline';
+        }
+      })
+      .catch(function() {});
+  });
 })();
 </script>
 {{- end -}}
