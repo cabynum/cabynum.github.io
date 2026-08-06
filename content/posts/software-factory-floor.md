@@ -1,7 +1,7 @@
 ---
 title: "What's on our Factory Floor"
 date: 2026-07-07T00:00:00-04:00
-lastmod: 2026-07-25T00:00:00-04:00
+lastmod: 2026-08-06T00:00:00-04:00
 draft: false
 tags: ["ai", "software-factory", "agentic-sdlc", "engineering-leadership"]
 description: "The Software Factory isn't one pipeline. It's a set of specialized workstations wired into a shared switchboard. Here's what's actually on the floor."
@@ -41,7 +41,7 @@ This is where incoming feature requests enter the factory. An agent scores each 
 
 <img src="/images/rfe-rubric.png" alt="RFE Quality Rubric" style="display:block;max-width:360px;margin:1em auto;">
 
-### Features ([STRAT Creator](https://github.com/ederign/strat-creator))
+### Features ([STRAT Creator](https://github.com/opendatahub-io/strat-creator))
 
 Once an RFE clears the gate, STRAT Creator turns it into a Feature with a generated technical strategy, scores that strategy on four dimensions in CI, then engineers pull the strategy and review artifacts into a local workspace for sign-off. STRAT is our Jira issue type for those Features. STRAT Creator also pulls from a shared architecture context repository so recommendations sit on top of product decisions we have already made, not a blank slate.
 
@@ -59,7 +59,7 @@ Some epics are really open questions masquerading as well-defined work. Those ar
 
 ![Investigation epic through evidence gathering to a go/no-go report for Implementation](/images/epic-investigator-flow.png)
 
-### [Epic Code Gen](https://github.com/ederign/epic-code-gen)
+### [Epic Code Gen](https://gitlab.com/redhat/rhel-ai/agentic-ci/epic-code-gen-pipeline)
 
 When an implementation epic is ready for code, this workstation implements it against the target repo and opens a PR that has already been through agent review. Spec and plan come first, then test-driven implementation, then four independent reviewers covering architecture, tests, lint, and intent. Failed reviews iterate. Passing work opens one PR (epics are sized for a single repository). From there, review comments (from bots or humans) can go back into another codegen pass until a human merges it. The diffs often look large. That's not feature sprawl. The codegen path is deliberately heavy on tests, often several times the size of the production change, so the PR lands as ready as possible and needs fewer passes to get across the line.
 
