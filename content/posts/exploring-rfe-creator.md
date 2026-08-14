@@ -8,7 +8,7 @@ description: "A hands-on run of the RFE Creator on Docling container image maint
 
 ![RFE Creator: from idea to board-ready Initiative](/images/rfe-creator-hero.png)
 
-The [RFE Creator](https://github.com/opendatahub-io/rfe-creator) is the component we interact with first when we need to get new work into our Agentic Development Lifecyle (ADLC). It is one of the many components on our ["factory floor"](/posts/software-factory-floor/).
+[RFE Creator](https://github.com/opendatahub-io/rfe-creator) is the component we interact with first when we need to get new work into our Agentic Development Lifecyle (ADLC). It is one of the many components on our ["factory floor"](/posts/software-factory-floor/).
 
 In our most recent release cycle, we noticed that some of the work we'd planned will become repetitive. In fact, this work that we were observing in particulary, is work that my team will have to complete with each major release. Because we'd like to work smarter not harder, we decided it would be wise to open a ticket on our board to automate away as much of this work as reasonably possible. We stashed the idea at the time so that we could meet our deadlines, but it resurfaced as I was looking for a good opportunity to get hands-on with the RFE Creator tooling included as a part of our ADLC. What follows in this post is what that experience looked like for me, including how I decided to use the tool in my own daily workflow, what running the tool produces and how that content "scores", and high level details for the setup involved, just in case you want to try something similar.
 
@@ -34,9 +34,9 @@ Here's what's needed for the skill setup:
 
 ## Creating my first RFE...ahem Initiative
 
-The majority of those persons that have decided to use the RFE tool will be doing so to create an RFE. A request for enhancment is typically reserved for product enhancements that have been specifically requested by a customer or a Product Manager. Because my request was neither of those, I used the built in functionality to create an Initiative(`/initiative-create` → review → submit to Jira). Intiatives are bodies of work that necessitate thought and real structure, but aren't work for customers or specifically designed to enhance the product's feature set. RFE Creator handles both cases, and lands RFEs in and Initiatives in their respective Jira project.
+The majority of those persons that have decided to use the RFE tool will be doing so to create an RFE. A request for enhancment is typically reserved for product enhancements that have been specifically requested by a customer or a Product Manager. Because my request was neither of those, rather than opting for the more frequenly used `rfe.create` command, I used the already built-in functionality to create an Initiative(`/initiative-create` → review → submit to Jira). Intiatives are non-trival work that do necessitate meaningful thought and real structure, but aren't work for customers or specifically designed to enhance our product's feature set. RFE Creator handles both cases, and lands both RFEs and Initiatives in their respective Jira projects.
 
-I won't spend much time on the divergence in types of work, but it is worth calling out that I technically created an Initiative, not an RFE. The internal engineering work for is us automating recurring release maintenance for a container image my team provides, not a customer business need.
+I won't spend any additional time on the divergence in types of work, but it is worth calling out that I technically created an Initiative, not an RFE.
 
 ---
 
