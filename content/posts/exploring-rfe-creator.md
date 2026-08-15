@@ -76,7 +76,9 @@ The initiative I created scored 1/2 in two of the rubric categories. For the **W
 > - Konflux pipeline components and nudging (SDK image triggers serve image rebuild), Renovate (or equivalent) for automated dependency and base-image bump PRs...
 > - Encode the audit decisions from the 3.5 model audit...into configuration so routine releases do not restart model discovery from scratch.
 
-Both deductions felt like the rubric grading me as if I had written an RFE rather than an Initiative. Right now Initiatives are assessed against the same rubric as RFEs, which likely explains the tilt. I didn't spend much time trying to correct this and moved forward with running `initiative-submit` to submit to Jira. I could have probably framed the scope as efficiency gains from the automation (saved time for the team, sharing with broader engineering teams for scaled efficiency), but it is unclear to me if those changes would have moved the needle on the score or not. Maybe I'll try that at a later date. There are plans for stronger Initiative-specific scoring coming. Until that lands, the tilt is useful feedback for the team building this component, and a useful thing for users to be aware of.
+The deduction in the **WHY** category felt like the rubric was grading as if I had written an RFE rather than an Initiative. Right now Initiatives are assessed against the same rubric as RFEs, which likely explains the tilt. I didn't spend much time trying to correct this and moved forward with running `initiative-submit` to submit to Jira. I certainly could have better framed the scope. It was written in a very robotic fashion and read as implementation detail. Changes I can make next time are to perhaps start from the efficiency gains expected from the automation (saved time for the team, sharing with broader engineering teams for scaled efficiency), but it is unclear to me if/how those changes would have moved the needle on the score since I didn't bother. Maybe I'll try that at a later date.
+
+There are plans for stronger Initiative-specific scoring coming, so I'll stay tuned.
 
 ---
 
