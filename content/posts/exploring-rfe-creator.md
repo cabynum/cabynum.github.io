@@ -71,14 +71,12 @@ The review process uses a rubric to score the artifact and produces a pass/fail 
 
 My initiative scored 8 out of 10 on the first pass.
 
-The initiative I created scored 1/2 in two of the rubric categories. For the **WHY**, a point was deducted for failing to cite customer or revenue impact, which makes sense when assessing an RFE but not for internal efficiency work like this, where there is no customer ask. The **Not a task** category also had a 1/2 result because the scope section read more like a list of implementation activities than business outcomes:
+The initiative I created scored 1/2 in two of the rubric categories. For the **WHY**, a point was deducted for failing to cite customer or revenue impact, which makes sense when assessing an RFE but not for internal efficiency work like this, where there is no customer ask. The **Not a task** category also scored 1/2 because the rubric views the primary framing as process automation rather than a customer need. My scope describes business outcomes:
 
-> - Konflux pipeline components and nudging (SDK image triggers serve image rebuild), Renovate (or equivalent) for automated dependency and base-image bump PRs...
-> - Encode the audit decisions from the 3.5 model audit...into configuration so routine releases do not restart model discovery from scratch.
+> - Docling container images stay current with upstream dependency and security fixes within each RHOAI release cycle, without manual multi-week maintenance efforts.
+> - SDK and serve images stay in lockstep, so customers always receive a consistent pair.
 
-The deduction in the **WHY** category felt like the rubric was grading as if I had written an RFE rather than an Initiative. Right now Initiatives are assessed against the same rubric as RFEs, which likely explains the tilt. I didn't spend much time trying to correct this and moved forward with running `initiative-submit` to submit to Jira. I certainly could have better framed the scope. It was written in a very robotic fashion and read as implementation detail. Changes I can make next time are to perhaps start from the efficiency gains expected from the automation (saved time for the team, sharing with broader engineering teams for scaled efficiency), but it is unclear to me if/how those changes would have moved the needle on the score since I didn't bother. Maybe I'll try that at a later date.
-
-There are plans for stronger Initiative-specific scoring coming, so I'll stay tuned.
+Both deductions highlight the fact that the rubric is an RFE rubric. It grades for customer-driven justification and customer-facing framing because that's what RFEs are. Initiatives are different, they can be internal efficiency work with downstream customer benefits but no specific customer ask. Right now Initiatives are assessed against the same rubric as RFEs, which explains the tilt. There are plans for Initiative-specific scoring that should better handle this distinction, and I'm looking forward to seeing what that looks like.
 
 ---
 
