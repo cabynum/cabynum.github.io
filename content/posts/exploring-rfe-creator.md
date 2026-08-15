@@ -79,6 +79,8 @@ The initiative I created scored 1/2 in two of the rubric categories. For the **W
 
 Both deductions highlight the fact that the rubric is an RFE rubric. It grades for customer-driven justification and customer-facing framing because that's what RFEs are. Initiatives are different, they can be internal efficiency work with downstream customer benefits but no specific customer ask. Right now Initiatives are assessed against the same rubric as RFEs, which explains the tilt. There are plans for Initiative-specific scoring that should better handle this distinction, and I'm looking forward to seeing what that looks like.
 
+With the review complete and an 8/10 pass, I ran `initiative-submit` to push the Initiative to Jira. The tool created an issue of Initiative type in our project, taking things from idea through to board-ready work, ready to break down.
+
 ---
 
 ## Try it for yourself
