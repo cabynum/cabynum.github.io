@@ -3,14 +3,18 @@ title: "Exploring the RFE Creator"
 date: 2026-08-12T00:00:00-04:00
 draft: false
 tags: ["ai", "software-factory", "agentic-sdlc", "engineering-leadership", "claude-code"]
-description: "A hands-on run of the RFE Creator on Docling container image maintenance. How I used it from Cursor, what the Initiative and scorecard looked like, and what you need to try it."
+description: "A hands-on run of the RFE Creator. How I used it from Cursor, what the artifacts and scorecard looked like, and what you need to try it."
 ---
 
 ![RFE Creator: from idea to board-ready Initiative](/images/rfe-creator-hero.png)
 
 [RFE Creator](https://github.com/opendatahub-io/rfe-creator) is the component we interact with first when we need to get new work into our Agentic Development Lifecyle (ADLC). It is one of the many components on our ["factory floor"](/posts/software-factory-floor/).
 
-In our most recent release cycle, we noticed that some of the work we'd planned will become repetitive. In fact, this work that we were observing in particulary, is work that my team will have to complete with each major release. Because we'd like to work smarter not harder, we decided it would be wise to open a ticket on our board to automate away as much of this work as reasonably possible. We stashed the idea at the time so that we could meet our deadlines, but it resurfaced as I was looking for a good opportunity to get hands-on with the RFE Creator tooling included as a part of our ADLC. What follows in this post is what that experience looked like for me, including how I decided to use the tool in my own daily workflow, what running the tool produces and how that content "scores", and high level details for the setup involved, just in case you want to try something similar.
+In our most recent release cycle, we noticed that some of the work we'd planned will become repetitive. In fact, this particular bit of work is maintenance work that my team will have to complete with each major release cycle. Because we'd like to work smarter not harder, we decided it would be in our best interest to open a ticket on our board to automate away as much of this specific bit of work as reasonably possible.
+
+We stashed this idea at the time so that we wouldn't have to worry about it and to make our deadlines, but when I started looking for a good opportunity to get hands-on with the RFE Creator tooling, it resurfaced.
+
+This post details what the experience of using RFE Creator for the first time looked like for me, including how I decided to use the tool in my own daily workflow. I discuss the artifacts that are outputs of the tool and how that content is "scored". I thought it'd also be helpful to include the high level details for the setup involved in getting started with the tool as well, just in case you want to try it out for yourself.
 
 ---
 
@@ -34,15 +38,15 @@ Here's what's needed for the skill setup:
 
 ## Creating my first RFE...ahem Initiative
 
-The majority of those persons that have decided to use the RFE tool will be doing so to create an RFE. A request for enhancment is typically reserved for product enhancements that have been specifically requested by a customer or a Product Manager. Because my request was neither of those, rather than opting for the more frequenly used `rfe.create` command, I used the already built-in functionality to create an Initiative(`/initiative-create` → review → submit to Jira). Intiatives are non-trival work that do necessitate meaningful thought and real structure, but aren't work for customers or specifically designed to enhance our product's feature set. RFE Creator handles both cases, and lands both RFEs and Initiatives in their respective Jira projects.
+The majority of people who decide to use the RFE tool will be doing so to create an RFE. A request for enhancment is typically reserved for product enhancements that have been specifically requested by a customer or a Product Manager. Because my request was neither of those, I did not use the popular `rfe.create` command, I used the already built-in parallel functionality `/initiative-create` to create an Initiative. Its flow is `/initiative-create` → review → submit to Jira. Intiatives are meant for non-trival work that necessitates meaningful thought and structure in Jira, but isn't work for customers or specifically designed to enhance our product's feature set. The RFE Creator tooling handles both cases, and lands both RFEs and Initiatives in their respective Jira projects.
 
-I won't spend any additional time on the divergence in types of work, but it is worth calling out that I technically created an Initiative, not an RFE.
+I won't spend any additional time on the divergence in types of work, but it is worth calling out that I technically created an Initiative on my first use of the tool, not an RFE.
 
 ---
 
 ## How the create flow works
 
-Creating Initiative begins with the `/initiative-create` command, which asks a set of clarifying questions before the tool is allowed to write anything.
+Creating initiatives begins with the `/initiative-create` command, which asks a set of clarifying questions before the tool is allowed to write anything.
 
 The four questions asked are:
 
@@ -51,15 +55,17 @@ The four questions asked are:
 3. What is the scope boundary?
 4. Is there a parent Outcome?
 
-In my case, having existing background made coming up with those details easier. The Feature from the prior release cycle held most of the context, so I was not starting from a blank page. The previous work, plus commentary on those tickets and in Slack, rounded out the story. The engineer that completed the initial work was diligent enough to put together a detailed report of the steps he took to complete the task, and it provided strong boundaries for the scope question instead of me attempting to invent them on the spot.
+In my case, I had existing background for my initiative, which made coming up with those details easier and faster. The work we'd done in the prior release cycle held most of the context, so I was not starting from a blank page. I used those Jira tickets/comments along with our commentary in Slack to round out the story. Also th engineer that completed the initial work was diligent enough to put together a detailed report of the steps he took to complete the task which provided strong boundaries for the scope question instead of me attempting to invent them on the spot. Having gone through this experince once now, I'd advise pulling as much of this material together for yourself ahead of time to avoid delays and headache. It also will make for more coherent and relevant output.
 
 ---
 
 ## From Markdown to Jira board
 
-RFE Creator's `initiative-create` command writes a local markdown Initiative under `artifacts/initiatives/`. I was able to read and edit that file before anything was pushed to Jira.
+The output of the `initiative-create` command is a Markdown file that is written locally to disk as a new Initiative and this file is stored under `artifacts/initiatives/`. I was able to read and edit that file as much as I wanted before anything was scored or pushed to Jira.
 
-After the Initiative was saved locally, I ran `initiative-review`. The review uses a rubric to score the artifact and produces a pass/fail recommendation. Each of the five categories is worth two points:
+With the initiative Markdown saved locally, I then ran `initiative-review`. The skill expects this command to be supplied an initiative ID or a specific file, but I actually ran it without any additional arguments and it worked just fine. What happened was inference understood the job to be done from the conversation context and filled the gap for me. I didn't realize this until after the fact, but it's pretty nice nonetheless.
+
+The review process uses a rubric to score the artifact and produces a pass/fail recommendation. Each of the five categories is worth two points:
 
 ![RFE Creator rubric categories](/images/rfe-rubric-categories.png)
 
